@@ -4,6 +4,8 @@ require 'pry'
 
 class Board
   EMPTY_SQUARE = ' '
+  FIRST_ROW = 0
+  LAST_ROW = 7
   PIECES_SEQUENCE = [
     Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
   ]
@@ -18,7 +20,7 @@ class Board
       board[[6, column]] = Pawn.new(:white)
     end
     
-    [[0, :black], [7, :white]].each do |(row, color)|
+    [[FIRST_ROW, :black], [LAST_ROW, :white]].each do |(row, color)|
       PIECES_SEQUENCE.each_with_index do |piece, column|
         board[[row, column]] = piece.new(color)
       end
@@ -49,13 +51,6 @@ class Board
       column >=0
   end
 end
-
-
-# place pieces
-# out of bounds
-# get a piece
-
-
 
 # Nouns - classes
 # Verbs - methods
