@@ -4,6 +4,9 @@ require 'pry'
 
 class Board
   EMPTY_SQUARE = ' '
+  SQUARE_ORDER = 8
+  B_PAWN_ROW = 1
+  W_PAWN_ROW = 6
   FIRST_ROW = 0
   LAST_ROW = 7
   PIECES_SEQUENCE = [
@@ -15,9 +18,9 @@ class Board
   def self.initialize_board
     board = self.new
 
-    8.times do |column|
-      board[[1, column]] = Pawn.new(:black)
-      board[[6, column]] = Pawn.new(:white)
+    SQUARE_ORDER.times do |column|
+      board[[B_PAWN_ROW, column]] = Pawn.new(:black)
+      board[[W_PAWN_ROW, column]] = Pawn.new(:white)
     end
     
     [[FIRST_ROW, :black], [LAST_ROW, :white]].each do |(row, color)|
@@ -30,7 +33,7 @@ class Board
   end
 
   def initialize
-    @grid = Array.new(8) { Array.new(8, EMPTY_SQUARE)}
+    @grid = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, EMPTY_SQUARE)}
   end
 
   def []=(location, piece)
@@ -45,10 +48,15 @@ class Board
 
   def in_bounds?(location)
     row, column = location
-    rox < grid.size &&
+    row < grid.size &&
       column < grid.first.size &&
       row >= 0 &&
       column >=0
+  end
+
+  def empty_square?(location)
+    row, column = location
+    grid[row][column] == EMPTY_SQUARE
   end
 end
 
