@@ -1,6 +1,5 @@
 require_relative 'board.rb'
-require_relative 'slideable.rb'
-require_relative 'stepable.rb'
+require_relative 'movement.rb'
 
 class Piece
   attr_reader :color, :board, :location
@@ -9,6 +8,14 @@ class Piece
     @board = board
     @color = color
     @location = location
+  end
+
+  def current_row
+    location.first
+  end
+
+  def current_column
+    location.last
   end
 
   # Remove? (not necessary??)
@@ -29,8 +36,43 @@ class Pawn < Piece
     color == :white ? '♙' : '♟'
   end
 
-  def move_directions
-    [[0, 1]]
+  # def move_directions
+  #   [[0, 1]]
+  # end
+
+  def at_start?
+    start_row = (color == :white ? BOARD::W_PAWN_ROW : BOARD::B_PAWN_ROW)
+ 
+    current_row == start_row
+  end
+
+  def forward_direction
+    color == :white ? -1 : 1
+  end
+
+  def available_moves
+    moves = []
+    current_row, current_column = location
+    one_forward = [current_row + forward_direction, current_column]
+    if board.empty_square?(one_forward)
+      moves << one_forward
+    end
+
+    # If on start line, move forward 2
+    two_forward = [current_row + (forward_direction * 2), current_column]
+    if board.empty_square?(two_forward) && 
+      board.empty_square?(one_forward) &&
+      at_start?
+      moves << two_forward
+    end
+
+    # If enemy on diagonal
+    diagonal_left = [current_row + forward_direction, current_column + 1]
+    diagonal_right = [current_row + forward_direction, current_column - 1]
+    moves << diagonal_left if enemy_in?(diagonal_left)
+    moves << diagonal_right if enemy_in?(diagonal_right)
+
+    moves.select { |move| board.in_bounds?(move) }
   end
 end
 

@@ -19,13 +19,13 @@ class Board
     board = self.new
 
     SQUARE_ORDER.times do |column|
-      board[[B_PAWN_ROW, column]] = Pawn.new(:black)
-      board[[W_PAWN_ROW, column]] = Pawn.new(:white)
+      board[[B_PAWN_ROW, column]] = Pawn.new(board, [B_PAWN_ROW, column], :black)
+      board[[W_PAWN_ROW, column]] = Pawn.new(board, [W_PAWN_ROW, column], :white)
     end
     
     [[FIRST_ROW, :black], [LAST_ROW, :white]].each do |(row, color)|
       PIECES_SEQUENCE.each_with_index do |piece, column|
-        board[[row, column]] = piece.new(color)
+        board[[row, column]] = piece.new(board, [row, column], color)
       end
     end
 
