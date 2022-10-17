@@ -58,6 +58,20 @@ class Board
     row, column = location
     grid[row][column] == EMPTY_SQUARE
   end
+
+  def move_piece(start_position, end_position)
+    piece = self[start_position]
+    if !piece.available_moves.include?(end_position)
+      raise "Unavailable end position #{end_position}."
+    elsif !in_bounds?(end_position)
+      raise 'End position not in bounds.'
+    end
+    
+    self[start_position] = EMPTY_SQUARE
+    self[end_position] = piece
+
+    piece.location = end_position
+  end
 end
 
 # Nouns - classes

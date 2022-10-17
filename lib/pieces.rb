@@ -2,7 +2,8 @@ require_relative 'board.rb'
 require_relative 'movement.rb'
 
 class Piece
-  attr_reader :color, :board, :location
+  attr_reader :color, :board
+  attr_accessor :location
 
   def initialize(board, location, color)
     @board = board
@@ -41,7 +42,7 @@ class Pawn < Piece
   # end
 
   def at_start?
-    start_row = (color == :white ? BOARD::W_PAWN_ROW : BOARD::B_PAWN_ROW)
+    start_row = (color == :white ? Board::W_PAWN_ROW : Board::B_PAWN_ROW)
  
     current_row == start_row
   end
