@@ -28,6 +28,17 @@ class Piece
     board[location] != Board::EMPTY_SQUARE &&
     board[location].color != color
   end
+
+  # Available moves that don't move us into check
+  def safe_moves
+    available_moves.each_with_object([]) do |move, moves|
+      new_board = board.dup
+
+      new_board.move_piece!(location, move)
+
+      moves << move unless new_board.in_check?(color)
+    end
+  end
 end
 
 class Pawn < Piece
