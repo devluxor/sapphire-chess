@@ -3,6 +3,8 @@ require 'singleton'
 require_relative 'board.rb'
 require_relative 'movement.rb'
 
+require 'pry'
+
 # TODO:
 # only one `#move_direction`, in `Piece`; defined by constants in each class.
 # only one `#to_s` in `Piece`, each piece/color defined by constants in each class.
@@ -34,11 +36,12 @@ class Piece
   end
 
   # Remove? (not necessary??)
-  def allowed_move?(location)
-    board[location].is_a?(NullPiece) || board[location].color != color
-  end
+  # def allowed_move?(location)
+  #   board[location].is_a?(NullPiece) || board[location].color != color
+  # end
 
   def enemy_in?(location)
+    board.in_bounds?(location) &&
     !board[location].is_a?(NullPiece) &&
     board[location].color != color
   end
@@ -61,10 +64,6 @@ class Pawn < Piece
   def to_s
     color == :white ? '♙' : '♟'
   end
-
-  # def move_directions
-  #   [[0, 1]]
-  # end
 
   def at_start?
     start_row = (color == :white ? Board::W_PAWN_ROW : Board::B_PAWN_ROW)
@@ -120,6 +119,8 @@ class Rook < Piece
 end
 
 class Knight < Piece
+  include Stepable
+
   def to_s
     color == :white ? '♘' : '♞'
   end

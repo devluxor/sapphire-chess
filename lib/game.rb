@@ -13,27 +13,28 @@ class Game
     @current_player = player_1
   end
 
-  def swap_player!
-    self.current_player = (current_player == player_1 ? player_2 : player_1)
-  end
-
+  
   def play
     loop do
-      # break if over?
-
+      break if over?
+      
       system 'clear'
-
+      
       renderer.render
       
       puts "It's #{current_player.color}'s turn!"
-      # puts 'You are in check!' if board.in_check?(current_player.color)
-    
+      puts 'You are in check!' if board.in_check?(current_player.color)
+      
       turn
-
+      
       swap_player!
     end
-
+    
     puts 'End'
+  end
+  
+  def swap_player!
+    self.current_player = (current_player == player_1 ? player_2 : player_1)
   end
 
   def turn
@@ -41,19 +42,20 @@ class Game
     end_position = nil
 
     # TODO: 
-    #       Implement algebraic notation for movements (automatic, validate)
+    # Indicate piece selected
     loop do
-      puts 'Select piece position to move:'
+      puts "What piece do you want to move?"
       start_position = current_player.get_position
-      break if !board[start_position].is_a?(NullPiece) && board[start_position].color == current_player.color 
+      break if !board[start_position].is_a?(NullPiece) && 
+        board[start_position].color == current_player.color 
       puts "Please, select a #{current_player.color} piece."
     end
     
-    loop do 
-      puts 'Select end position:'
+    loop do
+      puts "Where do you want to move the #{board[start_position].class}?"
       end_position = current_player.get_position
       break if board[start_position].available_moves.include?(end_position)
-      puts "Please, select a valid end position."
+      puts "The piece selected can't move to that square."
     end
 
     board.move_piece!(start_position, end_position)

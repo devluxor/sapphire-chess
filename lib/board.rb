@@ -48,11 +48,11 @@ class Board
   end
 
   def in_bounds?(location)
-    row, column = location
-    row < grid.size &&
-      column < grid.first.size &&
-      row >= 0 &&
-      column >=0
+    location.none? { |axis| axis >= SQUARE_ORDER || axis < 0 }
+
+    # row, column = location
+
+    # row < SQUARE_ORDER && row >= 0 && column < SQUARE_ORDER && column >= 0
   end
 
   def empty_square?(location)
@@ -63,7 +63,7 @@ class Board
   # RENAME
   def move_piece(start_position, end_position)
     piece = self[start_position]
-
+    
     if !piece.available_moves.include?(end_position)
       raise "Unavailable end position #{end_position}."
     elsif !in_bounds?(end_position)
@@ -92,7 +92,7 @@ class Board
   def find_king(color)
     king_location = pieces.find { |piece| piece.color == color && piece.is_a?(King) }
 
-    king_location ? king_location.location : nil # raise("There is no #{color} king on the board!")
+    king_location ? king_location.location : raise("There is no #{color} king on the board!")
   end
 
   def pieces
