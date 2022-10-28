@@ -17,13 +17,13 @@ class Board
   def self.initialize_board
     board = self.new
 
-    # initializes pawns
+    # sets pawns
     SQUARE_ORDER.times do |column|
       board[[B_PAWN_ROW, column]] = Pawn.new(board, [B_PAWN_ROW, column], :black)
       board[[W_PAWN_ROW, column]] = Pawn.new(board, [W_PAWN_ROW, column], :white)
     end
     
-    # initializes rest of pieces
+    # sets rest of the pieces
     [[FIRST_ROW, :black], [LAST_ROW, :white]].each do |(row, color)|
       PIECES_SEQUENCE.each_with_index do |piece, column|
         board[[row, column]] = piece.new(board, [row, column], color)
@@ -37,14 +37,14 @@ class Board
     @grid = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NullPiece.instance)}
   end
 
-  def []=(location, piece)
-    row, column = location
-    grid[row][column] = piece
-  end
-
   def [](location)
     row, column = location
     grid[row][column]
+  end
+
+  def []=(location, piece)
+    row, column = location
+    grid[row][column] = piece
   end
 
   def in_bounds?(location)
@@ -60,10 +60,10 @@ class Board
     grid[row][column].is_a?(NullPiece)
   end
 
-  # RENAME
+  # RENAME/REFACTOR
   def move_piece(start_position, end_position)
     piece = self[start_position]
-    
+
     if !piece.available_moves.include?(end_position)
       raise "Unavailable end position #{end_position}."
     elsif !in_bounds?(end_position)
@@ -101,9 +101,8 @@ class Board
 
   def checkmate?(color)
     return false unless in_check?(color)
-
     friendly_pieces = pieces.select { |piece| piece.color == color }
-
+    
     friendly_pieces.all? { |piece| piece.safe_moves.empty? }
   end
 

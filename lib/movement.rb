@@ -1,8 +1,7 @@
 module Stepable
   # Maybe shorten/refactor
   def available_moves
-    moves = []
-    move_directions.each do |(row_direction, column_direction)|
+    move_directions.each_with_object([]) do |(row_direction, column_direction), moves|
       current_row, current_column = location
 
       current_row += row_direction
@@ -15,16 +14,13 @@ module Stepable
         moves << possible_location
       end
     end
-
-    moves
   end
 end
 
 module Slideable
   # Maybe shorten/refactor
   def available_moves
-    moves = []
-    move_directions.each do |(row_direction, column_direction)|
+    move_directions.each_with_object([]) do |(row_direction, column_direction), moves|
       current_row, current_column = location
 
       loop do
@@ -42,7 +38,5 @@ module Slideable
         end
       end
     end
-
-    moves
   end
 end

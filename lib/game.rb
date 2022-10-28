@@ -1,48 +1,53 @@
 require_relative 'board.rb'
+require_relative 'board_renderer.rb'
 require 'pry'
 
-class Game
+class ChessEngine
   attr_reader :player_1, :player_2, :board, :renderer
   attr_accessor :current_player
 
-  def initialize(board, player_1, player_2, renderer_class)
-    @board = board
-    @renderer = renderer_class.new(board)
-    @player_1 = player_1
-    @player_2 = player_2
-    @current_player = player_1
-  end
+  # TODO:
+  # change game logic
 
+  def initialize(board, white_player, black_player)
+    @board = board
+    @renderer = BoardRenderer.new(board)
+    @white_player = white_player
+    @black_player = black_player
+    @current_player = white_player
+  end
   
   def play
     loop do
-      break if over?
-      
       system 'clear'
-      
       renderer.render
-      
-      puts "It's #{current_player.color}'s turn!"
-      puts 'You are in check!' if board.in_check?(current_player.color)
+      break if game_over?
       
       turn
       
       swap_player!
     end
     
+    swap_player!
+    puts "#{current_player.color.to_s.capitalize} player wins!"
     puts 'End'
   end
-  
+
+  private
+
   def swap_player!
-    self.current_player = (current_player == player_1 ? player_2 : player_1)
+    self.current_player = (
+      current_player == white_player ? black_player : white_player
+    )
   end
 
   def turn
+    puts "It's #{current_player.color}'s turn!"
+    puts 'You are in check!' if board.in_check?(current_player.color)
+
     start_position = nil
     end_position = nil
 
-    # TODO: 
-    # Indicate piece selected
     loop do
       puts "What piece do you want to move?"
       start_position = current_player.get_position
@@ -55,13 +60,13 @@ class Game
       puts "Where do you want to move the #{board[start_position].class}?"
       end_position = current_player.get_position
       break if board[start_position].available_moves.include?(end_position)
-      puts "The piece selected can't move to that square."
+      puts "The #{board[start_position].class} selected can't move to that square."
     end
 
     board.move_piece!(start_position, end_position)
   end
 
-  def over?
+  def game_over?
     board.checkmate?(current_player.color)
   end
 end

@@ -5,10 +5,6 @@ require_relative 'movement.rb'
 
 require 'pry'
 
-# TODO:
-# only one `#move_direction`, in `Piece`; defined by constants in each class.
-# only one `#to_s` in `Piece`, each piece/color defined by constants in each class.
-
 class NullPiece
   include Singleton
 
@@ -35,10 +31,14 @@ class Piece
     location.last
   end
 
-  # Remove? (not necessary??)
-  # def allowed_move?(location)
-  #   board[location].is_a?(NullPiece) || board[location].color != color
-  # end
+  # The colors are inverted because the black background terminal.
+  def to_s
+    color == :white ? self.class::BLACK : self.class::WHITE
+  end
+
+  def move_directions
+    self.class::MOVE_DIRECTIONS
+  end
 
   def enemy_in?(location)
     board.in_bounds?(location) &&
@@ -61,9 +61,8 @@ end
 class Pawn < Piece
   include Stepable
 
-  def to_s
-    color == :white ? '♙' : '♟'
-  end
+  BLACK = '♟'
+  WHITE = '♙'
 
   def at_start?
     start_row = (color == :white ? Board::W_PAWN_ROW : Board::B_PAWN_ROW)
@@ -102,101 +101,59 @@ class Pawn < Piece
 end
 
 class Rook < Piece
+  MOVE_DIRECTIONS = [
+    [0, 1], [0, -1], [1, 0], [-1, 0]
+  ]
+
+  BLACK = '♜'
+  WHITE = '♖'
+
   include Slideable
-
-  def to_s
-    color == :white ? '♖' : '♜'
-  end
-
-  def move_directions
-    [
-      [0, 1],
-      [0, -1],
-      [1, 0],
-      [-1, 0]
-    ]
-  end
 end
 
 class Knight < Piece
+  MOVE_DIRECTIONS = [
+    [1, 2], [2, 1], [-1, 2], [-2, 1],
+    [1, -2], [2, -1], [-1, -2], [-2, -1]
+  ]
+
+  BLACK = '♞'
+  WHITE = '♘'
+
   include Stepable
-
-  def to_s
-    color == :white ? '♘' : '♞'
-  end
-
-  def move_directions
-    [
-      [1, 2],
-      [2, 1],
-      [-1, 2],
-      [-2, 1],
-      [1, -2],
-      [2, -1],
-      [-1, -2],
-      [-2, -1]
-    ]
-  end
 end
 
 class Bishop < Piece
+  MOVE_DIRECTIONS = [
+    [1, 1], [1, -1], [-1, 1], [-1, -1]
+  ]
+
+  BLACK = '♝'
+  WHITE = '♗'
+
   include Slideable
-
-  def to_s
-    color == :white ? '♗' : '♝'
-  end
-
-  def move_directions
-    [
-      [1, 1],
-      [1, -1],
-      [-1, 1],
-      [-1, -1]
-    ]
-  end
 end
 
 class Queen < Piece
+  MOVE_DIRECTIONS = [
+    [0, 1], [0, -1], [1, 0], [-1, 0],
+    [1, 1], [1, -1], [-1, 1], [-1, -1]
+  ]
+
+  BLACK = '♛'
+  WHITE = '♕'
+    
   include Slideable
-
-  def to_s
-    color == :white ? '♕' : '♛'
-  end
-
-  def move_directions
-    [
-      [0, 1],
-      [0, -1],
-      [1, 0],
-      [-1, 0],
-      [1, 1],
-      [1, -1],
-      [-1, 1],
-      [-1, -1]
-    ]
-  end
 end
 
 class King < Piece
+  MOVE_DIRECTIONS = [
+    [0, 1], [1, 1], [1, 0], [0, -1],
+    [1, -1], [-1, 1], [-1, -1], [-1, 0]
+  ]
+
+  BLACK = '♚'
+  WHITE = '♔'
+
   include Stepable
-
-  def to_s
-    color == :white ? '♔' : '♚'
-  end
-
-  def move_directions
-    [
-      [0, 1],
-      [1, 1],
-      [1, 0],
-      [0, -1],
-      [1, -1],
-      [-1, 1],
-      [-1, -1],
-      [-1, 0]
-    ]
-  end
 end
-
-
-

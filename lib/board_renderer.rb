@@ -1,4 +1,4 @@
-class BoardRendererText
+class BoardRenderer
   attr_reader :board, :lines, :squares
   
   BOARD_ORDER = 8
@@ -29,13 +29,17 @@ class BoardRendererText
       puts (' ' * LEFT_MARGIN) + EMPTY_ROW_0 + (EMPTY_ROW * (BOARD_ORDER - 1))
       puts (' ' * LEFT_MARGIN) + FLOOR_0 + (FLOOR * (BOARD_ORDER - 1))
     end
-    puts ''
+
+    new_line
     COLUMN_LETTERS.each { |letter| print "        #{letter}" }
-    puts ''
-    puts ''
+    new_line(2)
   end
 
   private
+
+  def new_line(lines=1)
+    lines.times { puts '' }
+  end
 
   def print_frame_rows(row)
     (0...BOARD_ORDER).each do |column|
