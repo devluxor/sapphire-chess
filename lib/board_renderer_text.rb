@@ -20,7 +20,7 @@ class BoardRendererText
       print_frame_rows(row)
       puts (' ' * 4) + EMPTY_ROW_0 + (EMPTY_ROW * (BOARD_ORDER - 1))
       puts (' ' * 4) + FLOOR_0 + (FLOOR * (BOARD_ORDER - 1))
-      puts '        T' * BOARD_ORDER if row == BOARD_ORDER - 1
+      puts "\n" + '        T' * BOARD_ORDER if row == BOARD_ORDER - 1
     end
 
     puts ''
@@ -42,7 +42,7 @@ class BoardRendererText
         print  "   #{board[square]}   |"
       else
         print  "   #{board[square]}   |"
-        puts '        TEST'
+        puts '   T'
       end
     end
   end
