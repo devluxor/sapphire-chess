@@ -1,9 +1,9 @@
 class BoardRendererText
   attr_reader :board, :lines, :squares
 
-  EMPTY_ROW_0 = '|       |'
+  EMPTY_ROW_0 = '|        |'
   EMPTY_ROW =   '        |'
-  FLOOR_0 =     '+-------+'
+  FLOOR_0 =     '+--------+'
   FLOOR =       '--------+'
 
   BOARD_ORDER = 8
@@ -20,7 +20,7 @@ class BoardRendererText
       print_frame_rows(row)
       puts (' ' * 4) + EMPTY_ROW_0 + (EMPTY_ROW * (BOARD_ORDER - 1))
       puts (' ' * 4) + FLOOR_0 + (FLOOR * (BOARD_ORDER - 1))
-      puts '    T    ' * BOARD_ORDER if row == BOARD_ORDER - 1
+      puts '        T' * BOARD_ORDER if row == BOARD_ORDER - 1
     end
 
     puts ''
@@ -35,10 +35,10 @@ class BoardRendererText
       if column.zero?
         print "T   |  #{board[square]}    |"
       elsif column != BOARD_ORDER - 1
-        print "   #{board[square]}    |"
+        print "  #{board[square]}    |"
       else
-        print  "   #{board[square]}    |"
-        puts '   TEST'
+        print  "   #{board[square]}   |"
+        puts '        TEST'
       end
     end
   end
