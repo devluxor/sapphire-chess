@@ -8,3 +8,4 @@
 6. ~~Add a..h and 1..8 on x and y axis in board representation~~
 7. Simplify pieces class system design
 8. Add YAML file with messages
+9. Enable castling move

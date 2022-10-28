@@ -1,4 +1,5 @@
 require 'singleton'
+require 'paint'
 
 require_relative 'board.rb'
 require_relative 'movement.rb'
@@ -31,9 +32,13 @@ class Piece
     location.last
   end
 
-  # The colors are inverted because the black background terminal.
   def to_s
-    color == :white ? self.class::BLACK : self.class::WHITE
+    case color
+    when :white
+      Paint[self.class::WHITE]
+    else
+      Paint[self.class::BLACK]
+    end
   end
 
   def move_directions

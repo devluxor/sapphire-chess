@@ -3,7 +3,7 @@ require_relative 'board_renderer.rb'
 require 'pry'
 
 class ChessEngine
-  attr_reader :player_1, :player_2, :board, :renderer
+  attr_reader :white_player, :black_player, :board, :renderer
   attr_accessor :current_player
 
   # TODO:
@@ -22,7 +22,7 @@ class ChessEngine
       system 'clear'
       renderer.render
       break if game_over?
-      
+      binding.pry
       turn
       
       swap_player!
