@@ -32,10 +32,14 @@ class BoardRendererText
     (0...BOARD_ORDER).each do |column|
       square = [row, column]
 
-      if column.zero?
-        print "T   |  #{board[square]}    |"
+      if column.zero? && board[square].is_a?(NullPiece)
+        print  "T   |   #{board[square]}   |"
+      elsif column.zero?
+        print  "T   |   #{board[square]}    |"
+      elsif column != BOARD_ORDER - 1 && !board[square].is_a?(NullPiece)
+        print  "   #{board[square]}    |"
       elsif column != BOARD_ORDER - 1
-        print "  #{board[square]}    |"
+        print  "   #{board[square]}   |"
       else
         print  "   #{board[square]}   |"
         puts '        TEST'
