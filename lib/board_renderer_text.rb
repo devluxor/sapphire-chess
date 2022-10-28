@@ -1,28 +1,37 @@
 class BoardRendererText
   attr_reader :board, :lines, :squares
+  
+  BOARD_ORDER = 8
+
+  LEFT_MARGIN = 4
+  RIGHT_MARGIN = 3
 
   EMPTY_ROW_0 = '|        |'
   EMPTY_ROW =   '        |'
   FLOOR_0 =     '+--------+'
   FLOOR =       '--------+'
 
-  BOARD_ORDER = 8
+  COLUMN_LETTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+  ROW_NUMBERS = [8, 7, 6, 5, 4, 3, 2, 1]
   
   def initialize(board)
     @board = board
   end
 
   def render
-    puts (' ' * 4) + FLOOR_0 + (FLOOR * (BOARD_ORDER - 1))
+    puts (' ' * LEFT_MARGIN) + FLOOR_0 + (FLOOR * (BOARD_ORDER - 1))
 
     (0...BOARD_ORDER).each do |row|
-      puts (' ' * 4) + EMPTY_ROW_0 + (EMPTY_ROW * (BOARD_ORDER - 1))
+      puts (' ' * LEFT_MARGIN) + EMPTY_ROW_0 + (EMPTY_ROW * (BOARD_ORDER - 1))
+      print ROW_NUMBERS[row]
       print_frame_rows(row)
-      puts (' ' * 4) + EMPTY_ROW_0 + (EMPTY_ROW * (BOARD_ORDER - 1))
-      puts (' ' * 4) + FLOOR_0 + (FLOOR * (BOARD_ORDER - 1))
-      puts "\n" + '        T' * BOARD_ORDER if row == BOARD_ORDER - 1
+      puts (' ' * RIGHT_MARGIN) + ROW_NUMBERS[row].to_s
+      puts (' ' * LEFT_MARGIN) + EMPTY_ROW_0 + (EMPTY_ROW * (BOARD_ORDER - 1))
+      puts (' ' * LEFT_MARGIN) + FLOOR_0 + (FLOOR * (BOARD_ORDER - 1))
     end
-
+    puts ''
+    COLUMN_LETTERS.each { |letter| print "        #{letter}" }
+    puts ''
     puts ''
   end
 
@@ -32,18 +41,35 @@ class BoardRendererText
     (0...BOARD_ORDER).each do |column|
       square = [row, column]
 
+    print(
       if column.zero? && board[square].is_a?(NullPiece)
-        print  "T   |   #{board[square]}   |"
+        "   |   #{board[square]}   |"
       elsif column.zero?
-        print  "T   |   #{board[square]}    |"
+        "   |   #{board[square]}    |"
       elsif column != BOARD_ORDER - 1 && !board[square].is_a?(NullPiece)
-        print  "   #{board[square]}    |"
-      elsif column != BOARD_ORDER - 1
-        print  "   #{board[square]}   |"
+        "   #{board[square]}    |"
       else
-        print  "   #{board[square]}   |"
-        puts '   T'
+        "   #{board[square]}   |"
       end
+    )
     end
   end
+
+  # def print_frame_rows(row)
+  #   (0...BOARD_ORDER).each do |column|
+  #     square = [row, column]
+
+  #     if column.zero? && board[square].is_a?(NullPiece)
+  #       print  "   |   #{board[square]}   |"
+  #     elsif column.zero?
+  #       print  "   |   #{board[square]}    |"
+  #     elsif column != BOARD_ORDER - 1 && !board[square].is_a?(NullPiece)
+  #       print  "   #{board[square]}    |"
+  #     elsif column != BOARD_ORDER - 1
+  #       print  "   #{board[square]}   |"
+  #     else
+  #       print  "   #{board[square]}   |"
+  #     end
+  #   end
+  # end
 end
