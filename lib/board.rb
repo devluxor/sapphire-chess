@@ -3,7 +3,7 @@ require_relative 'pieces.rb'
 require 'pry'
 
 class Board
-  EMPTY_SQUARE = ' '
+  # EMPTY_SQUARE = ' '
   SQUARE_ORDER = 8
   B_PAWN_ROW = 1
   W_PAWN_ROW = 6
@@ -35,7 +35,7 @@ class Board
   end
 
   def initialize
-    @grid = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, EMPTY_SQUARE)}
+    @grid = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NullPiece.instance)}
   end
 
   def []=(location, piece)
@@ -58,7 +58,7 @@ class Board
 
   def empty_square?(location)
     row, column = location
-    grid[row][column] == EMPTY_SQUARE
+    grid[row][column].is_a?(NullPiece)
   end
 
   # RENAME
@@ -75,7 +75,7 @@ class Board
   end
 
   def move_piece!(start_position, end_position)
-    self[start_position], self[end_position] = EMPTY_SQUARE, self[start_position]
+    self[start_position], self[end_position] = NullPiece.instance, self[start_position]
 
     self[end_position].location = end_position
   end
@@ -97,7 +97,7 @@ class Board
   end
 
   def pieces
-    grid.flatten.reject { |position| position == EMPTY_SQUARE }
+    grid.flatten.reject { |position| position.is_a?(NullPiece) }
   end
 
   def checkmate?(color)

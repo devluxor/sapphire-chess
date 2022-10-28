@@ -1,4 +1,5 @@
 require_relative 'board.rb'
+require 'pry'
 
 class Game
   attr_reader :player_1, :player_2, :board, :renderer
@@ -17,16 +18,23 @@ class Game
   end
 
   def play
-    loop do
+    until over?
       system 'clear'
+
       renderer.render
+
       puts "It's #{current_player.color}'s turn!"
+      puts 'You are in check!' if board.in_check?(current_player.color)
+
       start_position = nil
       end_position = nil
+
+      # TODO: 
+      #       Implement letter + number notation for movements (automatic, validate)
       loop do
         puts 'Select piece position to move:'
         start_position = current_player.get_position
-        break if board[start_position].color == current_player.color
+        break if !board[start_position].is_a?(NullPiece) && board[start_position].color == current_player.color 
         puts "Please, select a #{current_player.color} piece."
       end
       
@@ -37,10 +45,15 @@ class Game
         puts "Please, select a valid end position."
       end
 
-      board[end_position] = board[start_position]
-      board[start_position] = Board::EMPTY_SQUARE
+      board.move_piece!(start_position, end_position)
 
       swap_player!
     end
+
+    puts 'End'
+  end
+
+  def over?
+    board.checkmate?(current_player.color)
   end
 end

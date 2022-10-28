@@ -1,5 +1,15 @@
+require 'singleton'
+
 require_relative 'board.rb'
 require_relative 'movement.rb'
+
+class NullPiece
+  include Singleton
+
+  def to_s
+    ' '
+  end
+end
 
 class Piece
   attr_reader :color, :board
@@ -21,11 +31,11 @@ class Piece
 
   # Remove? (not necessary??)
   def allowed_move?(location)
-    board[location] == Board::EMPTY_SQUARE || board[location].color != color
+    board[location].is_a?(NullPiece) || board[location].color != color
   end
 
   def enemy_in?(location)
-    board[location] != Board::EMPTY_SQUARE &&
+    !board[location].is_a?(NullPiece) &&
     board[location].color != color
   end
 
