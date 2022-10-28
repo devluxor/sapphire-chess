@@ -54,22 +54,4 @@ class BoardRendererText
     )
     end
   end
-
-  # def print_frame_rows(row)
-  #   (0...BOARD_ORDER).each do |column|
-  #     square = [row, column]
-
-  #   print(
-  #     if column.zero? && board[square].is_a?(NullPiece)
-  #       "   |   #{board[square]}   |"
-  #     elsif column.zero?
-  #       "   |   #{board[square]}    |"
-  #     elsif !board[square].is_a?(NullPiece) && column != BOARD_ORDER
-  #       "   #{board[square]}    |"
-  #     else
-  #       "   #{board[square]}   |"
-  #     end
-  #   )
-  #   end
-  # end
 end
