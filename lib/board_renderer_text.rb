@@ -42,14 +42,14 @@ class BoardRendererText
       square = [row, column]
 
     print(
-      if column.zero? && board[square].is_a?(NullPiece)
+      if board[square].is_a?(NullPiece) && column.zero?
         "   |   #{board[square]}   |"
       elsif column.zero?
         "   |   #{board[square]}    |"
-      elsif column != BOARD_ORDER - 1 && !board[square].is_a?(NullPiece)
-        "   #{board[square]}    |"
-      else
+      elsif board[square].is_a?(NullPiece)
         "   #{board[square]}   |"
+      else
+        "   #{board[square]}    |"
       end
     )
     end
@@ -59,17 +59,17 @@ class BoardRendererText
   #   (0...BOARD_ORDER).each do |column|
   #     square = [row, column]
 
+  #   print(
   #     if column.zero? && board[square].is_a?(NullPiece)
-  #       print  "   |   #{board[square]}   |"
+  #       "   |   #{board[square]}   |"
   #     elsif column.zero?
-  #       print  "   |   #{board[square]}    |"
-  #     elsif column != BOARD_ORDER - 1 && !board[square].is_a?(NullPiece)
-  #       print  "   #{board[square]}    |"
-  #     elsif column != BOARD_ORDER - 1
-  #       print  "   #{board[square]}   |"
+  #       "   |   #{board[square]}    |"
+  #     elsif !board[square].is_a?(NullPiece) && column != BOARD_ORDER
+  #       "   #{board[square]}    |"
   #     else
-  #       print  "   #{board[square]}   |"
+  #       "   #{board[square]}   |"
   #     end
+  #   )
   #   end
   # end
 end

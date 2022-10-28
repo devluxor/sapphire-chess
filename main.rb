@@ -7,16 +7,16 @@ require_relative 'lib/game.rb'
 require 'pry'
 
 system 'clear'
-# board = Board.initialize_board
-board = Board.new
+board = Board.initialize_board
+# board = Board.new
 
-board[[0, 0]] = King.new(board, [0, 0], :black)
-board[[2, 2]] = King.new(board, [2, 2], :white)
+# board[[0, 0]] = King.new(board, [0, 0], :black)
+# board[[2, 2]] = King.new(board, [2, 2], :white)
 
-board[[2, 0]] = Rook.new(board, [2, 0], :white)
-board[[0, 3]] = Rook.new(board, [0, 3], :white)
+# board[[2, 0]] = Rook.new(board, [2, 0], :white)
+# board[[0, 3]] = Rook.new(board, [0, 3], :white)
 
-board[[2, 2]] = Queen.new(board, [2, 2], :white)
+# board[[2, 2]] = Queen.new(board, [2, 2], :white)
 
 text_board = BoardRendererText.new(board)
 text_board.render

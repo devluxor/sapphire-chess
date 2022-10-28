@@ -19,14 +19,14 @@ class Game
 
   def play
     loop do
-      break if over?
+      # break if over?
 
       system 'clear'
 
       renderer.render
       
       puts "It's #{current_player.color}'s turn!"
-      puts 'You are in check!' if board.in_check?(current_player.color)
+      # puts 'You are in check!' if board.in_check?(current_player.color)
     
       turn
 
