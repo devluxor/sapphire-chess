@@ -3,6 +3,10 @@ require 'singleton'
 require_relative 'board.rb'
 require_relative 'movement.rb'
 
+# TODO:
+# only one `#move_direction`, in `Piece`; defined by constants in each class.
+# only one `#to_s` in `Piece`, each piece/color defined by constants in each class.
+
 class NullPiece
   include Singleton
 

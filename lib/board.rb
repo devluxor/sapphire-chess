@@ -3,7 +3,6 @@ require_relative 'pieces.rb'
 require 'pry'
 
 class Board
-  # EMPTY_SQUARE = ' '
   SQUARE_ORDER = 8
   B_PAWN_ROW = 1
   W_PAWN_ROW = 6
