@@ -12,3 +12,4 @@
 10. Add white/black random selection for the human player
 11. Class Player, Human, Computer.
 12. ~~Add possibility of two algebraic positions (fast move)~~
+13. Pawns into queens

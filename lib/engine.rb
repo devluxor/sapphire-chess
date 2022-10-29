@@ -6,6 +6,10 @@ require 'paint'
 
 require 'pry'
 
+# TODO:
+# Game over? does not work
+# checkmate not detected
+
 class ChessEngine 
   def initialize
     @board = Board.initialize_board
@@ -24,7 +28,16 @@ class ChessEngine
       break if game_over?
     end
 
-    puts "#{current_player.color.to_s.capitalize} player wins!"
+    system 'clear'
+    renderer.render
+    swap_player!
+    puts Paint['Checkmate!', nil, :red, :bright]
+    puts ''
+    puts Paint[
+      "#{current_player.color.to_s.capitalize} player wins!",
+      nil, 
+      current_player.color
+    ]
     puts 'End'
   end
   
@@ -46,7 +59,7 @@ class ChessEngine
       current_player.color, 
       :bright
     ]
-    puts 'You are in check!' if board.in_check?(current_player.color)
+    puts Paint['You are in check!', :red, :bright] if board.in_check?(current_player.color)
 
     player_move_input = prompt_move_position
 
@@ -71,9 +84,6 @@ class ChessEngine
     puts '[Format: "start position end position". I.e.: a2a4 ]'
     loop do
       player_move_input = current_player.get_position
-      # now start_position can be:
-      # -    [row, column]
-      # -    [[row, column], [row_end, column_end]]
       break if valid_player_input?(player_move_input)
       # puts "Please, select a #{current_player.color} piece." # Change
       puts "Please, select a valid movement." # Change

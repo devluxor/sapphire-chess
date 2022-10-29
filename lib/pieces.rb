@@ -41,8 +41,8 @@ class Piece
       new_board = board.duplicate
 
       new_board.move_piece!(location, move)
-
       moves << move if !new_board.in_check?(color)
+      binding.pry if !new_board.in_check?(color)
     end
   end
 
@@ -65,6 +65,10 @@ class Piece
       !board[location].is_a?(NullPiece) &&
       board[location].color != color
   end
+
+  def friend_in?(location)
+    !board[location].is_a?(NullPiece) && board[location].color == color
+  end
 end
 
 class Pawn < Piece
@@ -82,7 +86,7 @@ class Pawn < Piece
 
     # If at start line, move forward 2
     two_forward = [current_row + (forward_direction * 2), current_column]
-    if board.empty_square?(two_forward) && 
+    if board.empty_square?(two_forward) &&
       board.empty_square?(one_forward) &&
       at_start?
       moves << two_forward

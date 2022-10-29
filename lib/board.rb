@@ -56,7 +56,7 @@ class Board
 
   def empty_square?(location)
     row, column = location
-    grid[row][column].is_a?(NullPiece)
+    in_bounds?(location) && grid[row][column].is_a?(NullPiece)
   end
 
   def move_piece!(start_position, end_position)
@@ -83,8 +83,8 @@ class Board
   
   def checkmate?(color)
     return false unless in_check?(color)
-    
-    friendly_pieces.all? { |piece| piece.safe_moves.empty? }
+
+    friendly_pieces(color).all? { |piece| piece.safe_moves.empty? }
   end
   
   # Deep duplication of the board
