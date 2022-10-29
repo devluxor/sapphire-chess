@@ -11,16 +11,19 @@ class Board
   PIECES_SEQUENCE = [
     Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
   ]
-
+  
   attr_reader :grid
   
   def self.initialize_board
     board = self.new
-
+    
     # sets pawns
-    SQUARE_ORDER.times do |column|
-      board[[B_PAWN_ROW, column]] = Pawn.new(board, [B_PAWN_ROW, column], :black)
-      board[[W_PAWN_ROW, column]] = Pawn.new(board, [W_PAWN_ROW, column], :white)
+    [B_PAWN_ROW, W_PAWN_ROW].each do |pawn_row|
+      color = pawn_row == 1 ? :black : :white
+
+      SQUARE_ORDER.times do |column|
+        board[[pawn_row, column]] = Pawn.new(board, [pawn_row, column], color)
+      end
     end
     
     # sets rest of the pieces
@@ -29,10 +32,10 @@ class Board
         board[[row, column]] = piece.new(board, [row, column], color)
       end
     end
-
+    
     board
   end
-
+  
   def initialize
     @grid = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NullPiece.instance)}
   end
@@ -49,10 +52,6 @@ class Board
 
   def in_bounds?(location)
     location.none? { |axis| axis >= SQUARE_ORDER || axis < 0 }
-
-    # row, column = location
-
-    # row < SQUARE_ORDER && row >= 0 && column < SQUARE_ORDER && column >= 0
   end
 
   def empty_square?(location)
@@ -61,17 +60,17 @@ class Board
   end
 
   # RENAME/REFACTOR
-  def move_piece(start_position, end_position)
-    piece = self[start_position]
+  # def move_piece(start_position, end_position)
+  #   piece = self[start_position]
 
-    if !piece.available_moves.include?(end_position)
-      raise "Unavailable end position #{end_position}."
-    elsif !in_bounds?(end_position)
-      raise 'End position not in bounds.'
-    end
+  #   if !piece.available_moves.include?(end_position)
+  #     raise "Unavailable end position #{end_position}."
+  #   elsif !in_bounds?(end_position)
+  #     raise 'End position not in bounds.'
+  #   end
 
-    move_piece!(start_position, end_position)
-  end
+  #   move_piece!(start_position, end_position)
+  # end
 
   def move_piece!(start_position, end_position)
     self[start_position], self[end_position] = NullPiece.instance, self[start_position]
@@ -82,7 +81,7 @@ class Board
   def in_check?(color)
     king_position = find_king(color)
 
-    pieces.select { |piece| piece.color != color }.each do |piece|
+    enemy_pieces(color).each do |piece|
       return true if piece.available_moves.include?(king_position)
     end
     
@@ -94,24 +93,33 @@ class Board
 
     king_location ? king_location.location : raise("There is no #{color} king on the board!")
   end
+  
+  def checkmate?(color)
+    return false unless in_check?(color)
+    
+    friendly_pieces.all? { |piece| piece.safe_moves.empty? }
+  end
+  
+  # Deep duplication of the board
+  def duplicate
+    pieces.each_with_object(Board.new) do |piece, new_board|
+      new_piece = piece.class.new(new_board, piece.location, piece.color)
+      
+      new_board[new_piece.location] = new_piece
+    end
+  end
+
+  private
 
   def pieces
     grid.flatten.reject { |position| position.is_a?(NullPiece) }
   end
 
-  def checkmate?(color)
-    return false unless in_check?(color)
-    friendly_pieces = pieces.select { |piece| piece.color == color }
-    
-    friendly_pieces.all? { |piece| piece.safe_moves.empty? }
+  def friendly_pieces(color)
+    pieces.select { |piece| piece.color == color }
   end
 
-  # Deep duplication of the board
-  def dup
-    pieces.each_with_object(Board.new) do |piece, new_board|
-      new_piece = piece.class.new(new_board, piece.location, piece.color)
-
-      new_board[new_piece.location] = new_piece
-    end
+  def enemy_pieces(color)
+    pieces.select { |piece| piece.color != color }
   end
 end

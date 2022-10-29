@@ -9,3 +9,6 @@
 7. Simplify pieces class system design
 8. Add YAML file with messages
 9. Enable castling move
+10. Add white/black random selection for the human player
+11. Class Player, Human, Computer.
+12. Add possibility of two algebraic positions (fast move)

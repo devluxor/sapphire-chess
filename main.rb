@@ -2,7 +2,7 @@ require_relative './lib/board.rb'
 require_relative './lib/board_renderer.rb'
 require_relative './lib/pieces.rb'
 require_relative './lib/player.rb'
-require_relative './lib/game.rb'
+require_relative './lib/engine.rb'
 
 require 'pry'
 
@@ -25,5 +25,5 @@ board = Board.initialize_board
 # text_board = BoardRendererText.new(board)
 # text_board.render
 
-game = ChessEngine.new(board, Player.new(:white), Player.new(:black))
+game = ChessEngine.new
 game.play

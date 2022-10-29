@@ -28,21 +28,32 @@ class Piece
     @location = location
   end
 
+  def to_s
+    case color
+    when :white then Paint[self.class::WHITE, :white]
+    else Paint[self.class::BLACK, :blue]
+    end
+  end
+
+  # Available moves that don't move us into check
+  def safe_moves
+    available_moves.each_with_object([]) do |move, moves|
+      new_board = board.duplicate
+
+      new_board.move_piece!(location, move)
+
+      moves << move if !new_board.in_check?(color)
+    end
+  end
+
+  private
+
   def current_row
     location.first
   end
 
   def current_column
     location.last
-  end
-
-  def to_s
-    case color
-    when :white
-      Paint[self.class::WHITE, :white]
-    else
-      Paint[self.class::BLACK, :blue]
-    end
   end
 
   def move_directions
@@ -54,17 +65,6 @@ class Piece
     !board[location].is_a?(NullPiece) &&
     board[location].color != color
   end
-
-  # Available moves that don't move us into check
-  def safe_moves
-    available_moves.each_with_object([]) do |move, moves|
-      new_board = board.dup
-
-      new_board.move_piece!(location, move)
-
-      moves << move unless new_board.in_check?(color)
-    end
-  end
 end
 
 class Pawn < Piece
@@ -73,25 +73,14 @@ class Pawn < Piece
   BLACK = '♟'
   WHITE = '♙'
 
-  def at_start?
-    start_row = (color == :white ? Board::W_PAWN_ROW : Board::B_PAWN_ROW)
- 
-    current_row == start_row
-  end
-
-  def forward_direction
-    color == :white ? -1 : 1
-  end
-
   def available_moves
     moves = []
     current_row, current_column = location
-    one_forward = [current_row + forward_direction, current_column]
-    if board.empty_square?(one_forward)
-      moves << one_forward
-    end
 
-    # If on start line, move forward 2
+    one_forward = [current_row + forward_direction, current_column]
+    moves << one_forward if board.empty_square?(one_forward)
+
+    # If at start line, move forward 2
     two_forward = [current_row + (forward_direction * 2), current_column]
     if board.empty_square?(two_forward) && 
       board.empty_square?(one_forward) &&
@@ -106,6 +95,18 @@ class Pawn < Piece
     moves << diagonal_right if enemy_in?(diagonal_right)
 
     moves.select { |move| board.in_bounds?(move) }
+  end
+
+  private
+
+  def at_start?
+    start_row = (color == :white ? Board::W_PAWN_ROW : Board::B_PAWN_ROW)
+ 
+    current_row == start_row
+  end
+
+  def forward_direction
+    color == :white ? -1 : 1
   end
 end
 
