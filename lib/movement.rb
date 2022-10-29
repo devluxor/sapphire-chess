@@ -1,5 +1,3 @@
-
-# This one seems to be working fine...
 module Stepable
   # Maybe shorten/refactor
   def available_moves
@@ -18,11 +16,6 @@ module Stepable
     end
   end
 end
-
-# BUG:
-# Rook can fly: it can 'jump' over friendly pieces
-# Bishop can fly
-# Queen can fly
 
 module Slideable
   # Maybe shorten/refactor

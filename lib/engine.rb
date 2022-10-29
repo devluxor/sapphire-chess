@@ -6,10 +6,6 @@ require 'paint'
 
 require 'pry'
 
-# TODO:
-# Game over? does not work
-# checkmate not detected
-
 class ChessEngine 
   def initialize
     @board = Board.initialize_board
