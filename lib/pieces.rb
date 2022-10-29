@@ -46,6 +46,10 @@ class Piece
     end
   end
 
+  def score
+    color == : white ? self.class::SCORE_W : self.class::SCORE_B
+  end
+
   private
 
   def current_row
