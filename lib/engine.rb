@@ -1,6 +1,9 @@
 require_relative 'board.rb'
 require_relative 'board_renderer.rb'
 require_relative 'player.rb'
+
+require 'paint'
+
 require 'pry'
 
 class ChessEngine 
@@ -9,14 +12,14 @@ class ChessEngine
     @renderer = BoardRenderer.new(board)
     @white_player = Player.new(:white)
     @black_player = Player.new(:black)
-    @current_player = white_player # Here: random selection of first player
+    @current_player = white_player
   end
   
   def play
     loop do
       system 'clear'
       renderer.render
-      turn
+      turn!
       swap_player!
       break if game_over?
     end
@@ -36,8 +39,13 @@ class ChessEngine
     )
   end
 
-  def turn
-    puts "It's #{current_player.color}'s turn!"
+  def turn!
+    puts Paint[
+      "It's #{current_player.color}'s turn!", 
+      nil, 
+      current_player.color, 
+      :bright
+    ]
     puts 'You are in check!' if board.in_check?(current_player.color)
 
     player_move_input = prompt_move_position

@@ -59,19 +59,6 @@ class Board
     grid[row][column].is_a?(NullPiece)
   end
 
-  # RENAME/REFACTOR
-  # def move_piece(start_position, end_position)
-  #   piece = self[start_position]
-
-  #   if !piece.available_moves.include?(end_position)
-  #     raise "Unavailable end position #{end_position}."
-  #   elsif !in_bounds?(end_position)
-  #     raise 'End position not in bounds.'
-  #   end
-
-  #   move_piece!(start_position, end_position)
-  # end
-
   def move_piece!(start_position, end_position)
     self[start_position], self[end_position] = NullPiece.instance, self[start_position]
 
