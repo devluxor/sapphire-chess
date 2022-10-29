@@ -12,6 +12,10 @@ class NullPiece
   def to_s
     '  '
   end
+
+  def white
+    '██'
+  end
 end
 
 class Piece
@@ -35,9 +39,9 @@ class Piece
   def to_s
     case color
     when :white
-      Paint[self.class::WHITE]
+      Paint[self.class::WHITE, :white]
     else
-      Paint[self.class::BLACK]
+      Paint[self.class::BLACK, :blue]
     end
   end
 

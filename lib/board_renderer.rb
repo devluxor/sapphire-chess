@@ -86,11 +86,11 @@ class BoardRenderer
       print(
         if white_square?(square)
           if board[square].is_a?(NullPiece) && column.zero?
-            '   |' + "███#{board[square]}███" + '|'
+            '   |' + "███#{board[square].white}███" + '|'
           elsif column.zero?
             '   |' + "██ #{board[square]}  ██" + '|'
           elsif board[square].is_a?(NullPiece)
-            "███#{board[square]}███" + '|'
+            "███#{board[square].white}███" + '|'
           else
             "██ #{board[square]}  ██" + '|'
           end
