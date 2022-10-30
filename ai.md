@@ -26,6 +26,38 @@ function minimax(position, depth, maximizing_player)
 minimax(currentPosition, 3, true)
 ```
 
+Other pseudocode version:
+```
+def minimax(pos, depth, alpha, beta, maximizingPlayer) :
+# maximizingPlayer = True if White2Play and False si Black2Play
+
+if depth == 0 or game_is_finished(board) or can_t_move(board) :
+    return evaluate(board)                                     # <- zero ground for recusivity
+
+if maximizingPlayer :
+    maxEval = -infinity
+    for child in child_of_position(board) :
+        evalu = minimax(child, depth - 1, alpha, beta, False)  # recursivity
+        maxEval = max(maxEval, evalu)
+        alpha = max(alpha, evalu)
+        if beta <= alpha :
+            break
+    return maxEval
+
+else :
+    minEval = infinity
+    for child in child_of_position(board) :
+        evalu = minimax(child, depth - 1, alpha, beta, True)    # recursivity
+        minEval = min(minEval, evalu)
+        alpha = min(alpha, evalu)
+        if beta <= alpha :
+            break
+    return minEval
+```
+Evaluate(board) returns a number, representing the evaluation of the current state of the board. This is the number that will be used to choose the best evaluation for the player (max or min function). 
+
+And for changing board, child_of_position(board) will return all the new possible boards from a given board.
+
 In Ruby:
 
 ```ruby
