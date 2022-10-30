@@ -71,7 +71,7 @@ white: positive scores)
 
 `max_evaluation` = max. evaluation found
 
-child of position?
+child of `position`?
 
 `evaluation` = 'current' evaluation
 
