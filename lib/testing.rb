@@ -22,13 +22,16 @@ module Testing
     return evaluate if depth.zero? # or checkmate for (white or black)
 
     if maximizing_player
+      # Best is relative: best for the enemy
       best_evaluation = Float::INFINITY
 
+      # This performs the passed in move:
       start_position, target_position = move
       piece_buffer = self[target_position]
       move_piece!(start_position, target_position)
 
-      generate_moves(:black).each do |move|
+      # This generates children:
+      generate_moves(:black).each do |move| 
         evaluation = minimax(move, depth - 1, alpha, beta, false)
         best_evaluation = [best_evaluation, evaluation].min
         beta = [beta, evaluation].min
@@ -40,13 +43,16 @@ module Testing
 
       best_evaluation
     else
+      # Best is relative: best for the enemy
       best_evaluation = -Float::INFINITY
 
+      # This performs the passed in move:
       start_position, target_position = move
       piece_buffer = self[target_position]
       move_piece!(start_position, target_position)
 
-      generate_moves(:white).each do |move|
+      # This generates children:
+      generate_moves(:white).each do |move| 
         evaluation = minimax(move, depth - 1, alpha, beta, true)
         best_evaluation = [best_evaluation, evaluation].max
         alpha = [alpha, evaluation].max
