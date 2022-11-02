@@ -29,15 +29,15 @@ minimax(currentPosition, 3, true)
 Other pseudocode version:
 ```
 def minimax(pos, depth, alpha, beta, maximizingPlayer) :
-# maximizingPlayer = True if White2Play and False si Black2Play
+# maximizingPlayer = True if White2Play and False if Black2Play
 
 if depth == 0 or game_is_finished(board) or can_t_move(board) :
-    return evaluate(board)                                     # <- zero ground for recusivity
+    return evaluate(board)                                     
 
 if maximizingPlayer :
     maxEval = -infinity
     for child in child_of_position(board) :
-        evalu = minimax(child, depth - 1, alpha, beta, False)  # recursivity
+        evalu = minimax(child, depth - 1, alpha, beta, False) 
         maxEval = max(maxEval, evalu)
         alpha = max(alpha, evalu)
         if beta <= alpha :
@@ -47,7 +47,7 @@ if maximizingPlayer :
 else :
     minEval = infinity
     for child in child_of_position(board) :
-        evalu = minimax(child, depth - 1, alpha, beta, True)    # recursivity
+        evalu = minimax(child, depth - 1, alpha, beta, True)   
         minEval = min(minEval, evalu)
         alpha = min(alpha, evalu)
         if beta <= alpha :
@@ -91,11 +91,11 @@ minimax(current_position, 3, true)
 
 `minimax` = name of the method
 
-`position` = the board?
+`position` = board
 
 `depth` = levels of the tree
 
-`maximizing_player` = if true, white, else, black 
+`maximizing_player` = if true: white, else: black 
 (white wants max. values, black wants min. values.
 the score can be determined by the sum of the score of the pieces?
 black: negative scores,
@@ -105,5 +105,5 @@ white: positive scores)
 
 child of `position`?
 
-`evaluation` = 'current' evaluation
+`evaluation` = 'current' evaluation of the board
 

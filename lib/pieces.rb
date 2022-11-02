@@ -42,12 +42,11 @@ class Piece
 
       new_board.move_piece!(location, move)
       moves << move if !new_board.in_check?(color)
-      binding.pry if !new_board.in_check?(color)
     end
   end
 
-  def score
-    color == : white ? self.class::SCORE_W : self.class::SCORE_B
+  def value
+    self.class::VALUE
   end
 
   private
@@ -77,6 +76,8 @@ end
 
 class Pawn < Piece
   include Stepable
+
+  VALUE = 10
 
   BLACK = '♟'
   WHITE = '♙'
@@ -119,6 +120,8 @@ class Pawn < Piece
 end
 
 class Rook < Piece
+  VALUE = 50
+
   MOVE_DIRECTIONS = [
     [0, 1], [0, -1], [1, 0], [-1, 0]
   ]
@@ -130,6 +133,8 @@ class Rook < Piece
 end
 
 class Knight < Piece
+  VALUE = 30
+
   MOVE_DIRECTIONS = [
     [1, 2], [2, 1], [-1, 2], [-2, 1],
     [1, -2], [2, -1], [-1, -2], [-2, -1]
@@ -142,6 +147,8 @@ class Knight < Piece
 end
 
 class Bishop < Piece
+  VALUE = 30
+
   MOVE_DIRECTIONS = [
     [1, 1], [1, -1], [-1, 1], [-1, -1]
   ]
@@ -153,6 +160,8 @@ class Bishop < Piece
 end
 
 class Queen < Piece
+  VALUE = 90
+
   MOVE_DIRECTIONS = [
     [0, 1], [0, -1], [1, 0], [-1, 0],
     [1, 1], [1, -1], [-1, 1], [-1, -1]
@@ -165,6 +174,7 @@ class Queen < Piece
 end
 
 class King < Piece
+  VALUE = 900
   MOVE_DIRECTIONS = [
     [0, 1], [1, 1], [1, 0], [0, -1],
     [1, -1], [-1, 1], [-1, -1], [-1, 0]

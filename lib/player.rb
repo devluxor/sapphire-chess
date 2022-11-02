@@ -1,17 +1,36 @@
-require_relative './board.rb'
+require_relative 'board.rb'
+require_relative 'ai.rb'
 
 require 'pry'
 
 class Player
-  LETTER_RESET_VALUE = 97 # ASCII downcase 'a' numeric value: 'a'.ord
-  ALGEBRAIC_NOTATION_FORMAT = /[a-h]{1}[1-8]{1}/
-  
   attr_reader :color
-  
+
   def initialize(color)
     @color = color
   end
+end
 
+class Computer < Player
+  include AI
+
+  attr_reader :board
+
+  def initialize(color, board)
+    super(color)
+    @board = board
+  end
+
+  def get_position
+    computer_chooses_movement
+  end
+end
+
+class Human < Player
+  LETTER_RESET_VALUE = 97 # ASCII downcase 'a' numeric value: 'a'.ord
+  ALGEBRAIC_NOTATION_FORMAT = /[a-h]{1}[1-8]{1}/
+  
+  
   def get_position
     algebraic_input
   end
@@ -51,7 +70,7 @@ class Player
     
     row = number_to_row(number)
     column = letter_to_column(letter)
-    
+
     [row, column]
   end
 
@@ -69,7 +88,7 @@ class Player
   end
 
   def number_to_row(number)
-      (number.to_i - Board::SQUARE_ORDER).abs
+    (number.to_i - Board::SQUARE_ORDER).abs
   end
 
   def letter_to_column(letter)

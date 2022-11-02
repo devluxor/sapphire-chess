@@ -1,5 +1,8 @@
 require_relative 'pieces.rb'
 
+require_relative 'testing.rb'
+require_relative 'board_renderer.rb'
+
 require 'pry'
 
 class Board
@@ -11,8 +14,11 @@ class Board
   PIECES_SEQUENCE = [
     Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
   ]
+
+  include Testing
   
-  attr_reader :grid
+  attr_accessor :buffer
+  attr_reader :grid, :renderer
   
   def self.initialize_board
     board = self.new
@@ -38,6 +44,7 @@ class Board
   
   def initialize
     @grid = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NullPiece.instance)}
+    @renderer = BoardRenderer.new(self) # For testing only
   end
 
   def [](location)
@@ -62,10 +69,13 @@ class Board
   def move_piece!(start_position, end_position)
     self[start_position], self[end_position] = NullPiece.instance, self[start_position]
 
-    self[end_position].location = end_position
+    self[end_position].location = end_position if self[end_position].is_a?(Piece)
   end
 
   def in_check?(color)
+    # Remove:
+    return false
+
     king_position = find_king(color)
 
     enemy_pieces(color).each do |piece|
@@ -96,7 +106,26 @@ class Board
     end
   end
 
-  private
+  def generate_moves(color)
+    friendly_pieces(color).each_with_object([]) do |piece, possible_moves|
+      location = piece.location
+
+      piece.available_moves.each do |possible_move|
+        possible_moves << [location, possible_move]
+      end
+    end
+  end
+
+  def evaluate
+    count_material
+  end
+
+  def count_material
+    white_evaluation = friendly_pieces(:white).map(&:value).sum
+    black_evaluation = -friendly_pieces(:black).map(&:value).sum
+
+    white_evaluation + black_evaluation
+  end
 
   def pieces
     grid.flatten.reject { |position| position.is_a?(NullPiece) }
