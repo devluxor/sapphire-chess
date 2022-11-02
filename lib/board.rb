@@ -15,8 +15,6 @@ class Board
     Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
   ]
 
-  include Testing
-  
   attr_accessor :buffer
   attr_reader :grid, :renderer
   
@@ -73,9 +71,6 @@ class Board
   end
 
   def in_check?(color)
-    # Remove:
-    return false
-
     king_position = find_king(color)
 
     enemy_pieces(color).each do |piece|
