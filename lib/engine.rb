@@ -125,7 +125,6 @@ class ChessEngine
       
       print score unless board.count(type, color).zero?
     end
-
   end
 
   def double_input?(player_move_input)

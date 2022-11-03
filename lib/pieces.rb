@@ -75,20 +75,20 @@ class Piece
 end
 
 class Pawn < Piece
-  include Slideable
-
   VALUE = 10
-
+  
   BLACK = ['♟', '♛']
   WHITE = ['♙', '♕']
-
+  
   B_OPPOSITE_ROW = 7
   W_OPPOSITE_ROW = 1
-
+  
   MOVE_DIRECTIONS = [
     [0, 1], [0, -1], [1, 0], [-1, 0],
     [1, 1], [1, -1], [-1, 1], [-1, -1]
   ]
+  
+  include Slideable
 
   def initialize(board, location, color)
     super(board, location, color)
