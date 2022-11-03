@@ -1,6 +1,4 @@
 require_relative 'pieces.rb'
-
-require_relative 'testing.rb'
 require_relative 'board_renderer.rb'
 
 require 'pry'
@@ -72,7 +70,7 @@ class Board
 
   def in_check?(color)
     king_position = find_king(color)
-
+    
     enemy_pieces(color).each do |piece|
       return true if piece.available_moves.include?(king_position)
     end
@@ -83,12 +81,13 @@ class Board
   def find_king(color)
     king_location = pieces.find { |piece| piece.color == color && piece.is_a?(King) }
 
-    king_location ? king_location.location : raise("There is no #{color} king on the board!")
+    king_location ? king_location.location : :check#raise("There is no #{color} king on the board!")
   end
   
   def checkmate?(color)
     return false unless in_check?(color)
 
+    find_king(color).nil? || # Remove
     friendly_pieces(color).all? { |piece| piece.safe_moves.empty? }
   end
   

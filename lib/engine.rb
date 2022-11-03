@@ -96,6 +96,7 @@ class ChessEngine
   end
 
   def display_graphic_score
+    # show each piece icon x number + total material score for each player
   end
 
   def double_input?(player_move_input)

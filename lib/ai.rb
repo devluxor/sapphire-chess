@@ -9,67 +9,59 @@ module AI
     possible_moves = board.generate_moves(:black).shuffle
     # will have: possible_moves << castling if castling_rights?
 
-    eva = {} # Test
+    eva = [] # Test
     best_move = possible_moves.min_by do |move|
                   evaluation = minimax(move, DEPTH, -Float::INFINITY, Float::INFINITY, false)
-                  store_evaluation(eva, move, evaluation) # Test
+                  eva << store_evaluation(move, evaluation) # Test
                   evaluation
                 end
+    eva.sort_by! { |evaluation| evaluation.last }
     binding.pry
     return possible_moves.sample if all_equal?(eva)
     best_move
   end
 
   def minimax(move, depth, alpha, beta, maximizing_player)
-    return board.evaluate if depth.zero? # or checkmate for (white or black)
-
-    if maximizing_player
-      # Best is relative: best for the enemy
-      best_evaluation = Float::INFINITY
-
-      # This performs the passed in move:
-      start_position, target_position = move
-      piece_buffer = board[target_position]
-      board.move_piece!(start_position, target_position)
-
-      # This generates children:
-      board.generate_moves(:black).each do |move| 
-        evaluation = minimax(move, depth - 1, alpha, beta, false)
-        best_evaluation = [best_evaluation, evaluation].min
-        beta = [beta, evaluation].min
-        break if beta <= alpha
-      end
-
-      board.move_piece!(target_position, start_position)
-      board[target_position] = piece_buffer
-
-      best_evaluation
-    else
-      # Best is relative: best for the enemy
-      best_evaluation = -Float::INFINITY
-
-      # This performs the passed in move:
-      start_position, target_position = move
-      piece_buffer = board[target_position]
-      board.move_piece!(start_position, target_position)
-
-      # This generates children:
-      board.generate_moves(:white).each do |move| 
-        evaluation = minimax(move, depth - 1, alpha, beta, true)
-        best_evaluation = [best_evaluation, evaluation].max
-        alpha = [alpha, evaluation].max
-        break if beta <= alpha
-      end
-
-      board.move_piece!(target_position, start_position)
-      board[target_position] = piece_buffer
-
-      best_evaluation
+    if depth.zero? # board.checkmate?(:white) || board.checkmate?(:black) || 
+      return board.evaluate
     end
+
+    best_evaluation = maximizing_player ? Float::INFINITY : -Float::INFINITY
+
+    # This performs the passed in move:
+    start_position, target_position = move
+    piece_buffer = board[target_position]
+    board.move_piece!(start_position, target_position)
+
+    # This generates children:
+    best_evaluation = if maximizing_player
+                        board.generate_moves(:black).each do |move| 
+                          evaluation = minimax(move, depth - 1, alpha, beta, false)
+                          best_evaluation = [best_evaluation, evaluation].min
+                          beta = [beta, evaluation].min
+                          break if beta <= alpha
+                        end
+
+                        best_evaluation
+                      else
+                        board.generate_moves(:white).each do |move| 
+                          evaluation = minimax(move, depth - 1, alpha, beta, true)
+                          best_evaluation = [best_evaluation, evaluation].max
+                          alpha = [alpha, evaluation].max
+                          break if beta <= alpha
+                        end
+
+                        best_evaluation
+                      end
+
+    board.move_piece!(target_position, start_position)
+    board[target_position] = piece_buffer
+    
+    best_evaluation
   end
 
   # Testing:
-  def store_evaluation(evaluations, move, evaluation)
+  def store_evaluation(move, evaluation)
     description = format(
       "%s %s to %s %s",
       board[move.first].class,
@@ -77,12 +69,12 @@ module AI
       board[move.last].class,
       move.last
     )
-    evaluations[description] = evaluation
+
+    [description, evaluation]
   end
 
   def all_equal?(evaluations)
-    first_value = evaluations.values.first
-    evaluations.values.all? { |value| value == first_value }
+    evaluations.map(&:last).uniq.size == 1
   end
 
   # Testing:
