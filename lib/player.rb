@@ -30,7 +30,6 @@ class Human < Player
   LETTER_RESET_VALUE = 97 # ASCII downcase 'a' numeric value: 'a'.ord
   ALGEBRAIC_NOTATION_FORMAT = /[a-h]{1}[1-8]{1}/
   
-  
   def get_position
     algebraic_input
   end
