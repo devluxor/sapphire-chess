@@ -80,13 +80,12 @@ class Board
   def find_king(color)
     king_location = pieces.find { |piece| piece.color == color && piece.is_a?(King) }
 
-    king_location ? king_location.location : :check#raise("There is no #{color} king on the board!")
+    king_location ? king_location.location : nil
   end
   
   def checkmate?(color)
     return false unless in_check?(color)
 
-    find_king(color).nil? || # Remove
     friendly_pieces(color).all? { |piece| piece.safe_moves.empty? }
   end
   
