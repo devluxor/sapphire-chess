@@ -17,4 +17,5 @@
 15. ~~make/unmake provisional move~~
 16. ~~Display graphics for score~~
 17. Replan design
-18. Improve evaluation function `board#evaluate`
+18. ~~Improve evaluation function `board#evaluate`~~
+19. Add game balance display

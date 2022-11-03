@@ -13,22 +13,21 @@ class Board
     Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
   ]
 
-  attr_accessor :buffer
+  include Evaluation
+
   attr_reader :grid, :renderer
   
   def self.initialize_board
     board = self.new
-    
-    # sets pawns
+
     [B_PAWN_ROW, W_PAWN_ROW].each do |pawn_row|
-      color = pawn_row == 1 ? :black : :white
+      color = pawn_row == B_PAWN_ROW ? :black : :white
 
       SQUARE_ORDER.times do |column|
         board[[pawn_row, column]] = Pawn.new(board, [pawn_row, column], color)
       end
     end
-    
-    # sets rest of the pieces
+
     [[FIRST_ROW, :black], [LAST_ROW, :white]].each do |(row, color)|
       PIECES_SEQUENCE.each_with_index do |piece, column|
         board[[row, column]] = piece.new(board, [row, column], color)
@@ -108,17 +107,6 @@ class Board
         possible_moves << [location, possible_move]
       end
     end
-  end
-
-  def evaluate
-    count_material
-  end
-
-  def count_material
-    white_evaluation = friendly_pieces(:white).map(&:value).sum
-    black_evaluation = -friendly_pieces(:black).map(&:value).sum
-
-    white_evaluation + black_evaluation
   end
 
   def pieces
