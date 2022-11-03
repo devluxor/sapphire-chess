@@ -38,8 +38,7 @@ class Board
   end
   
   def initialize
-    @grid = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NullPiece.instance)}
-    @renderer = BoardRenderer.new(self) # For testing only
+    @grid = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NullPiece.instance) }
   end
 
   def [](location)
@@ -93,7 +92,7 @@ class Board
     find_king(color).nil?
   end
   
-  # Deep duplication of the board
+  # Deep duplication of the board for Piece#safe_moves
   def duplicate
     pieces.each_with_object(Board.new) do |piece, new_board|
       new_piece = piece.class.new(new_board, piece.location, piece.color)
