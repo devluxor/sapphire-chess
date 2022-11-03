@@ -10,24 +10,24 @@ module AI
     possible_moves = board.generate_moves(:black).shuffle
     # will have: possible_moves << castling if castling_rights?
 
-    eva = [] # Test
+    # eva = [] # Test
     best_move = possible_moves.min_by do |move|
-                  evaluation = minimax(move, DEPTH, -Float::INFINITY, Float::INFINITY, false)
-                  eva << store_evaluation(move, evaluation) # Test
-                  evaluation
+                  # evaluation = 
+                  minimax(move, DEPTH, -Float::INFINITY, Float::INFINITY, false)
+                  # eva << store_evaluation(move, evaluation) # Test
+                  # evaluation
                 end
 
-    eva.sort_by! { |evaluation| evaluation.last }
-    binding.pry
+    # eva.sort_by! { |evaluation| evaluation.last }
+    # binding.pry
     
-    return possible_moves.sample if all_equal?(eva)
+    # return possible_moves.sample if all_equal?(eva)
     best_move
   end
 
   def minimax(move, depth, alpha, beta, maximizing_player)
-    if depth.zero? # board.checkmate?(:white) || board.checkmate?(:black) || 
-      return board.evaluate
-    end
+    color = maximizing_player == :white ? :black : :white
+    return board.evaluate if depth.zero?
 
     best_evaluation = maximizing_player ? Float::INFINITY : -Float::INFINITY
 

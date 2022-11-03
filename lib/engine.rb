@@ -176,6 +176,6 @@ class ChessEngine
   end
 
   def game_over?
-    board.checkmate?(current_player.color)
+    board.no_king?(current_player.color) || board.checkmate?(current_player.color)
   end
 end

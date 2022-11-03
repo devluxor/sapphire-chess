@@ -88,6 +88,10 @@ class Board
 
     friendly_pieces(color).all? { |piece| piece.safe_moves.empty? }
   end
+
+  def no_king?(color)
+    find_king(color).nil?
+  end
   
   # Deep duplication of the board
   def duplicate
