@@ -5,7 +5,6 @@ require_relative 'board.rb'
 require_relative 'movement.rb'
 require_relative 'evaluation.rb'
 
-
 require 'pry'
 
 class NullPiece
@@ -85,8 +84,6 @@ class Piece
 end
 
 class Pawn < Piece
-  VALUE = 100
-  
   BLACK = ['♟', '♛']
   WHITE = ['♙', '♕']
   
@@ -97,6 +94,8 @@ class Pawn < Piece
     [0, 1], [0, -1], [1, 0], [-1, 0],
     [1, 1], [1, -1], [-1, 1], [-1, -1]
   ]
+  
+  VALUE = 100
 
   WHITE_LOCATION_VALUE = [
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -202,8 +201,6 @@ class Pawn < Piece
 end
 
 class Knight < Piece
-  VALUE = 320
-  
   MOVE_DIRECTIONS = [
     [1, 2], [2, 1], [-1, 2], [-2, 1],
     [1, -2], [2, -1], [-1, -2], [-2, -1]
@@ -211,6 +208,8 @@ class Knight < Piece
   
   BLACK = '♞'
   WHITE = '♘'
+  
+  VALUE = 320
 
   WHITE_LOCATION_VALUE = [
     [-50, -40, -30, -30, -30, -30, -40, -50],
@@ -239,14 +238,14 @@ class Knight < Piece
 end
 
 class Bishop < Piece
-  VALUE = 330
-  
   MOVE_DIRECTIONS = [
     [1, 1], [1, -1], [-1, 1], [-1, -1]
   ]
   
   BLACK = '♝'
   WHITE = '♗'
+  
+  VALUE = 330
 
   WHITE_LOCATION_VALUE = [
     [-20, -10, -10, -10, -10, -10, -10, -20],
@@ -274,14 +273,14 @@ class Bishop < Piece
 end
 
 class Rook < Piece
-  VALUE = 500
-
   MOVE_DIRECTIONS = [
     [0, 1], [0, -1], [1, 0], [-1, 0]
   ]
-
+  
   BLACK = '♜'
   WHITE = '♖'
+  
+  VALUE = 500
 
   WHITE_LOCATION_VALUE = [
     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -309,15 +308,15 @@ class Rook < Piece
 end
 
 class Queen < Piece
-  VALUE = 900
-
   MOVE_DIRECTIONS = [
     [0, 1], [0, -1], [1, 0], [-1, 0],
     [1, 1], [1, -1], [-1, 1], [-1, -1]
   ]
-
+  
   BLACK = '♛'
   WHITE = '♕'
+  
+  VALUE = 900
 
   WHITE_LOCATION_VALUE = [
     [-20, -10, -10, -5, -5, -10, -10, -20],
@@ -345,14 +344,15 @@ class Queen < Piece
 end
 
 class King < Piece
-  VALUE = 20000
   MOVE_DIRECTIONS = [
     [0, 1], [1, 1], [1, 0], [0, -1],
     [1, -1], [-1, 1], [-1, -1], [-1, 0]
   ]
-
+  
   BLACK = '♚'
   WHITE = '♔'
+
+  VALUE = 20000
 
   WHITE_LOCATION_VALUE = [
     [-30,-40,-40,-50,-50,-40,-40,-30],
