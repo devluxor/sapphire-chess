@@ -8,15 +8,15 @@ require 'pry'
 
 class ChessEngine 
   def initialize
-    @board = Board.initialize_board
-    # @board = Board.new
+    # @board = Board.initialize_board
 
-    # board[[0, 0]] = Rook.new(board, [0, 0], :white)
-    # board[[1, 0]] = Bishop.new(board, [1, 0], :white)
-    # board[[1, 2]] = Bishop.new(board, [1, 2], :white)
-    # board[[2, 1]] = Bishop.new(board, [2, 1], :black)
-    # board[[7, 7]] = Pawn.new(board, [7, 7], :white)
+    @board = Board.new
 
+    board[[1, 4]] = Pawn.new(board, [1, 4], :white)
+    board[[5, 4]] = Pawn.new(board, [5, 4], :black)
+
+    board[[0, 0]] = King.new(board, [0, 0], :black)
+    board[[7, 7]] = King.new(board, [7, 7], :white)
 
     @renderer = BoardRenderer.new(board)
     @white_player = Human.new(:white)
@@ -97,6 +97,15 @@ class ChessEngine
 
   def display_graphic_score
     # show each piece icon x number + total material score for each player
+    puts(
+      "#{Paint["Black score: ", :blue]}\n" +
+      "#{Paint["White score: "]}\n"
+    )
+    puts ''
+  end
+
+  def graphic_score(color)
+    
   end
 
   def double_input?(player_move_input)

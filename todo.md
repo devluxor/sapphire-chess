@@ -12,6 +12,7 @@
 10. Add white/black random selection for the human player
 11. ~~Class Player, Human, Computer.~~
 12. ~~Add possibility of two algebraic positions (fast move)~~
-13. Pawns into queens
+13. ~~Pawns into queens~~
 14. ~~Calculate material evaluation of the board~~
 15. ~~make/unmake provisional move~~
+16. Display graphics for score
