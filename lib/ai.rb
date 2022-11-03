@@ -55,7 +55,8 @@ module AI
 
                         best_evaluation
                       end
-
+                      
+    # Unmakes passed in move:
     board.move_piece!(target_position, start_position)
     board[target_position] = piece_buffer
     

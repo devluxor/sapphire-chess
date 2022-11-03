@@ -132,4 +132,14 @@ class Board
   def enemy_pieces(color)
     pieces.select { |piece| piece.color != color }
   end
+
+  def count(type, color)
+    friendly_pieces(color).select { |piece| piece.class == type }.size
+  end
+
+  def promoted_pawns(color)
+    friendly_pieces(Pawn).select do |piece| 
+      piece.class == Pawn && piece.promoted?
+    end.size
+  end
 end

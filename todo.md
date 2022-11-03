@@ -15,4 +15,5 @@
 13. ~~Pawns into queens~~
 14. ~~Calculate material evaluation of the board~~
 15. ~~make/unmake provisional move~~
-16. Display graphics for score
+16. ~~Display graphics for score~~
+17. Replan design

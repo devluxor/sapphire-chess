@@ -1,4 +1,5 @@
 require_relative 'board.rb'
+require_relative 'pieces.rb'
 require_relative 'board_renderer.rb'
 require_relative 'player.rb'
 
@@ -8,15 +9,15 @@ require 'pry'
 
 class ChessEngine 
   def initialize
-    # @board = Board.initialize_board
+    @board = Board.initialize_board
 
-    @board = Board.new
+    # @board = Board.new
 
-    board[[1, 4]] = Pawn.new(board, [1, 4], :white)
-    board[[5, 4]] = Pawn.new(board, [5, 4], :black)
+    # board[[1, 4]] = Pawn.new(board, [1, 4], :white)
+    # board[[5, 4]] = Pawn.new(board, [5, 4], :black)
 
-    board[[0, 0]] = King.new(board, [0, 0], :black)
-    board[[7, 7]] = King.new(board, [7, 7], :white)
+    # board[[0, 0]] = King.new(board, [0, 0], :black)
+    # board[[7, 7]] = King.new(board, [7, 7], :white)
 
     @renderer = BoardRenderer.new(board)
     @white_player = Human.new(:white)
@@ -97,15 +98,34 @@ class ChessEngine
 
   def display_graphic_score
     # show each piece icon x number + total material score for each player
-    puts(
-      "#{Paint["Black score: ", :blue]}\n" +
-      "#{Paint["White score: "]}\n"
-    )
-    puts ''
+    [:black, :white].each do |color|
+      message = case color 
+                when :black then Paint["Black score", :blue, :underline]
+                else Paint["White score", :white, :underline]
+                end
+      print message + ": "
+      display_pieces_score(color)
+      puts "\n\n"
+    end
   end
 
-  def graphic_score(color)
-    
+  def display_pieces_score(color)
+    [Pawn, Knight, Bishop, Rook, Queen, King].each do |type|
+      p_symbol = color == :white ? Paint[type::WHITE, :white] : Paint[type::BLACK, :blue]
+
+      if type == Pawn
+        p_symbol = color == :white ? Paint[type::WHITE.first, :white] : Paint[type::BLACK.first, :blue]
+      end
+
+      score = case type
+              when Queen
+                "#{p_symbol}  x #{board.count(type, color) + board.promoted_pawns(color)} "
+              else "#{p_symbol}  x #{board.count(type, color)} "
+              end
+      
+      print score unless board.count(type, color).zero?
+    end
+
   end
 
   def double_input?(player_move_input)

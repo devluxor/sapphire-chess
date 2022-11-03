@@ -76,7 +76,6 @@ end
 
 class Pawn < Piece
   include Slideable
-  # include Stepable
 
   VALUE = 10
 
@@ -140,13 +139,13 @@ class Pawn < Piece
     end
   end
 
-  private
-
-  attr_writer :promoted
-
   def promoted?
     @promoted
   end
+
+  private
+
+  attr_writer :promoted
 
   def promote
     self.promoted = true if location.first == opposite_row
