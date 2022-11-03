@@ -75,7 +75,7 @@ class Piece
 end
 
 class Pawn < Piece
-  VALUE = 10
+  VALUE = 100
   
   BLACK = ['♟', '♛']
   WHITE = ['♙', '♕']
@@ -169,8 +169,35 @@ class Pawn < Piece
   end
 end
 
+class Knight < Piece
+  VALUE = 320
+  
+  MOVE_DIRECTIONS = [
+    [1, 2], [2, 1], [-1, 2], [-2, 1],
+    [1, -2], [2, -1], [-1, -2], [-2, -1]
+  ]
+  
+  BLACK = '♞'
+  WHITE = '♘'
+  
+  include Stepable
+end
+
+class Bishop < Piece
+  VALUE = 330
+  
+  MOVE_DIRECTIONS = [
+    [1, 1], [1, -1], [-1, 1], [-1, -1]
+  ]
+  
+  BLACK = '♝'
+  WHITE = '♗'
+  
+  include Slideable
+end
+
 class Rook < Piece
-  VALUE = 50
+  VALUE = 500
 
   MOVE_DIRECTIONS = [
     [0, 1], [0, -1], [1, 0], [-1, 0]
@@ -182,35 +209,8 @@ class Rook < Piece
   include Slideable
 end
 
-class Knight < Piece
-  VALUE = 30
-
-  MOVE_DIRECTIONS = [
-    [1, 2], [2, 1], [-1, 2], [-2, 1],
-    [1, -2], [2, -1], [-1, -2], [-2, -1]
-  ]
-
-  BLACK = '♞'
-  WHITE = '♘'
-
-  include Stepable
-end
-
-class Bishop < Piece
-  VALUE = 30
-
-  MOVE_DIRECTIONS = [
-    [1, 1], [1, -1], [-1, 1], [-1, -1]
-  ]
-
-  BLACK = '♝'
-  WHITE = '♗'
-
-  include Slideable
-end
-
 class Queen < Piece
-  VALUE = 90
+  VALUE = 900
 
   MOVE_DIRECTIONS = [
     [0, 1], [0, -1], [1, 0], [-1, 0],
@@ -224,7 +224,7 @@ class Queen < Piece
 end
 
 class King < Piece
-  VALUE = 900
+  VALUE = 20000
   MOVE_DIRECTIONS = [
     [0, 1], [1, 1], [1, 0], [0, -1],
     [1, -1], [-1, 1], [-1, -1], [-1, 0]
