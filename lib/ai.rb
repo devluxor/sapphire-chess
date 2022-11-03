@@ -29,8 +29,6 @@ module AI
     color = maximizing_player == :white ? :black : :white
     return board.evaluate if depth.zero?
 
-    best_evaluation = maximizing_player ? Float::INFINITY : -Float::INFINITY
-
     # This performs the passed in move:
     start_position, target_position = move
     piece_buffer = board[target_position]
@@ -38,6 +36,8 @@ module AI
 
     # This generates children:
     best_evaluation = if maximizing_player
+                        best_evaluation = Float::INFINITY
+
                         board.generate_moves(:black).each do |move| 
                           evaluation = minimax(move, depth - 1, alpha, beta, false)
                           best_evaluation = [best_evaluation, evaluation].min
@@ -47,6 +47,8 @@ module AI
 
                         best_evaluation
                       else
+                        best_evaluation = -Float::INFINITY
+
                         board.generate_moves(:white).each do |move| 
                           evaluation = minimax(move, depth - 1, alpha, beta, true)
                           best_evaluation = [best_evaluation, evaluation].max
