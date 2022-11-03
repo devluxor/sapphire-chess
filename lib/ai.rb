@@ -7,7 +7,7 @@ module AI
   private
   # Choose move by best outcome:
   def computer_chooses_movement
-    possible_moves = board.generate_moves(:black).shuffle
+    possible_moves = board.generate_moves(:black)
     # will have: possible_moves << castling if castling_rights?
 
     # eva = [] # Test
@@ -21,12 +21,10 @@ module AI
     # eva.sort_by! { |evaluation| evaluation.last }
     # binding.pry
     
-    # return possible_moves.sample if all_equal?(eva)
     best_move
   end
 
   def minimax(move, depth, alpha, beta, maximizing_player)
-    color = maximizing_player == :white ? :black : :white
     return board.evaluate if depth.zero?
 
     # This performs the passed in move:
