@@ -91,9 +91,9 @@ module AI
     
     color = swap_color(color)
     possible_moves.each do |(start_position, target_position)|
-      move_piece!(start_position, target_position) if !self[target_position].is_a?(NullPiece)
+      move_piece!(start_position, target_position)
       number_positions += move_generation_test(color, depth - 1)
-      move_piece!(target_position, start_position) if !self[target_position].is_a?(NullPiece)
+      move_piece!(target_position, start_position)
     end
 
     number_positions
