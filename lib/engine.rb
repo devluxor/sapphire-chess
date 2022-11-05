@@ -65,6 +65,7 @@ class ChessEngine
   def turn!
     display_graphic_score
 
+    # For Display.turn
     puts Paint[
       "It's #{current_player.color}'s turn!",
       nil,
@@ -85,6 +86,7 @@ class ChessEngine
                           current_player.get_position
                         end
 
+    # For Translate_player_input:
     if double_input?(player_move_input)
       start_position = player_move_input.first
       end_position = player_move_input.last
