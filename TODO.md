@@ -19,3 +19,4 @@
 17. Replan design
 18. ~~Improve evaluation function `board#evaluate`~~
 19. Enable en passant move
+20. Separated `Display` class/module for `Engine`
