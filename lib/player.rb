@@ -7,15 +7,9 @@ require 'pry'
 
 class Player
   attr_reader :color
-  attr_writer :castle_rights
 
   def initialize(color)
     @color = color
-    @castle_rights = false
-  end
-
-  def castle_rights?
-    @castle_rights
   end
 end
 

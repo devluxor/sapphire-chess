@@ -2,23 +2,17 @@ require_relative 'board.rb'
 require_relative 'pieces.rb'
 require_relative 'board_renderer.rb'
 require_relative 'player.rb'
+require_relative 'display.rb'
 
 require 'paint'
 
 require 'pry'
 
-class ChessEngine 
+class ChessEngine
+  include Display
+
   def initialize
     @board = Board.initialize_board
-
-    # @board = Board.new
-
-    # board[[1, 4]] = Pawn.new(board, [1, 4], :white)
-    # board[[5, 4]] = Pawn.new(board, [5, 4], :black)
-
-    # board[[0, 0]] = King.new(board, [0, 0], :black)
-    # board[[7, 7]] = King.new(board, [7, 7], :white)
-
     @renderer = BoardRenderer.new(board)
     @white_player = Human.new(:white)
     @black_player = Computer.new(:black, board)
@@ -54,79 +48,37 @@ class ChessEngine
     swap_player!
     puts Paint['Checkmate!', nil, :red, :bright]
     puts ''
-    puts Paint[
-      "#{current_player.color.to_s.capitalize} player wins!",
-      nil, 
-      current_player.color
-    ]
+    display_winner
     puts 'End'
   end
 
   def turn!
     display_graphic_score
-
-    # For Display.turn
-    puts Paint[
-      "It's #{current_player.color}'s turn!",
-      nil,
-      current_player.color,
-      :bright
-    ]
+    display_player_turn
 
     player_move_input = if current_player.color == :white
-                          puts Paint[
-                            'You are in check!', 
-                            :red, :bright
-                            ] if board.in_check?(current_player.color)
-
+                          display_check if board.in_check?(current_player.color)
                           prompt_move_position
                         else
-                          puts ''
-                          puts "🤖 I am thinking... 🤖"
+                          puts "\n🤖 I am thinking... 🤖"
                           current_player.get_position
                         end
 
-    # For Translate_player_input:
+    start_position, target_position = translate_player_input(player_move_input)
+
+    board.move_piece!(start_position, target_position)
+  end
+
+  def translate_player_input(player_move_input)
     if double_input?(player_move_input)
       start_position = player_move_input.first
-      end_position = player_move_input.last
+      target_position = player_move_input.last
     else
       start_position = player_move_input
-      end_position = prompt_end_position(start_position)
+      target_position = prompt_target_position(start_position)
     end
-    
-    board.move_piece!(start_position, end_position)
-  end
 
-  def display_graphic_score
-    # show each piece icon x number + total material score for each player
-    [:black, :white].each do |color|
-      message = case color 
-                when :black then Paint["Black score", :blue, :underline]
-                else Paint["White score", :white, :underline]
-                end
-      print message + ": "
-      display_pieces_score(color)
-      puts "\n\n"
-    end
-  end
-
-  def display_pieces_score(color)
-    [Pawn, Knight, Bishop, Rook, Queen, King].each do |type|
-      p_symbol = color == :white ? Paint[type::WHITE, :white] : Paint[type::BLACK, :blue]
-
-      if type == Pawn
-        p_symbol = color == :white ? Paint[type::WHITE.first, :white] : Paint[type::BLACK.first, :blue]
-      end
-
-      score = case type
-              when Queen
-                "#{p_symbol}  x #{board.count(type, color) + board.promoted_pawns(color)} "
-              else "#{p_symbol}  x #{board.count(type, color)} "
-              end
-      
-      print score unless board.count(type, color).zero?
-    end
+    [start_position, target_position]
   end
 
   def double_input?(player_move_input)
@@ -141,7 +93,7 @@ class ChessEngine
     loop do
       player_move_input = current_player.get_position
       break if valid_player_input?(player_move_input)
-      puts "Please, select a valid movement." # Change
+      puts "Please, select a valid movement." # Change?
     end
 
     player_move_input
@@ -150,7 +102,7 @@ class ChessEngine
   def valid_player_input?(player_move_input)
     if double_input?(player_move_input)
       valid_piece_selection?(player_move_input.first) &&
-      valid_end_position?(player_move_input.first, player_move_input.last)
+      valid_target_position?(player_move_input.first, player_move_input.last)
     else
       valid_piece_selection?(player_move_input)
     end
@@ -161,20 +113,20 @@ class ChessEngine
       board[start_position].color == current_player.color
   end
 
-  def prompt_end_position(start_position)
-    end_position = nil
+  def prompt_target_position(start_position)
+    target_position = nil
     puts "Where do you want to move the #{board[start_position].class}?"
     loop do
-      end_position = current_player.get_position
-      break if valid_end_position?(start_position, end_position)
+      target_position = current_player.get_position
+      break if valid_target_position?(start_position, target_position)
       puts "The #{board[start_position].class} selected can't move to that square."
     end
 
     end_position
   end
 
-  def valid_end_position?(start_position, end_position)
-    board[start_position].available_moves.include?(end_position)
+  def valid_target_position?(start_position, target_position)
+    board[start_position].available_moves.include?(target_position)
   end
 
   def game_over?
