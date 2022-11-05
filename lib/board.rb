@@ -1,5 +1,6 @@
 require_relative 'pieces.rb'
 require_relative 'board_renderer.rb'
+require_relative 'board_analysis.rb'
 
 require 'pry'
 
@@ -13,6 +14,7 @@ class Board
     Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
   ]
 
+  include BoardAnalysis
   include Evaluation
 
   attr_reader :grid, :renderer
