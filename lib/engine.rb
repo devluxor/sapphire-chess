@@ -64,12 +64,12 @@ class ChessEngine
                           current_player.get_position
                         end
 
-    start_position, target_position = translate_player_input(player_move_input)
+    start_position, target_position = convert_player_input(player_move_input)
 
     board.move_piece!(start_position, target_position)
   end
 
-  def translate_player_input(player_move_input)
+  def convert_player_input(player_move_input)
     if double_input?(player_move_input)
       start_position = player_move_input.first
       target_position = player_move_input.last
@@ -98,6 +98,18 @@ class ChessEngine
 
     player_move_input
   end
+  
+  def prompt_target_position(start_position)
+    target_position = nil
+    puts "Where do you want to move the #{board[start_position].class}?"
+    loop do
+      target_position = current_player.get_position
+      break if valid_target_position?(start_position, target_position)
+      puts "The #{board[start_position].class} selected can't move to that square."
+    end
+
+    end_position
+  end
 
   def valid_player_input?(player_move_input)
     if double_input?(player_move_input)
@@ -111,18 +123,6 @@ class ChessEngine
   def valid_piece_selection?(start_position)
     !board[start_position].is_a?(NullPiece) && 
       board[start_position].color == current_player.color
-  end
-
-  def prompt_target_position(start_position)
-    target_position = nil
-    puts "Where do you want to move the #{board[start_position].class}?"
-    loop do
-      target_position = current_player.get_position
-      break if valid_target_position?(start_position, target_position)
-      puts "The #{board[start_position].class} selected can't move to that square."
-    end
-
-    end_position
   end
 
   def valid_target_position?(start_position, target_position)

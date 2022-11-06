@@ -1,6 +1,8 @@
 module Stepable
-  # Maybe shorten/refactor
   def available_moves
+    # This line keeps track of movement for castling purposes
+    move if self.class == King
+
     move_directions.each_with_object([]) do |(row_direction, column_direction), moves|
       current_row, current_column = location
 
@@ -18,8 +20,10 @@ module Stepable
 end
 
 module Slideable
-  # Maybe shorten/refactor
   def available_moves
+    # This line keeps track of movement for castling purposes
+    move if self.class == Rook
+
     move_directions.each_with_object([]) do |(row_direction, column_direction), moves|
       current_row, current_column = location
 

@@ -26,6 +26,17 @@
 
         - the castling won't result in check
 
+  Tasks:
+
+    - ~~add moved? to Rook and King:~~
+
+        ~~if location != start location (relative to color), then moved = true~~
+
+    - filter two types of castling: castle king, castle queen
+
+      (castle rights king? castle rights queen? for white/for white)
+
+    - add castling rights to Board/BoardAnalysis: castling_rights?(color, side) if...
 
 10. Add white/black random selection for the human player
 11. ~~Class Player, Human, Computer.~~
