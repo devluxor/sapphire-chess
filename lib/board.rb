@@ -62,15 +62,36 @@ class Board
     in_bounds?(location) && grid[row][column].is_a?(NullPiece)
   end
 
-  def move_piece!(start_position, end_position)
-    # If start_position == 'castle'
-    #   castle(end_position)
-    #   return
-    # end
+  def move_piece!(start_position, end_position, color=nil)
+    if start_position == :castle
+      castle!(end_position, color)
+      return
+    end
 
     self[start_position], self[end_position] = NullPiece.instance, self[start_position]
 
     self[end_position].location = end_position if self[end_position].is_a?(Piece)
+  end
+
+  def castle!(side, color)
+    case color
+    when :white
+      if side == :king
+        move_piece!([7,4], [7,6])
+        move_piece!([7,7], [7,5])
+      else
+        move_piece!([7,4], [7,2])
+        move_piece!([7,0], [7,3])
+      end
+    else
+      if side == :king
+        move_piece!([0,4], [0,6])
+        move_piece!([0,7], [0,5])
+      else
+        move_piece!([0,4], [0,2])
+        move_piece!([0,0], [0,3])
+      end
+    end
   end
   
   # Deep duplication of the board for Piece#safe_moves

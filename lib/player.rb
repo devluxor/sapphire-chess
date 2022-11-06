@@ -8,8 +8,9 @@ require 'pry'
 class Player
   attr_reader :color
 
-  def initialize(color)
+  def initialize(color, board)
     @color = color
+    @board = board
   end
 end
 
@@ -17,11 +18,6 @@ class Computer < Player
   include AI
 
   attr_reader :board
-
-  def initialize(color, board)
-    super(color)
-    @board = board
-  end
 
   def get_position
     computer_chooses_movement
