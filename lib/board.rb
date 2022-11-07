@@ -62,17 +62,14 @@ class Board
     in_bounds?(location) && grid[row][column].is_a?(NullPiece)
   end
 
-  def move_piece!(start_position, end_position, color=nil)
-    if start_position == :castle
-      castle!(end_position, color)
-      return
-    end
-
+  def move_piece!(start_position, end_position, color=nil)   
     self[start_position], self[end_position] = NullPiece.instance, self[start_position]
 
     self[end_position].location = end_position if self[end_position].is_a?(Piece)
   end
 
+  # BUG:
+  # `color` is `nil`, it shouldn't be
   def castle!(side, color)
     case color
     when :white
@@ -83,13 +80,34 @@ class Board
         move_piece!([7,4], [7,2])
         move_piece!([7,0], [7,3])
       end
-    else
+    when :black
       if side == :king
         move_piece!([0,4], [0,6])
         move_piece!([0,7], [0,5])
       else
         move_piece!([0,4], [0,2])
         move_piece!([0,0], [0,3])
+      end
+    end
+  end
+
+  def uncastle!(side, color)
+    case color
+    when :white
+      if side == :king
+        move_piece!([7,6], [7,4])
+        move_piece!([7,5], [7,7])
+      else
+        move_piece!([7,2], [7,4])
+        move_piece!([7,3], [7,0])
+      end
+    when :black
+      if side == :king
+        move_piece!([0,6], [0,4])
+        move_piece!([0,5], [0,7])
+      else
+        move_piece!([0,2], [0,4])
+        move_piece!([0,3], [0,0])
       end
     end
   end

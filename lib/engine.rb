@@ -14,7 +14,7 @@ class ChessEngine
   def initialize
     @board = Board.initialize_board
     @renderer = BoardRenderer.new(board)
-    @white_player = Human.new(:white)
+    @white_player = Human.new(:white, board)
     @black_player = Computer.new(:black, board)
     @current_player = white_player
   end
@@ -64,18 +64,16 @@ class ChessEngine
                           current_player.get_position
                         end
 
-    start_position, target_position = convert_player_input(player_move_input)
-
-    board.move_piece!(start_position, target_position)
+    perform_move!(player_move_input)
   end
 
   def convert_player_input(player_move_input)
-    if double_input?(player_move_input)
-      start_position = player_move_input.first
-      target_position = player_move_input.last
-    else
+    if single_input?(player_move_input)
       start_position = player_move_input
       target_position = prompt_target_position(start_position)
+    else
+      start_position = player_move_input.first
+      target_position = player_move_input.last
     end
 
     [start_position, target_position]
@@ -85,9 +83,14 @@ class ChessEngine
     player_move_input.first.is_a?(Array)
   end
 
+  def single_input?(player_move_input)
+    player_move_input.first.is_a?(Integer)
+  end
+
   def prompt_move_position
     puts 'What piece do you want to move?'
-    puts '[Use algebraic notation, i.e.: a2a4]'
+    puts '[Use algebraic notation, i.e.: "a2a4"]'
+    puts '[To castle, "castle (k for king side, q for queen side), i.e: "castle k"]'
 
     player_move_input = nil
     loop do
@@ -115,6 +118,8 @@ class ChessEngine
     if double_input?(player_move_input)
       valid_piece_selection?(player_move_input.first) &&
       valid_target_position?(player_move_input.first, player_move_input.last)
+    elsif player_move_input.first == :castle
+      valid_castling?(player_move_input.last)
     else
       valid_piece_selection?(player_move_input)
     end
@@ -127,6 +132,19 @@ class ChessEngine
 
   def valid_target_position?(start_position, target_position)
     board[start_position].available_moves.include?(target_position)
+  end
+
+  def valid_castling?(side)
+    current_player.castle_rights?(side)
+  end
+
+  def perform_move!(move_input)
+    start_position, target_position = convert_player_input(move_input)
+    
+    case start_position
+    when :castle then board.castle!(target_position, current_player.color)
+    else board.move_piece!(start_position, target_position)
+    end
   end
 
   def game_over?

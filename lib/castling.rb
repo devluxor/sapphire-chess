@@ -11,28 +11,22 @@ module Castling
         #     - the king or the rook have been previously moved DONE
         #     - no pieces between rook and king DONE
         #     - not in check DONE
-    
-        #     - the castling won't result in check
-
-    pieces_available?(side) && !board.in_check?(color) && !results_in_check?(side)
+        #     - the castling won't result in check DONE
+    king_and_rook_unmoved?(side) && 
+      castling_line_free?(side) && 
+      !board.in_check?(color) && 
+      !results_in_check?(side)
   end
 
   def results_in_check?(side)
-    # make provisional move
-
     board.castle!(side, color)
 
-    # check if player is in check?
+    in_check = board.in_check?(color)
 
-    # unmakes provisional move
+    board.uncastle!(side, color)
 
-    # returns boolean
+    in_check
   end
-
-  def pieces_available?(side)
-    king_and_rook_unmoved?(side) && castling_line_free?(side)
-  end
-
     
   def king_and_rook_unmoved?(side)
     case color
@@ -51,17 +45,17 @@ module Castling
     case color
     when :white
       if side == :king
-        board[[7, 5]].empty_square? && board[[7, 6]].empty_square?
+        board.empty_square?([7, 5]) && board.empty_square?([7, 6])
       else
-        board[[7, 1]].empty_square? && board[[7, 3]].empty_square? &&
-          board[[7, 3]].empty_square?
+        board.empty_square?([7, 1]) && board.empty_square?([7, 3]) &&
+          board.empty_square?([7, 3])
       end
     else
       if side == :king
-        board[[0, 5]].empty_square? && board[[0, 6]].empty_square?
+        board.empty_square?([0, 5]) && board.empty_square?([0, 6])
       else
-        board[[0, 1]].empty_square? && board[[0, 3]].empty_square? &&
-          board[[0, 3]].empty_square?
+        board.empty_square?([0, 1]) && board.empty_square?([0, 3]) &&
+          board.empty_square?([0, 3])
       end
     end
   end

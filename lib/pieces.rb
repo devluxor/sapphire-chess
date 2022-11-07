@@ -316,10 +316,10 @@ class Rook < Piece
   def initialize(board, location, color)
     super(board, location, color)
     @moved = false
-    @rook_a_w = true if location = A_WHITE_START_LOCATION
-    @rook_h_w = true if location = H_WHITE_START_LOCATION
-    @rook_a_b = true if location = A_BLACK_START_LOCATION
-    @rook_h_b = true if location = H_BLACK_START_LOCATION
+    @rook_a_w = true if location == A_WHITE_START_LOCATION
+    @rook_h_w = true if location == H_WHITE_START_LOCATION
+    @rook_a_b = true if location == A_BLACK_START_LOCATION
+    @rook_h_b = true if location == H_BLACK_START_LOCATION
   end
 
   def moved?

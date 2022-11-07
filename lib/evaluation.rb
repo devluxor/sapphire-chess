@@ -1,4 +1,8 @@
 module Evaluation
+  # I could add a difficulty selection: 
+        # if easy, only depth 1 and only material evaluation
+        # if medium, depth 3, only material evaluation
+        # if hard, depth 3, material and piece location evaluation
   def evaluate
     material_evaluation + piece_location_evaluation
   end
