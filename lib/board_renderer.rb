@@ -58,21 +58,17 @@ class BoardRenderer
   end
 
   def white_starting_row
-    (
-      (' ' * LEFT_MARGIN) + 
-      EMPTY_ROW_0_WHITE + EMPTY_ROW + EMPTY_ROW_WHITE +
-      EMPTY_ROW + EMPTY_ROW_WHITE + EMPTY_ROW + 
-      EMPTY_ROW_WHITE + EMPTY_ROW
-    )
+    ' ' * LEFT_MARGIN + 
+    EMPTY_ROW_0_WHITE + 
+    (EMPTY_ROW + EMPTY_ROW_WHITE) * 3 +
+    EMPTY_ROW
   end
 
   def black_starting_row
-    (
-      (' ' * LEFT_MARGIN) + 
-      EMPTY_ROW_0 + EMPTY_ROW_WHITE + EMPTY_ROW +
-      EMPTY_ROW_WHITE + EMPTY_ROW + EMPTY_ROW_WHITE +
-      EMPTY_ROW + EMPTY_ROW_WHITE
-    )
+    ' ' * LEFT_MARGIN + 
+    EMPTY_ROW_0 + 
+    (EMPTY_ROW_WHITE + EMPTY_ROW) * 3 +
+    EMPTY_ROW_WHITE
   end
 
   def print_piece_row(row)
