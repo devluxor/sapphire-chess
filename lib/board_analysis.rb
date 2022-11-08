@@ -1,20 +1,22 @@
 module BoardAnalysis
   def in_check?(color)
     king_position = find_king(color)
-    
+
     enemy_pieces(color).each do |piece|
       return true if piece.available_moves.include?(king_position)
     end
-    
+
     false
   end
 
   def find_king(color)
-    king_location = pieces.find { |piece| piece.color == color && piece.is_a?(King) }
+    king_location = pieces.find do |piece|
+      piece.color == color && piece.is_a?(King)
+    end
 
     king_location ? king_location.location : nil
   end
-  
+
   def checkmate?(color)
     return false unless in_check?(color)
 
@@ -42,8 +44,8 @@ module BoardAnalysis
   end
 
   def promoted_pawns(color)
-    friendly_pieces(Pawn).select do |piece| 
-      piece.class == Pawn && piece.promoted?
+    friendly_pieces(Pawn).select do |piece|
+      piece.class == Pawn && piece.color == color && piece.promoted?
     end.size
   end
 end
