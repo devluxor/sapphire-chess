@@ -7,35 +7,35 @@ module HumanInputFormat
 
   # See Engine#turn! and HumanMoveValidation#convert_player_input
   def algebraic_input
-    position = nil
+    move_input = nil
     loop do 
-      position = gets.chomp.strip.downcase
-      break if valid_input_format?(position)
-      puts 'Please, enter a valid position.'
+      move_input = gets.chomp.strip.downcase
+      break if valid_input_format?(move_input)
+      puts 'Please, enter a valid move_input.'
     end
 
-    convert_algegraic_input(position)
+    convert_algegraic_input(move_input)
   end
 
-  def valid_input_format?(position)
-    (position.size == 2 && 
-      position.match?(ALGEBRAIC_NOTATION_FORMAT)) ||
-    (position.size == 4 && 
-      position[0, 2].match?(ALGEBRAIC_NOTATION_FORMAT) &&
-      position[2, 2].match?(ALGEBRAIC_NOTATION_FORMAT)) ||
-    position.match?(CASTLING_INPUT_FORMAT)
+  def valid_input_format?(move_input)
+    (move_input.size == 2 && 
+      move_input.match?(ALGEBRAIC_NOTATION_FORMAT)) ||
+    (move_input.size == 4 && 
+      move_input[0, 2].match?(ALGEBRAIC_NOTATION_FORMAT) &&
+      move_input[2, 2].match?(ALGEBRAIC_NOTATION_FORMAT)) ||
+    move_input.match?(CASTLING_INPUT_FORMAT)
   end
 
-  def convert_algegraic_input(position)
-    case position.size
-    when 2 then convert_single_input(position)
-    when 4 then convert_double_input(position)
-    else convert_castling_input(position)
+  def convert_algegraic_input(move_input)
+    case move_input.size
+    when 2 then convert_single_input(move_input)
+    when 4 then convert_double_input(move_input)
+    else convert_castling_input(move_input)
     end
   end
 
-  def convert_single_input(position)
-    letter, number = position[0], position[1]
+  def convert_single_input(move_input)
+    letter, number = move_input[0], move_input[1]
     
     row = number_to_row(number)
     column = letter_to_column(letter)
@@ -43,9 +43,9 @@ module HumanInputFormat
     [row, column]
   end
 
-  def convert_double_input(position)
-    letter, number = position[0], position[1]
-    letter_end, number_end = position[2], position[3]
+  def convert_double_input(move_input)
+    letter, number = move_input[0], move_input[1]
+    letter_end, number_end = move_input[2], move_input[3]
 
     row = number_to_row(number)
     column = letter_to_column(letter)
@@ -56,8 +56,8 @@ module HumanInputFormat
     [[row, column], [row_end, column_end]]
   end
 
-  def convert_castling_input(position)
-    side = position[-1] == 'k' ? :king : :queen
+  def convert_castling_input(move_input)
+    side = move_input[-1] == 'k' ? :king : :queen
 
     [:castle, side]
   end

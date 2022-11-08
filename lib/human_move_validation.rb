@@ -2,7 +2,7 @@ module HumanMoveValidation
   def prompt_move
     puts 'What piece do you want to move?'
     puts '[Use algebraic notation, i.e.: "a2a4"]'
-    puts '[To castle, "castle (k for king side, q for queen side), i.e: "castle k"]'
+    puts "[To castle, \"castle (k for king side, q for queen side), i.e: \"castle k\"]\n\n"
 
     player_move_input = nil
     loop do
@@ -46,7 +46,7 @@ module HumanMoveValidation
   end
 
   def valid_piece_selection?(start_square)
-    !board[start_square].is_a?(NullPiece) && 
+    board[start_square].is_a?(Piece) && 
       board[start_square].color == current_player.color
   end
 

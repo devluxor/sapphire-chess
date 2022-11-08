@@ -413,7 +413,7 @@ class King < Piece
   include Stepable
 
   def initialize(board, location, color)
-    super(board, location, color)
+    super
     @moved = false
   end
 

@@ -3,7 +3,6 @@ require_relative 'ai.rb'
 require_relative 'human_input_format.rb'
 require_relative 'castling.rb'
 
-
 require 'pry'
 
 class Player
