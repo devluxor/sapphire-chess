@@ -2,7 +2,8 @@ module HumanMoveValidation
   def prompt_move
     puts 'What piece do you want to move?'
     puts '[Use algebraic notation, i.e.: "a2a4"]'
-    puts "[To castle, \"castle (k for king side, q for queen side), i.e: \"castle k\"]\n\n"
+    puts "[To castle, \"castle (k for king side, q for queen side),"\
+         "i.e: \"castle k\"]\n\n"
 
     player_move_input = nil
     loop do
@@ -29,7 +30,7 @@ module HumanMoveValidation
   def valid_player_input?(player_move_input)
     if double_input?(player_move_input)
       valid_piece_selection?(player_move_input.first) &&
-      valid_move?(player_move_input.first, player_move_input.last)
+        valid_move?(player_move_input.first, player_move_input.last)
     elsif player_move_input.first == :castle
       valid_castling?(player_move_input.last)
     else

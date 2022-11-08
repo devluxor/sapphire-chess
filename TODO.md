@@ -1,7 +1,7 @@
 ### Things to do/implement/fix in the game:
 
 1. ~~Algebraic notation as input from the user~~
-2. Reformat/refactor/abstract methods
+2. ~~Reformat/refactor/abstract methods~~
 3. ~~Check dependencies/design~~
 4. ~~Proto AI~~
 5. ~~Define access modifiers~~
@@ -19,9 +19,9 @@
 17. Replan design
 18. ~~Improve evaluation function `board#evaluate`~~
 19. Enable en passant move
-20. Separated `Display` class/module for `Engine`
+20. ~~Separated `Display` class/module for `Engine`~~
 21. ~~Module `PieceAnalysis` for `Board`~~
 22. Add difficulty setting
 23. Rename modules/classes (more expressive)
 24. Fine tuning of game over system
-25. Add turn number
+25. ~~Add turn number~~
