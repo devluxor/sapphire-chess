@@ -7,8 +7,6 @@ require_relative 'human_move_validation.rb'
 
 require 'paint'
 
-require 'pry'
-
 class ChessEngine
   include Display
   include HumanMoveValidation

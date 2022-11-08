@@ -1,11 +1,9 @@
-require 'singleton'
-require 'paint'
-
 require_relative 'board.rb'
 require_relative 'movement.rb'
 require_relative 'evaluation.rb'
 
-require 'pry'
+require 'singleton'
+require 'paint'
 
 class NullPiece
   include Singleton
