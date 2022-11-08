@@ -68,8 +68,6 @@ class Board
     self[end_position].location = end_position if self[end_position].is_a?(Piece)
   end
 
-  # BUG:
-  # `color` is `nil`, it shouldn't be
   def castle!(side, color)
     case color
     when :white

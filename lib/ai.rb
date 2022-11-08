@@ -2,10 +2,10 @@ require 'paint'
 require 'pry'
 
 module AI
-  DEPTH = 1
+  DEPTH = 2
 
   private
-  # Choose move by best outcome:
+  # Choose move by best possible outcome:
   def computer_chooses_movement
     possible_moves = board.generate_moves(:black)
     possible_moves << [:castle, :king] if castle_rights?(:king)
@@ -29,8 +29,8 @@ module AI
     return board.evaluate if depth.zero?
 
     castling = move.first == :castle
-    # This performs the passed in move:
 
+    # Makes provisional move
     if castling
       board.castle!(move.last, color)
     else
@@ -39,7 +39,7 @@ module AI
       board.move_piece!(start_position, target_position)
     end
 
-    # This generates children:
+    # This generates possible outcomes for the provisional move:
     best_evaluation = if maximizing_player
                         best_evaluation = Float::INFINITY
 
@@ -63,11 +63,11 @@ module AI
 
                         best_evaluation
                       end
-
+                      
+    # Unmakes provisional move:
     if castling
       board.uncastle!(move.last, color)
     else
-      # Unmakes passed in move:
       board.move_piece!(target_position, start_position)
       board[target_position] = piece_buffer
     end
