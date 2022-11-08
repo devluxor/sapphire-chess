@@ -1,6 +1,7 @@
 require_relative 'pieces.rb'
 require_relative 'board_renderer.rb'
 require_relative 'board_analysis.rb'
+require_relative 'board_evaluation.rb'
 
 class Board
   SQUARE_ORDER = 8
