@@ -5,7 +5,7 @@ module HumanInputFormat
 
   private
 
-  # See Engine#turn! and Engine#convert_player_input
+  # See Engine#turn! and HumanMoveValidation#convert_player_input
   def algebraic_input
     position = nil
     loop do 

@@ -4,7 +4,7 @@ module Castling
       castling_line_free?(side) && 
       !board.in_check?(color) && 
       !results_in_check?(side) &&
-      !king_on_attack_line?(side)
+      !king_crosses_attack_line?(side)
   end
     
   def king_and_rook_unmoved?(side)
@@ -50,7 +50,7 @@ module Castling
     in_check
   end
 
-  def king_on_attack_line?(side)
+  def king_crosses_attack_line?(side)
     hot_square = case color
                  when :white
                    if side == :king then [7, 5]

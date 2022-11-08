@@ -20,15 +20,15 @@ end
 class Computer < Player
   include AI
 
-  def get_position
-    computer_chooses_movement
+  def get_move
+    computer_chooses_move
   end
 end
 
 class Human < Player
   include HumanInputFormat
   
-  def get_position
+  def get_move
     algebraic_input
   end
 end
