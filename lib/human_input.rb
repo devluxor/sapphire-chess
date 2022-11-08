@@ -1,4 +1,4 @@
-module UserInput
+module HumanInput
   LETTER_RESET_VALUE = 97 # ASCII downcase 'a' numeric value: 'a'.ord
   ALGEBRAIC_NOTATION_FORMAT = /[a-h]{1}[1-8]{1}/
   CASTLING_INPUT_FORMAT = /castle [kq]{1}/
