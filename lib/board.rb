@@ -18,9 +18,9 @@ class Board
   include Evaluation
 
   attr_reader :grid, :renderer
-  
+
   def self.initialize_board
-    board = self.new
+    board = new
 
     [B_PAWN_ROW, W_PAWN_ROW].each do |pawn_row|
       color = pawn_row == B_PAWN_ROW ? :black : :white
@@ -35,10 +35,10 @@ class Board
         board[[row, column]] = piece.new(board, [row, column], color)
       end
     end
-    
+
     board
   end
-  
+
   def initialize
     @grid = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NullPiece.instance) }
   end
@@ -62,7 +62,7 @@ class Board
     in_bounds?(location) && grid[row][column].is_a?(NullPiece)
   end
 
-  def move_piece!(start_position, end_position, color=nil)   
+  def move_piece!(start_position, end_position)
     self[start_position], self[end_position] = NullPiece.instance, self[start_position]
 
     self[end_position].location = end_position if self[end_position].is_a?(Piece)
@@ -72,19 +72,19 @@ class Board
     case color
     when :white
       if side == :king
-        move_piece!([7,4], [7,6])
-        move_piece!([7,7], [7,5])
+        move_piece!([7, 4], [7, 6])
+        move_piece!([7, 7], [7, 5])
       else
-        move_piece!([7,4], [7,2])
-        move_piece!([7,0], [7,3])
+        move_piece!([7, 4], [7, 2])
+        move_piece!([7, 0], [7, 3])
       end
     when :black
       if side == :king
-        move_piece!([0,4], [0,6])
-        move_piece!([0,7], [0,5])
+        move_piece!([0, 4], [0, 6])
+        move_piece!([0, 7], [0, 5])
       else
-        move_piece!([0,4], [0,2])
-        move_piece!([0,0], [0,3])
+        move_piece!([0, 4], [0, 2])
+        move_piece!([0, 0], [0, 3])
       end
     end
   end
@@ -93,28 +93,28 @@ class Board
     case color
     when :white
       if side == :king
-        move_piece!([7,6], [7,4])
-        move_piece!([7,5], [7,7])
+        move_piece!([7, 6], [7, 4])
+        move_piece!([7, 5], [7, 7])
       else
-        move_piece!([7,2], [7,4])
-        move_piece!([7,3], [7,0])
+        move_piece!([7, 2], [7, 4])
+        move_piece!([7, 3], [7, 0])
       end
     when :black
       if side == :king
-        move_piece!([0,6], [0,4])
-        move_piece!([0,5], [0,7])
+        move_piece!([0, 6], [0, 4])
+        move_piece!([0, 5], [0, 7])
       else
-        move_piece!([0,2], [0,4])
-        move_piece!([0,3], [0,0])
+        move_piece!([0, 2], [0, 4])
+        move_piece!([0, 3], [0, 0])
       end
     end
   end
-  
+
   # Deep duplication of the board for Piece#safe_moves
   def duplicate
     pieces.each_with_object(Board.new) do |piece, new_board|
       new_piece = piece.class.new(new_board, piece.location, piece.color)
-      
+
       new_board[new_piece.location] = new_piece
     end
   end
