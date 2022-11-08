@@ -1,12 +1,12 @@
 module Castling
   def castle_rights?(side)
-    king_and_rook_unmoved?(side) && 
-      castling_line_free?(side) && 
-      !board.in_check?(color) && 
+    king_and_rook_unmoved?(side) &&
+      castling_line_free?(side) &&
+      !board.in_check?(color) &&
       !results_in_check?(side) &&
       !king_crosses_attack_line?(side)
   end
-    
+
   def king_and_rook_unmoved?(side)
     case color
     when :white
@@ -20,7 +20,7 @@ module Castling
     board[king].is_a?(King) && !board[king].moved? &&
       board[rook].is_a?(Rook) && !board[rook].moved?
   end
-    
+
   def castling_line_free?(side)
     case color
     when :white
@@ -42,9 +42,7 @@ module Castling
 
   def results_in_check?(side)
     board.castle!(side, color)
-
     in_check = board.in_check?(color)
-
     board.uncastle!(side, color)
 
     in_check
