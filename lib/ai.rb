@@ -2,9 +2,12 @@ require 'paint'
 require 'pry'
 
 module AI
-  DEPTH = 2
+  # Levels of recursion. 
+  # Higher means harder (computer can think DEPTH turns ahead)
+  DEPTH = 3
 
   private
+  
   # Choose move by best possible outcome:
   def computer_chooses_movement
     possible_moves = board.generate_moves(:black)
