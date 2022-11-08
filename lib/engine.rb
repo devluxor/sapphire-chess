@@ -19,14 +19,12 @@ class ChessEngine
     @white_player = Human.new(:white, board)
     @black_player = Computer.new(:black, board)
     @current_player = white_player
+    @turn_number = 1
   end
   
   def play
     loop do
-      system 'clear'
-      renderer.render
       turn!
-      swap_player!
       break if game_over?
     end
 
@@ -36,7 +34,7 @@ class ChessEngine
   private
 
   attr_reader :white_player, :black_player, :board, :renderer
-  attr_accessor :current_player
+  attr_accessor :current_player, :turn_number
   
   def swap_player!
     self.current_player = (
@@ -45,9 +43,17 @@ class ChessEngine
   end
 
   def turn!
-    display_graphic_score
-    display_player_turn
-    perform_move!(player_move_choice)
+    2.times do
+      system 'clear'
+      renderer.render
+      display_graphic_score
+      display_turn_number
+      display_player_turn
+      perform_move!(player_move_choice)
+      swap_player!
+    end
+
+    self.turn_number += 1
   end
 
   def player_move_choice

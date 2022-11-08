@@ -42,7 +42,7 @@ module AI
       board.move_piece!(start_position, target_position)
     end
 
-    # This generates possible outcomes for the provisional move:
+    # This generates possible outcomes (children) for the provisional move:
     best_evaluation = if maximizing_player
                         best_evaluation = Float::INFINITY
 
@@ -93,23 +93,5 @@ module AI
 
   def all_equal?(evaluations)
     evaluations.map(&:last).uniq.size == 1
-  end
-
-  # Testing:
-  def move_generation_test(color, depth)    
-    return 1 if depth.zero?
-
-    possible_moves = generate_moves(color)
-
-    number_positions = 0
-    
-    color = swap_color(color)
-    possible_moves.each do |(start_position, target_position)|
-      move_piece!(start_position, target_position)
-      number_positions += move_generation_test(color, depth - 1)
-      move_piece!(target_position, start_position)
-    end
-
-    number_positions
   end
 end
