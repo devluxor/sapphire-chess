@@ -4,7 +4,8 @@ module Evaluation
         # if medium, depth 3, only material evaluation
         # if hard, depth 3, material and piece location evaluation
   def evaluate
-    material_evaluation + piece_location_evaluation
+    # material_evaluation + piece_location_evaluation
+    material_evaluation
   end
 
   def material_evaluation

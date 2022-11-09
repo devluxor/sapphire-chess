@@ -3,7 +3,7 @@ class Pawn < Piece
   WHITE = ['♙', '♕']
   
   B_OPPOSITE_ROW = 7
-  W_OPPOSITE_ROW = 1
+  W_OPPOSITE_ROW = 0
   
   MOVE_DIRECTIONS = [
     [0, 1], [0, -1], [1, 0], [-1, 0],
