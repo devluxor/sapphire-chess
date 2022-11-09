@@ -1,4 +1,4 @@
-| Things to do/implement/fix in the game | Bugs found |
+| ##Things to do/implement/fix in the game | ##Bugs found |
 | -------------------------------|--------------------------------- |
 | 1. ~~Algebraic notation as input from the user~~ | 1.
 | 2. ~~Reformat/refactor/abstract methods~~ | 2.
