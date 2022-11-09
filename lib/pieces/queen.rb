@@ -31,5 +31,5 @@ class Queen < Piece
     [-20, -10, -10, -5, -5, -10, -10, -20]
   ]
     
-  include Slideable
+  include SlidePattern
 end

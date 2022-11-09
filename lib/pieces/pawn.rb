@@ -34,7 +34,7 @@ class Pawn < Piece
     [0, 0, 0, 0, 0, 0, 0, 0]
   ]
   
-  include Slideable
+  include SlidePattern
 
   def initialize(board, location, color)
     super(board, location, color)

@@ -15,13 +15,13 @@ module HumanMoveValidation
     player_move_input
   end
   
-  def prompt_target_square(start_square)
+  def prompt_target_square(piece)
     target_square = nil
-    puts "Where do you want to move the #{board[start_square].class}?"
+    puts "Where do you want to move the #{board[piece].class}?"
     loop do
       target_square = current_player.get_move
-      break if valid_target_square?(start_square, target_square)
-      puts "The #{board[start_square].class} selected can't move to that square."
+      break if valid_target_square?(piece, target_square)
+      puts "The #{board[piece].class} selected can't move to that square."
     end
 
     end_square
@@ -46,13 +46,13 @@ module HumanMoveValidation
     player_move_input.first.is_a?(Integer)
   end
 
-  def valid_piece_selection?(start_square)
-    board[start_square].is_a?(Piece) && 
-      board[start_square].color == current_player.color
+  def valid_piece_selection?(piece)
+    board[piece].is_a?(Piece) && 
+      board[piece].color == current_player.color
   end
 
-  def valid_move?(start_square, target_square)
-    board[start_square].available_moves.include?(target_square)
+  def valid_move?(piece, target_square)
+    board[piece].available_moves.include?(target_square)
   end
 
   def valid_castling?(side)
@@ -61,13 +61,13 @@ module HumanMoveValidation
 
   def convert_player_input(player_move_input)
     if single_input?(player_move_input)
-      start_square = player_move_input
-      target_square = prompt_target_square(start_square)
+      piece = player_move_input
+      target_square = prompt_target_square(piece)
     else
-      start_square = player_move_input.first
+      piece = player_move_input.first
       target_square = player_move_input.last
     end
 
-    [start_square, target_square]
+    [piece, target_square]
   end
 end

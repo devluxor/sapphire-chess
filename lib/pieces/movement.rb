@@ -1,8 +1,6 @@
-module Stepable
+module StepPattern
   def available_moves
     # This line keeps track of movement for castling purposes
-    move if self.class == King
-
     move_directions.each_with_object([]) do |(row_direction, column_direction), moves|
       current_row, current_column = location
 
@@ -19,11 +17,9 @@ module Stepable
   end
 end
 
-module Slideable
+module SlidePattern
   def available_moves
     # This line keeps track of movement for castling purposes
-    move if self.class == Rook
-
     move_directions.each_with_object([]) do |(row_direction, column_direction), moves|
       current_row, current_column = location
 
@@ -43,5 +39,15 @@ module Slideable
         end
       end
     end
+  end
+end
+
+module CastlingPieceControl
+  def moved?
+    @moved
+  end
+
+  def mark!
+    @moved = true
   end
 end

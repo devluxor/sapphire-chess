@@ -31,5 +31,5 @@ class Knight < Piece
     [-50, -40, -30, -30, -30, -30, -40, -50]
   ]
   
-  include Stepable
+  include StepPattern
 end

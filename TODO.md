@@ -25,3 +25,5 @@
 23. Rename modules/classes (more expressive)
 24. Fine tuning of game over system
 25. ~~Add turn number~~
+26. Study alpha-beta pruning
+27. Minimax to Negamax ???

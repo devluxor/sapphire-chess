@@ -3,9 +3,6 @@ class King < Piece
     [0, 1], [1, 1], [1, 0], [0, -1],
     [1, -1], [-1, 1], [-1, -1], [-1, 0]
   ]
-
-  WHITE_START_LOCATION = [7, 4]
-  BLACK_START_LOCATION = [0, 4]
   
   BLACK = '♚'
   WHITE = '♔'
@@ -34,21 +31,11 @@ class King < Piece
     [-30, -40, -40, -50, -50, -40, -40, -30]
   ]
 
-  include Stepable
+  include StepPattern
+  include CastlingPieceControl
 
   def initialize(board, location, color)
     super
     @moved = false
-  end
-
-  def moved?
-    @moved
-  end
-
-  def move
-    @moved = case color
-             when :white then true if location != WHITE_START_LOCATION
-             else true if location != BLACK_START_LOCATION
-             end
   end
 end

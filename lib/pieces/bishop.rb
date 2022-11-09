@@ -30,5 +30,5 @@ class Bishop < Piece
     [-20, -10, -10, -10, -10, -10, -10, -20]
   ]
   
-  include Slideable
+  include SlidePattern
 end

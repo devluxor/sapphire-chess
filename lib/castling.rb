@@ -1,6 +1,8 @@
+require 'pry'
+
 module Castling
   def castle_rights?(side)
-    king_and_rook_unmoved?(side) &&
+    king_and_rook_unmoved?(side) && # Change to !...moved?
       castling_line_free?(side) &&
       !board.in_check?(color) &&
       !results_in_check?(side) &&

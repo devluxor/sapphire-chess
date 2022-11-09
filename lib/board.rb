@@ -61,29 +61,39 @@ class Board
     in_bounds?(location) && grid[row][column].is_a?(NullPiece)
   end
 
-  def move_piece!(start_position, end_position)
-    self[start_position], self[end_position] = NullPiece.instance, self[start_position]
+  def move_piece!(piece, target_square, permanent=false)
+    mark_moved_piece!(piece) if permanent
 
-    self[end_position].location = end_position if self[end_position].is_a?(Piece)
+    self[piece], self[target_square] = NullPiece.instance, self[piece]
+
+    self[target_square].location = target_square
   end
 
-  def castle!(side, color)
+  # Controls castling rights 
+  # (See Castling, movement.rb::CastlingPieceControl, Rook, King)
+  def mark_moved_piece!(piece)
+    return unless self[piece].is_a?(Rook) || self[piece].is_a?(King)
+
+    self[piece].mark!
+  end
+
+  def castle!(side, color, permanent=false)
     case color
     when :white
       if side == :king
-        move_piece!([7, 4], [7, 6])
-        move_piece!([7, 7], [7, 5])
+        move_piece!([7, 4], [7, 6], permanent)
+        move_piece!([7, 7], [7, 5], permanent)
       else
-        move_piece!([7, 4], [7, 2])
-        move_piece!([7, 0], [7, 3])
+        move_piece!([7, 4], [7, 2], permanent)
+        move_piece!([7, 0], [7, 3], permanent)
       end
     when :black
       if side == :king
-        move_piece!([0, 4], [0, 6])
-        move_piece!([0, 7], [0, 5])
+        move_piece!([0, 4], [0, 6], permanent)
+        move_piece!([0, 7], [0, 5], permanent)
       else
-        move_piece!([0, 4], [0, 2])
-        move_piece!([0, 0], [0, 3])
+        move_piece!([0, 4], [0, 2], permanent)
+        move_piece!([0, 0], [0, 3], permanent)
       end
     end
   end

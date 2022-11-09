@@ -65,11 +65,11 @@ class ChessEngine
   end  
   
   def perform_move!(move_input)
-    start_square, target_square = convert_player_input(move_input)
+    piece, target_square = convert_player_input(move_input)
     
-    case start_square
-    when :castle then board.castle!(target_square, current_player.color)
-    else board.move_piece!(start_square, target_square)
+    case piece
+    when :castle then board.castle!(target_square, current_player.color, true)
+    else board.move_piece!(piece, target_square, true)
     end
   end
 
