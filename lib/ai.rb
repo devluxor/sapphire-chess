@@ -42,6 +42,14 @@ module AI
     end
 
     # This generates possible outcomes (children) for the provisional move:
+    # Each branch represents the next turn (i.e.: if current player is white 
+    # [the maximizing player], it generates every possible movement for the
+    # next player, black [the minimizing player], who will choose the best 
+    # possible move, and so on. The best (relative to each player) possible 
+    # outcome for each move will determine what move is chosen. See ai.rb)
+
+    # The alpha-beta `prunes` the tree: it makes the search more efficient
+    # removing unnecessary branches, resulting in a faster process.
     best_evaluation = if maximizing_player
                         best_evaluation = Float::INFINITY
 

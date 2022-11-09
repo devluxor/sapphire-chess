@@ -1,4 +1,5 @@
 # Ruby-chess
 
-Hi! 
+Hi!
+
 Welcome to my pure Ruby chess game!

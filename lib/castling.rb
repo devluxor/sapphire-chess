@@ -1,5 +1,3 @@
-require 'pry'
-
 module Castling
   def castle_rights?(side)
     king_and_rook_unmoved?(side) && # Change to !...moved?
