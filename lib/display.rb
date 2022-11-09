@@ -15,8 +15,8 @@ module Display
   def display_graphic_score
     [:black, :white].each do |color|
       message = case color
-                when :black then Paint['Black player score', :blue, :underline]
-                else Paint['White player score', :white, :underline]
+                when :white then Paint['White player score', :white, :underline]
+                else Paint['Black player score', :blue, :underline]
                 end
       print message + ': '
       display_pieces_score(color)

@@ -21,15 +21,7 @@ class Board
   def self.initialize_board
     board = new
 
-    # [B_PAWN_ROW, W_PAWN_ROW].each do |pawn_row|
-    #   color = pawn_row == B_PAWN_ROW ? :black : :white
-
-    #   SQUARE_ORDER.times do |column|
-    #     board[[pawn_row, column]] = Pawn.new(board, [pawn_row, column], color)
-    #   end
-    # end
-
-    [W_PAWN_ROW].each do |pawn_row|
+    [B_PAWN_ROW, W_PAWN_ROW].each do |pawn_row|
       color = pawn_row == B_PAWN_ROW ? :black : :white
 
       SQUARE_ORDER.times do |column|
