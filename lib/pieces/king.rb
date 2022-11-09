@@ -5,7 +5,7 @@ class King < Piece
   ]
 
   WHITE_START_LOCATION = [7, 4]
-  BLACK_START_LOCATION = [0, 5]
+  BLACK_START_LOCATION = [0, 4]
   
   BLACK = '♚'
   WHITE = '♔'
@@ -46,9 +46,9 @@ class King < Piece
   end
 
   def move
-    case color
-    when :white then @moved = true if location != WHITE_START_LOCATION
-    else @moved = true if location != BLACK_START_LOCATION
-    end
+    @moved = case color
+             when :white then true if location != WHITE_START_LOCATION
+             else true if location != BLACK_START_LOCATION
+             end
   end
 end

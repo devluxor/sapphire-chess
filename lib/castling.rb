@@ -1,6 +1,5 @@
 module Castling
   def castle_rights?(side)
-    binding.pry if color == :white
     king_and_rook_unmoved?(side) &&
       castling_line_free?(side) &&
       !board.in_check?(color) &&
@@ -50,7 +49,6 @@ module Castling
   end
 
   def king_crosses_attack_line?(side)
-    binding.pry if color == :white
     hot_square = case color
                  when :white
                    if side == :king then [7, 5]

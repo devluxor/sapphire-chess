@@ -53,13 +53,13 @@ class Rook < Piece
   end
 
   def move
-    case color
-    when :white
-      @moved = true if rook_a_w && location != A_WHITE_START_LOCATION
-      @moved = true if rook_h_w && location != H_WHITE_START_LOCATION
-    else
-      @moved = true if rook_a_b && location != A_BLACK_START_LOCATION
-      @moved = true if rook_h_b && location != H_BLACK_START_LOCATION
-    end
+    @moved = case color
+             when :white
+               true if rook_a_w && location != A_WHITE_START_LOCATION
+               true if rook_h_w && location != H_WHITE_START_LOCATION
+             else
+               true if rook_a_b && location != A_BLACK_START_LOCATION
+               true if rook_h_b && location != H_BLACK_START_LOCATION
+             end
   end
 end
