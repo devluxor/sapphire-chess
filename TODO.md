@@ -1,5 +1,5 @@
 | Things to do/implement/fix in the game | Bugs found |
-| ---------------------------------------------------------------- |
+| -------------------------------|--------------------------------- |
 | 1. ~~Algebraic notation as input from the user~~ |
 | 2. ~~Reformat/refactor/abstract methods~~ |
 | 3. ~~Check dependencies/design~~ |
