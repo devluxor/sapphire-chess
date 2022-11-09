@@ -3,7 +3,7 @@ require 'paint'
 module AI
   # Levels of recursion. 
   # Deeper means harder (computer can think DEPTH turns ahead)
-  DEPTH = 1
+  DEPTH = 0
 
   private
   

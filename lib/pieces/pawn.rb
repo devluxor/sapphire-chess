@@ -42,6 +42,8 @@ class Pawn < Piece
   end
 
   def to_s
+    promote unless promoted?
+    
     if promoted?
       case color
       when :white then Paint[self.class::WHITE.last, :white, :bright]
@@ -56,8 +58,6 @@ class Pawn < Piece
   end
 
   def available_moves
-    promote unless promoted?
-
     if promoted?
       super
     else
