@@ -28,15 +28,17 @@ module Display
     [Pawn, Knight, Bishop, Rook, Queen, King].each do |type|
       piece_symbol = get_piece_symbol(color, type)
 
-      
-      score_line = case type
-                   when Queen
-                     "#{piece_symbol}  x #{board.count(type, color) +
-                       board.promoted_pawns(color)} "
-                   else "#{piece_symbol}  x #{board.count(type, color)} "
+      score_line = if type == Queen
+                     "#{piece_symbol} x "\
+                     "#{board.count(type, color) + board.promoted_pawns(color)} "
+                   elsif type == Pawn
+                     "#{piece_symbol} x "\
+                     "#{board.count(type, color) - board.promoted_pawns(color)} "
+                   else 
+                     "#{piece_symbol} x #{board.count(type, color)} "
                    end
 
-      print score_line
+      print score_line unless score_line[-2] == "0"
     end
   end
 

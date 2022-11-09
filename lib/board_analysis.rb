@@ -44,8 +44,8 @@ module BoardAnalysis
   end
 
   def promoted_pawns(color)
-    friendly_pieces(Pawn).select do |piece|
-      piece.class == Pawn && piece.color == color && piece.promoted?
+    friendly_pieces(color).select do |piece|
+      piece.is_a?(Pawn) && piece.promoted?
     end.size
   end
 end
