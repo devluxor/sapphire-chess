@@ -7,7 +7,7 @@ module AI
 
   private
   
-  # Choose move by best possible outcome:
+  # Chooses move by best possible outcome:
   def computer_chooses_move
     possible_moves = board.generate_moves(:black)
     possible_moves << [:castle, :king] if castle_rights?(:king)

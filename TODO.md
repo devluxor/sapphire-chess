@@ -1,5 +1,5 @@
 | Things to do/implement/fix in the game | Bugs found |
-| -------------------------------|--------------------------------- |
+| ---------------------------------------|--------------------------------- |
 | 1. ~~Algebraic notation as input from the user~~ | 1.
 | 2. ~~Reformat/refactor/abstract methods~~ | 2.
 | 3. ~~Check dependencies/design~~ | 3.
@@ -27,3 +27,4 @@
 | 25. ~~Add turn number~~ |
 | 26. Study alpha-beta pruning |
 | 27. Minimax to Negamax ??? |
+| 28. Write a detailed MAP.md |
