@@ -30,7 +30,7 @@ module HumanMoveValidation
   def valid_player_input?(player_move_input)
     if double_input?(player_move_input)
       valid_piece_selection?(player_move_input.first) &&
-        valid_move?(player_move_input.first, player_move_input.last)
+        valid_target_square?(player_move_input.first, player_move_input.last)
     elsif player_move_input.first == :castle
       valid_castling?(player_move_input.last)
     else
@@ -51,7 +51,7 @@ module HumanMoveValidation
       board[piece].color == current_player.color
   end
 
-  def valid_move?(piece, target_square)
+  def valid_target_square?(piece, target_square)
     board[piece].available_moves.include?(target_square)
   end
 

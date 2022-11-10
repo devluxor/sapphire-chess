@@ -1,7 +1,7 @@
 | Things to do/implement/fix in the game | Bugs found |
 | ---------------------------------------|--------------------------------- |
 | 1. ~~Algebraic notation as input from the user~~ | 1. Game is not over when black king is killed
-| 2. ~~Reformat/refactor/abstract methods~~ | 2.
+| 2. ~~Reformat/refactor/abstract methods~~ | 2. Engine#game_over? not working
 | 3. ~~Check dependencies/design~~ | 3.
 | 4. ~~Proto AI~~ | 4.
 | 5. ~~Define access modifiers~~ | 5.

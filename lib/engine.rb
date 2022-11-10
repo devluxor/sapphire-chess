@@ -6,6 +6,7 @@ require_relative 'display.rb'
 require_relative 'human_move_validation.rb'
 
 require 'paint'
+require 'pry'
 
 class ChessEngine
   include Display
@@ -24,6 +25,7 @@ class ChessEngine
     loop do
       turn!
       break if game_over?
+      # binding.pry if game_over?
     end
 
     end_game
@@ -40,6 +42,7 @@ class ChessEngine
     )
   end
 
+  # You have to insert another game_over after perform_move! or replan turn! sequence
   def turn!
     2.times do
       system 'clear'
@@ -49,6 +52,7 @@ class ChessEngine
       display_player_turn
       perform_move!(player_move_choice)
       swap_player!
+      binding.pry if game_over?
     end
 
     self.turn_number += 1
@@ -76,14 +80,15 @@ class ChessEngine
   def end_game
     system 'clear'
     renderer.render
-    swap_player!
+    # swap_player!
     puts Paint['Checkmate!', nil, :red, :bright]
     puts ''
     display_winner
-    puts 'End'
   end
 
+  # FIX:
   def game_over?
-    board.no_king?(current_player.color) || board.checkmate?(current_player.color)
+    board.no_king?(current_player.color) || board.checkmate?(current_player.color) ||
+      board.checkmate?(:white)
   end
 end
