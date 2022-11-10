@@ -21,9 +21,14 @@ class ChessEngine
   end
   
   def play
-    loop do
-      turn!
-      break if game_over?
+    until game_over?
+      system 'clear'
+      renderer.render
+      display_graphic_score
+      display_turn_number
+      display_player_turn
+      perform_move!(player_move_choice)
+      swap_player!
     end
 
     end_game
@@ -40,19 +45,14 @@ class ChessEngine
     )
   end
 
-  def turn!
-    2.times do
-      system 'clear'
-      renderer.render
-      display_graphic_score
-      display_turn_number
-      display_player_turn
-      perform_move!(player_move_choice)
-      swap_player!
-    end
+  # def turn!
+  #   2.times do
+      
+  #     swap_player!
+  #   end
 
-    self.turn_number += 1
-  end
+  #   self.turn_number += 1
+  # end
 
   def player_move_choice
     if current_player.color == :white
@@ -77,13 +77,19 @@ class ChessEngine
     system 'clear'
     renderer.render
     swap_player!
-    puts Paint['Checkmate!', nil, :red, :bright]
-    puts ''
     display_winner
     puts 'End'
   end
 
   def game_over?
-    board.no_king?(current_player.color) || board.checkmate?(current_player.color)
+    board.checkmate?(current_player.color) || board.no_king?(current_player.color)
   end
 end
+
+# Methods:
+
+# someone_won?
+
+# determine_winner?
+
+# 
