@@ -3,6 +3,8 @@ require_relative 'board_renderer.rb'
 require_relative 'board_analysis.rb'
 require_relative 'board_evaluation.rb'
 
+require 'pry'
+
 class Board
   SQUARE_ORDER = 8
   B_PAWN_ROW = 1
