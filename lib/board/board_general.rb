@@ -64,7 +64,13 @@ class Board
   def move_piece!(piece, target_square, permanent=false)
     mark_moved_piece!(piece) if permanent
 
+    # Test
+    binding.pry if self[piece].is_a?(NullPiece)
+
     self[piece], self[target_square] = NullPiece.instance, self[piece]
+
+    # Test
+    binding.pry if self[target_square].is_a?(NullPiece)
 
     self[target_square].location = target_square
   end
@@ -77,6 +83,8 @@ class Board
     self[piece].mark!
   end
 
+  # Refactor?
+  # Abstract double move_piece!
   def castle!(side, color, permanent=false)
     case color
     when :white

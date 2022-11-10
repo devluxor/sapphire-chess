@@ -1,6 +1,6 @@
 module Display
   def display_turn_number
-    print Paint["   Turn #{turn_number}    ", nil, :green]
+    print Paint["   Turn #{turn_number.to_i}    ", nil, :green]
   end
 
   def display_player_turn
@@ -55,10 +55,12 @@ module Display
   end
 
   def display_check
-    puts Paint[
-      'You are in check!',
-      :red, :bright
-      ]
+    puts Paint['You are in check!', :red, :bright]
+  end
+
+  def display_checkmate
+    puts Paint['Checkmate!', nil, :red, :bright]
+    puts ''
   end
 
   def display_winner

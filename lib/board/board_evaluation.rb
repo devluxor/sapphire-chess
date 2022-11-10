@@ -6,6 +6,7 @@ module BoardEvaluation
   def evaluate
     material_evaluation + piece_location_evaluation
     # material_evaluation
+    # piece_location_evaluation
   end
 
   def material_evaluation
