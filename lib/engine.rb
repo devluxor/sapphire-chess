@@ -77,16 +77,7 @@ class ChessEngine
     display_winner
   end
 
-  # FIX:
   def game_over?
     board.checkmate?(current_player.color) || board.no_king?(current_player.color)
   end
 end
-
-# Methods:
-
-# someone_won?
-
-# determine_winner?
-
-# 

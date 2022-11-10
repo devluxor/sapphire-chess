@@ -64,12 +64,12 @@ class Board
   def move_piece!(piece, target_square, permanent=false)
     mark_moved_piece!(piece) if permanent
 
-    # Test
+    # Test:
     binding.pry if self[piece].is_a?(NullPiece)
 
     self[piece], self[target_square] = NullPiece.instance, self[piece]
 
-    # Test
+    # Test:
     binding.pry if self[target_square].is_a?(NullPiece)
 
     self[target_square].location = target_square
