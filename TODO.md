@@ -28,3 +28,4 @@
 | 26. Study alpha-beta pruning |
 | 27. Minimax to Negamax ??? |
 | 28. Write a detailed MAP.md |
+| 29. Add a 'want to play again?' method |
