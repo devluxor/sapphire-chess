@@ -1,6 +1,6 @@
 module Display
   def display_turn_number
-    print Paint["   Turn #{turn_number}    ", nil, :green]
+    print Paint["   Turn #{turn_number.to_i}    ", nil, :green]
   end
 
   def display_player_turn

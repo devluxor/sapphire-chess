@@ -29,6 +29,7 @@ class ChessEngine
       display_player_turn
       perform_move!(player_move_choice)
       swap_player!
+      update_turn_counter
     end
 
     end_game
@@ -45,14 +46,9 @@ class ChessEngine
     )
   end
 
-  # def turn!
-  #   2.times do
-      
-  #     swap_player!
-  #   end
-
-  #   self.turn_number += 1
-  # end
+  def update_turn_counter
+    self.turn_number += 0.5
+  end
 
   def player_move_choice
     if current_player.color == :white
