@@ -1,13 +1,13 @@
 module Castling
   def castle_rights?(side)
-    king_and_rook_unmoved?(side) && # Change to !...moved?
+    !king_and_rook_moved?(side) &&
       castling_line_free?(side) &&
       !board.in_check?(color) &&
       !results_in_check?(side) &&
       !king_crosses_attack_line?(side)
   end
 
-  def king_and_rook_unmoved?(side)
+  def king_and_rook_moved?(side)
     case color
     when :white
       king = [7, 4]
@@ -17,8 +17,8 @@ module Castling
       rook = side == :king ? [0, 7] : [0, 0]
     end
 
-    board[king].is_a?(King) && !board[king].moved? &&
-      board[rook].is_a?(Rook) && !board[rook].moved?
+    board[king].is_a?(King) && board[king].moved? &&
+      board[rook].is_a?(Rook) && board[rook].moved?
   end
 
   def castling_line_free?(side)
