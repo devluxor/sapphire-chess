@@ -1,8 +1,8 @@
 | Things to do/implement/fix in the game | Bugs found |
 | ---------------------------------------|--------------------------------- |
-| 1. ~~Algebraic notation as input from the user~~ | 1. Game is not over when black king is killed
-| 2. ~~Reformat/refactor/abstract methods~~ | 2. Engine#game_over? not working
-| 3. ~~Check dependencies/design~~ | 3.
+| 1. ~~Algebraic notation as input from the user~~ | 1. ~~Game is not over when black king is killed~~
+| 2. ~~Reformat/refactor/abstract methods~~ | ~~2. Engine#game_over? not working~~
+| 3. ~~Check dependencies/design~~ | 3. Bug encountered only once: Board#move_piece! tries to move a NullPiece? (NoMethodError `location=` on NullPiece, line: `self[target_square].location = target_square)`
 | 4. ~~Proto AI~~ | 4.
 | 5. ~~Define access modifiers~~ | 5.
 | 6. ~~Add a..h and 1..8 on x and y axis in board representation~~ |
