@@ -1,4 +1,4 @@
-module Evaluation
+module BoardEvaluation
   # I could add a difficulty selection: 
         # if easy, only depth 1 and only material evaluation
         # if medium, depth 3, only material evaluation
