@@ -34,7 +34,8 @@ module AI
 
     # Makes provisional move
     if castling
-      board.castle!(move.last, color)
+      side = move.last
+      board.castle!(side, color)
     else
       start_position, target_position = move
       piece_buffer = board[target_position]
@@ -76,7 +77,7 @@ module AI
                       
     # Unmakes provisional move:
     if castling
-      board.uncastle!(move.last, color)
+      board.uncastle!(side, color)
     else
       board.move_piece!(target_position, start_position)
       board[target_position] = piece_buffer
