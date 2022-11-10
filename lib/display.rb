@@ -69,5 +69,6 @@ module Display
       nil,
       current_player.color
     ]
+    puts 'Thanks for playing Ruby Chess'
   end
 end
