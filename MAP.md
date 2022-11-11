@@ -2,11 +2,13 @@
 #### Engine:
   - `lib/engine.rb`
 
-the `ChessEngine` class controls the game flow and logic, via the `play` interface, mixing-in `Display` and `HumanMoveValidation`. It coordinates the board renderization via `BoardRenderer`, the turn number update, the display of messages and player score via `Display`, controls input validation, move legality and move input conversion, and game over logic. I will write a more fine-tuned logic for this before long.
+The `ChessEngine` class controls the game flow and logic, via the `play` interface, mixing-in `Display` and `HumanMoveValidation`. It coordinates the board renderization via `BoardRenderer`, the turn number update, the display of messages and player score via `Display`, controls input validation, move legality and move input conversion, and game over logic. I will write a more fine-tuned logic for this before long.
 
 At the moment, the game only allows the human player to play with whites, but this will change in the near future, as I'd like to implement a color selection randomization.
 
 I'd also like to add an AI vs. AI mode.
+
+---
 
 #### Board functionality:
   - `lib/board_analysis.rb`
