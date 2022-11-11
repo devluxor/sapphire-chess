@@ -27,7 +27,7 @@ class ChessEngine
       display_graphic_score
       display_turn_number
       display_player_turn
-      perform_move!(player_move_choice)
+      perform_move!(player_move_selection)
       swap_player!
       update_turn_counter
     end
@@ -50,7 +50,7 @@ class ChessEngine
     self.turn_number += 0.5
   end
 
-  def player_move_choice
+  def player_move_selection
     if current_player.color == :white
       display_check if board.in_check?(current_player.color)
       prompt_move
