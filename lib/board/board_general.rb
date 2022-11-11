@@ -66,15 +66,15 @@ class Board
   def move_piece!(piece, target_square, permanent=false)
     mark_moved_piece!(piece) if permanent
 
-    # Test:
-    binding.pry if self[piece].is_a?(NullPiece)
-
     self[piece], self[target_square] = NullPiece.instance, self[piece]
 
-    # Test:
-    binding.pry if self[target_square].is_a?(NullPiece)
-
-    self[target_square].location = target_square
+    begin
+      self[target_square].location = target_square
+    rescue NoMethodError => e
+      puts "Board#Move_piece! tried to move a #{self[piece].class} "\
+           "to #{target_square}."
+      puts "Backtrace: #{e.backtrace}"
+    end
   end
 
   # Controls castling rights 
