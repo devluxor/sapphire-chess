@@ -1,4 +1,4 @@
-# Ruby-chess
+# Ruby Chess
 
 Hi!
 
