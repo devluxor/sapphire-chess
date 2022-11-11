@@ -1,11 +1,10 @@
-module HumanInputFormat
+module HumanInputConversion
   LETTER_RESET_VALUE = 97 # ASCII downcase 'a' numeric value: 'a'.ord
   ALGEBRAIC_NOTATION_FORMAT = /[a-h]{1}[1-8]{1}/
   CASTLING_INPUT_FORMAT = /castle [kq]{1}/
 
   private
 
-  # See Engine#turn! and HumanMoveValidation#convert_player_input
   def algebraic_input
     move_input = nil
     loop do 
@@ -55,18 +54,17 @@ module HumanInputFormat
       
     [[row, column], [row_end, column_end]]
   end
-
-  def convert_castling_input(move_input)
-    side = move_input[-1] == 'k' ? :king : :queen
-
-    [:castle, side]
-  end
-
+  
   def number_to_row(number)
     (number.to_i - Board::SQUARE_ORDER).abs
   end
-
+  
   def letter_to_column(letter)
     letter.ord - LETTER_RESET_VALUE
+  end
+  
+  def convert_castling_input(move_input)
+    side = move_input[-1] == 'k' ? :king : :queen
+     [:castle, side]
   end
 end

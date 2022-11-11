@@ -1,6 +1,6 @@
 require_relative 'board.rb'
 require_relative 'ai.rb'
-require_relative 'human_input_format.rb'
+require_relative 'human_input_conversion.rb'
 require_relative 'castling.rb'
 
 class Player
@@ -23,7 +23,7 @@ class Computer < Player
 end
 
 class Human < Player
-  include HumanInputFormat
+  include HumanInputConversion
   
   def get_move
     algebraic_input
