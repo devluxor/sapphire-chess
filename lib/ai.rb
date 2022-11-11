@@ -8,7 +8,7 @@ module AI
   private
   
   # Chooses move by best possible outcome:
-  # (Uncomment  all lines in this method to enable evaluation analysis)
+  # (Uncomment all lines in this method to enable evaluation analysis)
   def computer_chooses_move
     possible_moves = board.generate_moves(:black)
     possible_moves << [:castle, :king] if castle_rights?(:king)
