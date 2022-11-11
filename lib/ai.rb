@@ -8,16 +8,17 @@ module AI
   private
   
   # Chooses move by best possible outcome:
+  # (Uncomment  all lines in this method to enable evaluation analysis)
   def computer_chooses_move
     possible_moves = board.generate_moves(:black)
     possible_moves << [:castle, :king] if castle_rights?(:king)
     possible_moves << [:castle, :queen] if castle_rights?(:queen)
 
-    # eva = [] # Test
+    # eva = []
     best_move = possible_moves.min_by do |move|
                   # evaluation = 
                   minimax(move, DEPTH, -Float::INFINITY, Float::INFINITY, false)
-                  # eva << store_evaluation(move, evaluation) # Test
+                  # eva << store_evaluation(move, evaluation)
                   # evaluation
                 end
 
@@ -47,7 +48,8 @@ module AI
     # [the maximizing player], it generates every possible movement for the
     # next player, black [the minimizing player], who will choose the best 
     # possible move, and so on. The best (relative to each player) possible 
-    # outcome for each move will determine what move is chosen. See ai.rb)
+    # outcome for each move will determine what move is chosen)
+    # See AI#computer_chooses_move
 
     # The alpha-beta `prunes` the tree: it makes the search more efficient
     # removing unnecessary branches, resulting in a faster process.
@@ -86,7 +88,7 @@ module AI
     best_evaluation
   end
 
-  # Testing:
+  # For evaluation analysis only:
   def store_evaluation(move, evaluation)
     description = format(
       "%s %s to %s %s",
@@ -97,9 +99,5 @@ module AI
     )
 
     [description, evaluation]
-  end
-
-  def all_equal?(evaluations)
-    evaluations.map(&:last).uniq.size == 1
   end
 end
