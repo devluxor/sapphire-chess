@@ -1,4 +1,8 @@
 module Display
+  def clear_screen
+    system 'clear'
+  end
+
   def display_turn_number
     print Paint["   Turn #{turn_number.to_i}    ", nil, :green]
   end

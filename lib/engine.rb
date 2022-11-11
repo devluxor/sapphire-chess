@@ -23,7 +23,7 @@ class ChessEngine
   
   def play
     until game_over?
-      system 'clear'
+      clear_screen
       renderer.render
       display_graphic_score
       display_turn_number
@@ -71,7 +71,7 @@ class ChessEngine
   end
 
   def end_game
-    system 'clear'
+    clear_screen
     renderer.render
     swap_player!
     display_winner
