@@ -15,12 +15,13 @@ class ChessEngine
     @board = Board.initialize_board
     @renderer = BoardRenderer.new(board)
     @white_player = Human.new(:white, board)
-    @black_player = Computer.new(:black, board, set_difficulty)
+    @black_player = Computer.new(:black, board)
     @current_player = white_player
     @turn_number = 1
   end
   
   def play
+    set_difficulty
     until game_over?
       clear_screen
       renderer.render
@@ -42,17 +43,18 @@ class ChessEngine
 
   # See Computer#initialize in player.rb, AI#minimax in ai.rb
   def set_difficulty
-    system 'clear'
+    clear_screen
     display_difficulty_settings
-    difficulty = nil
+    difficulty_input = nil
     loop do
-      difficulty = gets.chomp.strip.downcase
-      break if valid_difficulty?(difficulty)
+      difficulty_input = gets.chomp.strip.downcase
+      break if valid_difficulty?(difficulty_input)
       'Please, enter a valid difficulty setting.'
     end
 
-    if difficulty == 'easy' || difficulty == '1' then 1
-    elsif difficulty == 'medium' || difficulty == '2' then 2
+    black_player.depth =
+    if difficulty_input == 'easy' || difficulty_input == '1' then 1
+    elsif difficulty_input == 'medium' || difficulty_input == '2' then 2
     else 3
     end
   end

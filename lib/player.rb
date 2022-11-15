@@ -17,12 +17,9 @@ end
 class Computer < Player
   include AI
 
-  # depth: Levels of minimax recursion. 
+  # depth: Levels of AI#minimax recursion. 
   # Deeper means harder (computer can think `depth` turns ahead)
-  def initialize(color, board, depth)
-    super(color, board)
-    @depth = depth
-  end
+  attr_writer :depth
 
   def get_move
     computer_chooses_move
