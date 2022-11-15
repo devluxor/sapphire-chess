@@ -21,7 +21,7 @@
 | 19. Enable en passant move |
 | 20. ~~Separated `Display` class/module for `Engine`~~ |
 | 21. ~~Module `PieceAnalysis` for `Board`~~ |
-| 22. Add difficulty setting |
+| 22. ~~Add difficulty setting~~ |
 | 23. Rename modules/classes (more expressive) |
 | 24. Fine tuning of game over system |
 | 25. ~~Add turn number~~ |
