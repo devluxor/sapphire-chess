@@ -1,12 +1,7 @@
 require 'paint'
 
 module AI
-  # Levels of recursion. 
-  # Deeper means harder (computer can think DEPTH turns ahead)
-  DEPTH = 3
-
   private
-  
   # Chooses move by best possible outcome:
   # (Uncomment all lines in this method to enable evaluation analysis)
   def computer_chooses_move
@@ -17,7 +12,7 @@ module AI
     # eva = []
     best_move = possible_moves.min_by do |move|
                   # evaluation = 
-                  minimax(move, DEPTH, -Float::INFINITY, Float::INFINITY, false)
+                  minimax(move, depth, -Float::INFINITY, Float::INFINITY, false)
                   # eva << store_evaluation(move, evaluation)
                   # evaluation
                 end

@@ -15,7 +15,7 @@ class ChessEngine
     @board = Board.initialize_board
     @renderer = BoardRenderer.new(board)
     @white_player = Human.new(:white, board)
-    @black_player = Computer.new(:black, board)
+    @black_player = Computer.new(:black, board, set_difficulty)
     @current_player = white_player
     @turn_number = 1
   end
@@ -39,6 +39,23 @@ class ChessEngine
 
   attr_reader :white_player, :black_player, :board, :renderer
   attr_accessor :current_player, :turn_number
+
+  # See Computer#initialize in player.rb, AI#minimax in ai.rb
+  def set_difficulty
+    system 'clear'
+    display_difficulty_settings
+    difficulty = nil
+    loop do
+      difficulty = gets.chomp.strip.downcase
+      break if valid_difficulty?(difficulty)
+      'Please, enter a valid difficulty setting.'
+    end
+
+    if difficulty == 'easy' || difficulty == '1' then 1
+    elsif difficulty == 'medium' || difficulty == '2' then 2
+    else 3
+    end
+  end
   
   def swap_player!
     self.current_player = (

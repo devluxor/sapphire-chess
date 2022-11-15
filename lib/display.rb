@@ -3,6 +3,15 @@ module Display
     system 'clear'
   end
 
+  def display_difficulty_settings
+    system 'clear'
+    puts "Please, enter the game difficulty:\n"\
+      "[i.e.: \"1\", \"e\" or \"easy\" to select \"easy\"]\n\n"\
+      "1) Easy\n2) Medium\n3) Hard\n\n"\
+      "This setting determines how many turns the computer can think ahead.\n"\
+      'Caveat: the "hard" setting is very hard!'
+  end
+
   def display_turn_number
     print Paint["   Turn #{turn_number.to_i}    ", nil, :green]
   end

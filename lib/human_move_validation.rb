@@ -1,4 +1,8 @@
 module HumanMoveValidation
+  def valid_difficulty?(difficulty)
+    %w(easy medium hard 1 2 3).include?(difficulty)
+  end
+
   def prompt_move
     puts 'What piece do you want to move?'
     puts '[Use algebraic notation, i.e.: "a2a4"]'
