@@ -27,14 +27,14 @@ module Castling
       if side == :king
         board.empty_square?([7, 5]) && board.empty_square?([7, 6])
       else
-        board.empty_square?([7, 1]) && board.empty_square?([7, 3]) &&
+        board.empty_square?([7, 1]) && board.empty_square?([7, 2]) &&
           board.empty_square?([7, 3])
       end
     else
       if side == :king
         board.empty_square?([0, 5]) && board.empty_square?([0, 6])
       else
-        board.empty_square?([0, 1]) && board.empty_square?([0, 3]) &&
+        board.empty_square?([0, 1]) && board.empty_square?([0, 2]) &&
           board.empty_square?([0, 3])
       end
     end
