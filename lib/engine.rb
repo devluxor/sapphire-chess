@@ -8,7 +8,7 @@ require_relative 'algebraic_conversion.rb'
 
 require 'paint'
 
-class ChessEngine
+class Engine
   include Display
   include HumanMoveValidation
   include AlgebraicConversion
@@ -16,7 +16,7 @@ class ChessEngine
   def initialize
     @board = Board.initialize_board
     @renderer = BoardRenderer.new(board)
-    @white_player = Computer.new(:white, board)
+    @white_player = Human.new(:white, board)
     @black_player = Computer.new(:black, board)
     @current_player = white_player
     @turn_number = 1
