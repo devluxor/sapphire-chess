@@ -22,7 +22,7 @@
 | 20. ~~Separated `Display` class/module for `Engine`~~ |
 | 21. ~~Module `PieceAnalysis` for `Board`~~ |
 | 22. ~~Add difficulty setting~~ |
-| 23. Rename modules/classes (more expressive) |
+| 23. ~~Rename modules/classes (more expressive)~~ |
 | 24. Fine tuning of game over system |
 | 25. ~~Add turn number~~ |
 | 26. Study alpha-beta pruning |
@@ -32,3 +32,5 @@
 | 30. Implement speed optimization for AI#minimax |
 | 31. Research TCO (_Tail Call Optimization_) |
 | 32. Enable AI vs. AI mode |
+| 33. Add player + computer last move |
+| 34. Learn code packaging |
