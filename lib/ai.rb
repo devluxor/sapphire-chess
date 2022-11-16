@@ -12,7 +12,7 @@ module AI
     # eva = []
     best_move = possible_moves.min_by do |move|
                   # evaluation = 
-                  minimax(move, depth, -Float::INFINITY, Float::INFINITY, false)
+                  minimax(move, depth, -Float::INFINITY, Float::INFINITY, color == :white)
                   # eva << store_evaluation(move, evaluation)
                   # evaluation
                 end
