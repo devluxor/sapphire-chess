@@ -32,6 +32,6 @@
 | 30. Implement speed optimization for AI#minimax |
 | 31. Research TCO (_Tail Call Optimization_) |
 | 32. Enable AI vs. AI mode |
-| 33. Add player + computer last move |
+| 33. ~~Add player + computer last move~~ |
 | 34. Learn code packaging |
 | 35. Add history of moves |
