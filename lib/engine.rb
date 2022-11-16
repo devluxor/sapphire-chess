@@ -16,7 +16,7 @@ class ChessEngine
   def initialize
     @board = Board.initialize_board
     @renderer = BoardRenderer.new(board)
-    @white_player = Human.new(:white, board)
+    @white_player = Computer.new(:white, board)
     @black_player = Computer.new(:black, board)
     @current_player = white_player
     @turn_number = 1
@@ -55,10 +55,14 @@ class ChessEngine
       'Please, enter a valid difficulty setting.'
     end
 
-    black_player.depth =
-    if difficulty_input == 'easy' || difficulty_input == '1' then 1
-    elsif difficulty_input == 'medium' || difficulty_input == '2' then 2
-    else 3
+    [white_player, black_player].each do |player|
+      if player.is_a?(Computer)
+        player.depth =
+        if difficulty_input == 'easy' || difficulty_input == '1' then 1
+        elsif difficulty_input == 'medium' || difficulty_input == '2' then 2
+        else 3
+        end
+      end
     end
   end
   
