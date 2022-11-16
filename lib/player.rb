@@ -19,6 +19,7 @@ class Computer < Player
 
   # depth: Levels of AI#minimax recursion. 
   # Deeper means harder (computer can think `depth` turns ahead)
+  # See Engine#set_difficulty
   attr_writer :depth
 
   def get_move
