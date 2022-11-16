@@ -1,6 +1,5 @@
 module StepPattern
   def available_moves
-    # This line keeps track of movement for castling purposes
     move_directions.each_with_object([]) do |(row_direction, column_direction), moves|
       current_row, current_column = location
 
@@ -19,7 +18,6 @@ end
 
 module SlidePattern
   def available_moves
-    # This line keeps track of movement for castling purposes
     move_directions.each_with_object([]) do |(row_direction, column_direction), moves|
       current_row, current_column = location
 
