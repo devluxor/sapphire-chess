@@ -70,7 +70,7 @@ class ChessEngine
   end
 
   def player_move_selection
-    if current_player.color == :white
+    if current_player.is_a?(Human)
       display_check if board.in_check?(current_player.color)
       prompt_move
     else
