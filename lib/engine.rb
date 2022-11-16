@@ -4,14 +4,14 @@ require_relative 'pieces.rb'
 require_relative 'player.rb'
 require_relative 'display.rb'
 require_relative 'human_move_validation.rb'
-require_relative 'human_input_conversion.rb'
+require_relative 'algebraic_conversion.rb'
 
 require 'paint'
 
 class ChessEngine
   include Display
   include HumanMoveValidation
-  include HumanInputConversion
+  include AlgebraicConversion
 
   def initialize
     @board = Board.initialize_board
