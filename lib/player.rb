@@ -6,6 +6,7 @@ require_relative 'castling.rb'
 class Player
   include Castling
 
+  attr_accessor :last_move
   attr_reader :color, :board
 
   def initialize(color, board)

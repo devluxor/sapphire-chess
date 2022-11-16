@@ -4,12 +4,14 @@ require_relative 'pieces.rb'
 require_relative 'player.rb'
 require_relative 'display.rb'
 require_relative 'human_move_validation.rb'
+require_relative 'human_input_conversion.rb'
 
 require 'paint'
 
 class ChessEngine
   include Display
   include HumanMoveValidation
+  include HumanInputConversion
 
   def initialize
     @board = Board.initialize_board
@@ -26,6 +28,7 @@ class ChessEngine
       clear_screen
       renderer.render
       display_graphic_score
+      display_last_moves
       display_turn_number
       display_player_turn
       perform_move!(player_move_selection)
@@ -81,10 +84,27 @@ class ChessEngine
   
   def perform_move!(move_input)
     piece, target_square = convert_player_input(move_input)
-    
+    store_move!(move_input)
+
     case piece
     when :castle then board.castle!(target_square, current_player.color, true)
     else board.move_piece!(piece, target_square, true)
+    end
+  end
+
+  def store_move!(move_input)
+    piece, target_square = move_input
+
+    current_player.last_move = 
+    if piece == :castling
+      "Castle, #{square} side"
+    elsif board[target_square].is_a?(Piece)
+      "#{board[piece].class} #{convert_to_algebraic(piece)} "\
+      "to #{board[target_square].class} "\
+      "#{convert_to_algebraic(target_square)}"
+    else
+      "#{board[piece].class} #{convert_to_algebraic(piece)} "\
+      "to #{convert_to_algebraic(target_square)}"
     end
   end
 

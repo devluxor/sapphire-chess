@@ -3,6 +3,10 @@ module Display
     system 'clear'
   end
 
+  def new_line
+    puts ''
+  end
+
   def display_difficulty_settings
     system 'clear'
     puts "Please, enter the game difficulty:\n"\
@@ -10,6 +14,26 @@ module Display
       "1) Easy\n2) Medium\n3) Hard\n\n"\
       "This setting determines how many turns the computer can think ahead.\n"\
       'Caveat: the "hard" setting is very hard!'
+  end
+
+  def display_last_moves
+    return if turn_number < 2
+    print Paint['Last turn: ', :green]
+    display_move(:white)
+    display_move(:black)
+    
+    new_line
+  end
+
+  def display_move(color)
+    player = color == :white ? white_player : black_player
+      
+    if color == :white
+      print Paint["White #{player.last_move}"]
+      print Paint[' | ', :green]
+    else
+      puts Paint["Black #{player.last_move}", :blue]
+    end
   end
 
   def display_turn_number

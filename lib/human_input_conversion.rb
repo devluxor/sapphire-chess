@@ -67,4 +67,19 @@ module HumanInputConversion
     side = move_input[-1] == 'k' ? :king : :queen
      [:castle, side]
   end
+
+  def convert_to_algebraic(square)
+    letter = column_to_letter(square.last)
+    number = row_to_number(square.first)
+
+    "#{letter}#{number}"
+  end
+
+  def column_to_letter(column)
+    (column + LETTER_RESET_VALUE).chr
+  end
+
+  def row_to_number(row)
+    (row - Board::SQUARE_ORDER).abs
+  end
 end
