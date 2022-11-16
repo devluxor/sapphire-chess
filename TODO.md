@@ -34,3 +34,4 @@
 | 32. Enable AI vs. AI mode |
 | 33. Add player + computer last move |
 | 34. Learn code packaging |
+| 35. Add history of moves |
