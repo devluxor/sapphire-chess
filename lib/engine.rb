@@ -88,7 +88,7 @@ class Engine
   
   def perform_move!(move_input)
     piece, target_square = convert_player_input(move_input)
-    store_move!(move_input)
+    store_move!(piece, target_square)
 
     case piece
     when :castle then board.castle!(target_square, current_player.color, true)
@@ -96,9 +96,7 @@ class Engine
     end
   end
 
-  def store_move!(move_input)
-    piece, target_square = move_input
-
+  def store_move!(piece, target_square)  
     current_player.last_move = 
     if piece == :castling
       "Castle, #{square} side"
