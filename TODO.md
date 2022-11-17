@@ -2,8 +2,8 @@
 | ---------------------------------------|--------------------------------- |
 | 1. ~~Algebraic notation as input from the user~~ | 1. ~~Game is not over when black king is killed~~
 | 2. ~~Reformat/refactor/abstract methods~~ | ~~2. Engine#game_over? not working~~
-| 3. ~~Check dependencies/design~~ | 3. Bug encountered only once: Board#move_piece! tries to move a NullPiece? (NoMethodError `location=` on NullPiece, line: `self[target_square].location = target_square)`
-| 4. ~~Proto AI~~ | 4.
+| 3. ~~Check dependencies/design~~ | 3. ~~Bug encountered only once: Board#move_piece! tries to move a NullPiece? (NoMethodError `location=` on NullPiece, line: `self[target_square].location = target_square)`~~
+| 4. ~~Proto AI~~ | 4. BUF FIXED: square numbers in `castling_line_free?` were incorrect.
 | 5. ~~Define access modifiers~~ | 5.
 | 6. ~~Add a..h and 1..8 on x and y axis in board representation~~ |
 | 7. ~~Simplify pieces class system design~~ |
@@ -31,7 +31,9 @@
 | 29. Add a 'want to play again?' method |
 | 30. Implement speed optimization for AI#minimax |
 | 31. Research TCO (_Tail Call Optimization_) |
-| 32. Enable AI vs. AI mode |
+| 32. ~~Enable AI vs. AI mode~~ |
 | 33. ~~Add player + computer last move~~ |
 | 34. Learn code packaging |
 | 35. Add history of moves |
+| 36. Add white/black random selection |
+
