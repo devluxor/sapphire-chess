@@ -9,32 +9,29 @@ module AI
     possible_moves << [:castle, :king] if castle_rights?(:king)
     possible_moves << [:castle, :queen] if castle_rights?(:queen)
 
-    best_move = get_best_move(possible_moves, color)
-    
-    best_move
+    get_best_move(possible_moves, color)
   end
 
   def get_best_move(possible_moves, color)
     evaluations = {}
-    if color == :white
-      possible_moves.max_by do |move|
-        evaluation = 
-        minimax(move, depth, -Float::INFINITY, Float::INFINITY, true)
-        evaluations[move] = evaluation
-        evaluation
-      end
-    else
-      eva = []
-      possible_moves.min_by do |move|
-        evaluation = 
-        minimax(move, depth, -Float::INFINITY, Float::INFINITY, false)
-        eva << store_evaluation(move, evaluation)
-        evaluation
-      end
+
+    possible_moves.each do |move|
+      evaluations[move] = 
+      minimax(move, depth, -Float::INFINITY, Float::INFINITY, maximizing_player?)
     end
+
+    move_randomizer(evaluations)
   end
 
-  def move_randomizer(best_moves)
+  # This method randomizes the moves if two or more moves share the best evaluation.
+  # This avoids the Computer to play the same moves every game.
+  def move_randomizer(evaluations)
+    best_evaluation =
+    if color == :white then evaluations.values.max
+    else evaluations.values.min
+    end
+
+    evaluations.select { |_, evaluation| evaluation == best_evaluation }.keys.sample
   end
 
   def minimax(move, depth, alpha, beta, maximizing_player)
