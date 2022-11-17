@@ -98,8 +98,8 @@ class Engine
 
   def store_move!(piece, target_square)  
     current_player.last_move = 
-    if piece == :castling
-      "Castle, #{square} side"
+    if piece == :castle
+      "Castle, #{target_square} side"
     elsif board[target_square].is_a?(Piece)
       "#{board[piece].class} #{convert_to_algebraic(piece)} "\
       "to #{board[target_square].class} "\
