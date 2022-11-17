@@ -23,6 +23,7 @@ class Engine
   end
   
   def play
+    display_welcome
     set_difficulty
     until game_over?
       clear_screen
@@ -46,7 +47,6 @@ class Engine
 
   # See Computer#initialize in player.rb, AI#minimax in ai.rb
   def set_difficulty
-    clear_screen
     display_difficulty_settings
     difficulty_input = nil
     loop do

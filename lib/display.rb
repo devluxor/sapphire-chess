@@ -7,10 +7,18 @@ module Display
     puts ''
   end
 
+  def display_welcome
+    clear_screen
+
+    print '♟  ♞  ♝  ♜  ♛  ♚'
+    print Paint['   Welcome to Ruby Chess!  ', :green]
+    puts Paint['♚  ♛  ♜  ♝  ♞  ♟', :blue]
+    new_line
+  end
+
   def display_difficulty_settings
-    system 'clear'
     puts "Please, enter the game difficulty:\n"\
-      "[i.e.: \"1\", \"e\" or \"easy\" to select \"easy\"]\n\n"\
+      "[i.e.: \"1\", \"e\" or \"easy\" to select Easy]\n\n"\
       "1) Easy\n2) Medium\n3) Hard\n\n"\
       "This setting determines how many turns the computer can think ahead.\n"\
       'Caveat: the "hard" setting is very hard!'
