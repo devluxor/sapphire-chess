@@ -13,6 +13,12 @@ class Player
     @color = color
     @board = board
   end
+
+  private
+
+  def maximizing_player?
+    color == :white
+  end
 end
 
 class Computer < Player
