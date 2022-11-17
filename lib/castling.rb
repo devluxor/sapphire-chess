@@ -17,8 +17,9 @@ module Castling
       rook = side == :king ? [0, 7] : [0, 0]
     end
 
-    board[king].is_a?(King) && board[king].moved? &&
-      board[rook].is_a?(Rook) && board[rook].moved?
+    return true unless board[king].is_a?(King) && board[rook].is_a?(Rook)
+
+    board[king].moved? && board[rook].moved?
   end
 
   def castling_line_free?(side)
@@ -41,6 +42,7 @@ module Castling
   end
 
   def results_in_check?(side)
+    return true if king_and_rook_moved?(side)
     board.castle!(side, color)
     in_check = board.in_check?(color)
     board.uncastle!(side, color)
