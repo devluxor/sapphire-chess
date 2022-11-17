@@ -93,7 +93,7 @@ class Board
         move_piece!([7, 4], [7, 2], permanent)
         move_piece!([7, 0], [7, 3], permanent)
       end
-    when :black
+    else
       if side == :king
         move_piece!([0, 4], [0, 6], permanent)
         move_piece!([0, 7], [0, 5], permanent)
@@ -114,7 +114,7 @@ class Board
         move_piece!([7, 2], [7, 4])
         move_piece!([7, 3], [7, 0])
       end
-    when :black
+    else
       if side == :king
         move_piece!([0, 6], [0, 4])
         move_piece!([0, 5], [0, 7])
