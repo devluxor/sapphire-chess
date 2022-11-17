@@ -18,7 +18,7 @@ module Display
 
   def display_last_moves
     return if turn_number < 2
-    print Paint['Last turn: ', :green]
+    print Paint['Last moves: ', :green]
     display_move(:white)
     display_move(:black)
     
