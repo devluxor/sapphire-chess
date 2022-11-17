@@ -66,13 +66,7 @@ class Board
 
     self[piece], self[target_square] = NullPiece.instance, self[piece]
 
-    begin
-      self[target_square].location = target_square
-    rescue NoMethodError => e
-      puts "Board#Move_piece! tried to move a #{self[piece].class} "\
-           "to #{target_square}."
-      puts "Backtrace: #{e.backtrace}"
-    end
+    self[target_square].location = target_square
   end
 
   # Controls castling rights 
