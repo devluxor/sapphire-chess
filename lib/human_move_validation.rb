@@ -28,7 +28,7 @@ module HumanMoveValidation
       puts "The #{board[piece].class} selected can't move to that square."
     end
 
-    end_square
+    target_square
   end
 
   def valid_player_input?(player_move_input)
