@@ -52,7 +52,7 @@ class Engine
     loop do
       difficulty_input = gets.chomp.strip.downcase
       break if valid_difficulty?(difficulty_input)
-      'Please, enter a valid difficulty setting.'
+      puts 'Please, enter a valid difficulty setting.'
     end
 
     [white_player, black_player].each do |player|
