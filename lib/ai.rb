@@ -1,26 +1,40 @@
 require 'paint'
-
+require 'pry'
 module AI
   private
+
   # Chooses move by best possible outcome:
-  # (Uncomment all lines in this method to enable evaluation analysis)
   def computer_chooses_move
     possible_moves = board.generate_moves(color)
     possible_moves << [:castle, :king] if castle_rights?(:king)
     possible_moves << [:castle, :queen] if castle_rights?(:queen)
 
-    # eva = []
-    best_move = possible_moves.min_by do |move|
-                  # evaluation = 
-                  minimax(move, depth, -Float::INFINITY, Float::INFINITY, color == :white)
-                  # eva << store_evaluation(move, evaluation)
-                  # evaluation
-                end
-
-    # eva.sort_by! { |evaluation| evaluation.last }
-    # binding.pry
+    best_move = get_best_move(possible_moves, color)
     
     best_move
+  end
+
+  def get_best_move(possible_moves, color)
+    evaluations = {}
+    if color == :white
+      possible_moves.max_by do |move|
+        evaluation = 
+        minimax(move, depth, -Float::INFINITY, Float::INFINITY, true)
+        evaluations[move] = evaluation
+        evaluation
+      end
+    else
+      eva = []
+      possible_moves.min_by do |move|
+        evaluation = 
+        minimax(move, depth, -Float::INFINITY, Float::INFINITY, false)
+        eva << store_evaluation(move, evaluation)
+        evaluation
+      end
+    end
+  end
+
+  def move_randomizer(best_moves)
   end
 
   def minimax(move, depth, alpha, beta, maximizing_player)
@@ -85,6 +99,7 @@ module AI
 
   # For evaluation analysis only:
   def store_evaluation(move, evaluation)
+    return [move, evaluation] if move.first == :castle
     description = format(
       "%s %s to %s %s",
       board[move.first].class,
