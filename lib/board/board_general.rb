@@ -9,14 +9,14 @@ class Board
   W_PAWN_ROW = 6
   FIRST_ROW = 0
   LAST_ROW = 7
-  PIECES_SEQUENCE = [
+  PIECES_SEQUENCE = [BoardAnalysis
     Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
   ]
 
   include BoardAnalysis
   include BoardEvaluation
 
-  attr_reader :grid, :renderer
+  attr_reader :matrix, :renderer
 
   def self.initialize_board
     board = new
@@ -39,17 +39,17 @@ class Board
   end
 
   def initialize
-    @grid = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NullPiece.instance) }
+    @matrix = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NullPiece.instance) }
   end
 
   def [](location)
     row, column = location
-    grid[row][column]
+    matrix[row][column]
   end
 
   def []=(location, piece)
     row, column = location
-    grid[row][column] = piece
+    matrix[row][column] = piece
   end
 
   def in_bounds?(location)
@@ -58,7 +58,7 @@ class Board
 
   def empty_square?(location)
     row, column = location
-    in_bounds?(location) && grid[row][column].is_a?(NullPiece)
+    in_bounds?(location) && matrix[row][column].is_a?(NullPiece)
   end
 
   def move_piece!(piece, target_square, permanent=false)
