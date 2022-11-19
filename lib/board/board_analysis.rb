@@ -28,7 +28,7 @@ module BoardAnalysis
   end
 
   def pieces
-    grid.flatten.reject { |position| position.is_a?(NullPiece) }
+    matrix.flatten.reject { |position| position.is_a?(NullPiece) }
   end
 
   def friendly_pieces(color)
