@@ -7,7 +7,7 @@ module StepPattern
       current_column += column_direction
       possible_location = [current_row, current_column]
 
-      next if !board.in_bounds?(possible_location)
+      next if !board.within_bounds?(possible_location)
 
       if board.empty_square?(possible_location) || enemy_in?(possible_location)
         moves << possible_location
@@ -26,7 +26,7 @@ module SlidePattern
         current_column += column_direction
         possible_location = [current_row, current_column]
 
-        break if !board.in_bounds?(possible_location)
+        break if !board.within_bounds?(possible_location)
         break if friend_in?(possible_location)
 
         moves << possible_location if board.empty_square?(possible_location)
