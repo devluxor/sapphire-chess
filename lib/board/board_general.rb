@@ -9,7 +9,7 @@ class Board
   W_PAWN_ROW = 6
   FIRST_ROW = 0
   LAST_ROW = 7
-  PIECES_SEQUENCE = [BoardAnalysis
+  PIECES_SEQUENCE = [
     Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
   ]
 
