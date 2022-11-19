@@ -42,23 +42,23 @@ class Board
     @matrix = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NullPiece.instance) }
   end
 
-  def [](location)
-    row, column = location
+  def [](square)
+    row, column = square
     matrix[row][column]
   end
 
-  def []=(location, piece)
-    row, column = location
+  def []=(square, piece)
+    row, column = square
     matrix[row][column] = piece
   end
 
-  def in_bounds?(location)
-    location.none? { |axis| axis >= SQUARE_ORDER || axis < 0 }
+  def in_bounds?(square)
+    square.none? { |axis| axis >= SQUARE_ORDER || axis < 0 }
   end
 
-  def empty_square?(location)
-    row, column = location
-    in_bounds?(location) && matrix[row][column].is_a?(NullPiece)
+  def empty_square?(square)
+    row, column = square
+    in_bounds?(square) && matrix[row][column].is_a?(NullPiece)
   end
 
   def move_piece!(piece, target_square, permanent=false)
