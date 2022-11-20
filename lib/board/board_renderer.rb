@@ -81,6 +81,13 @@ class BoardRenderer
     end
   end
 
+  def white_square?(square)
+    row = square.first
+    column = square.last
+
+    row.even? && column.even? || row.odd? && column.odd?
+  end
+
   def print_white_square(square, column)
     print(
       if board[square].is_a?(NullPiece) && column.zero?
@@ -107,12 +114,5 @@ class BoardRenderer
         "   #{board[square]}    |"
       end
     )
-  end
-
-  def white_square?(square)
-    row = square.first
-    column = square.last
-
-    row.even? && column.even? || row.odd? && column.odd?
   end
 end
