@@ -70,7 +70,7 @@ class Piece
   end
 
   def enemy_in?(location)
-    board.within_bounds?(location) && 
+    board.within_limits?(location) && 
       board[location].is_a?(Piece) &&
       board[location].color != color
   end

@@ -81,7 +81,7 @@ class Pawn < Piece
       moves << diagonal_left if enemy_in?(diagonal_left)
       moves << diagonal_right if enemy_in?(diagonal_right)
 
-      moves.select { |move| board.within_bounds?(move) }
+      moves.select { |move| board.within_limits?(move) }
     end
   end
 

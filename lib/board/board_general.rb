@@ -52,13 +52,13 @@ class Board
     matrix[row][column] = piece
   end
 
-  def within_bounds?(square)
+  def within_limits?(square)
     square.none? { |axis| axis >= SQUARE_ORDER || axis < 0 }
   end
 
   def empty_square?(square)
     row, column = square
-    within_bounds?(square) && matrix[row][column].is_a?(NullPiece)
+    within_limits?(square) && matrix[row][column].is_a?(NullPiece)
   end
 
   def move_piece!(piece, target_square, permanent=false)
