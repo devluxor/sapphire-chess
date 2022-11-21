@@ -1,6 +1,4 @@
 class BoardRenderer
-  BOARD_ORDER = 8
-
   LEFT_MARGIN = 4
   RIGHT_MARGIN = 3
 
@@ -17,13 +15,14 @@ class BoardRenderer
 
   def initialize(board)
     @board = board
+    @square_order = board.class::SQUARE_ORDER
   end
 
   def render
     print_column_letters
     print_floor
 
-    (0...BOARD_ORDER).each do |number|
+    square_order.times do |number|
       print_row(number)
       print ROW_NUMBERS[number]
       print_piece_row(number)
@@ -38,7 +37,7 @@ class BoardRenderer
 
   private
 
-  attr_reader :board
+  attr_reader :board, :square_order
 
   def print_column_letters
     COLUMN_LETTERS.each { |letter| print "        #{letter}" }
@@ -50,7 +49,7 @@ class BoardRenderer
   end
 
   def print_floor
-    puts ' ' * LEFT_MARGIN + FLOOR_0 + FLOOR * (BOARD_ORDER - 1)
+    puts ' ' * LEFT_MARGIN + FLOOR_0 + FLOOR * (square_order - 1)
   end
 
   def new_line(lines=1)
@@ -72,7 +71,7 @@ class BoardRenderer
   end
 
   def print_piece_row(row)
-    (0...BOARD_ORDER).each do |column|
+    square_order.times do |column|
       square = [row, column]
 
       if white_square?(square) then print_white_square(square, column)
@@ -90,11 +89,11 @@ class BoardRenderer
 
   def print_white_square(square, column)
     print(
-      if board[square].is_a?(NullPiece) && column.zero?
+      if board[square].is_a?(NoPiece) && column.zero?
         "   |███#{board[square].white}███|"
       elsif column.zero?
         "   |██ #{board[square]}  ██|"
-      elsif board[square].is_a?(NullPiece)
+      elsif board[square].is_a?(NoPiece)
         "███#{board[square].white}███|"
       else
         "██ #{board[square]}  ██|"
@@ -104,11 +103,11 @@ class BoardRenderer
 
   def print_black_square(square, column)
     print(
-      if board[square].is_a?(NullPiece) && column.zero?
+      if board[square].is_a?(NoPiece) && column.zero?
         "   |   #{board[square]}   |"
       elsif column.zero?
         "   |   #{board[square]}    |"
-      elsif board[square].is_a?(NullPiece)
+      elsif board[square].is_a?(NoPiece)
         "   #{board[square]}   |"
       else
         "   #{board[square]}    |"
