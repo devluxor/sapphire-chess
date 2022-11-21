@@ -39,7 +39,7 @@ class Board
   end
 
   def initialize
-    @matrix = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NullPiece.instance) }
+    @matrix = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NoPiece.instance) }
   end
 
   def [](square)
@@ -58,13 +58,13 @@ class Board
 
   def empty_square?(square)
     row, column = square
-    within_limits?(square) && matrix[row][column].is_a?(NullPiece)
+    within_limits?(square) && matrix[row][column].is_a?(NoPiece)
   end
 
   def move_piece!(piece, target_square, permanent=false)
     mark_moved_piece!(piece) if permanent
 
-    self[piece], self[target_square] = NullPiece.instance, self[piece]
+    self[piece], self[target_square] = NoPiece.instance, self[piece]
 
     self[target_square].location = target_square
   end

@@ -4,7 +4,7 @@ require_relative 'movement.rb'
 require 'singleton'
 require 'paint'
 
-class NullPiece
+class NoPiece
   include Singleton
 
   def to_s
