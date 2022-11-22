@@ -4,7 +4,7 @@
 | 2. ~~Reformat/refactor/abstract methods~~ | ~~2. Engine#game_over? not working~~
 | 3. ~~Check dependencies/design~~ | 3. ~~Bug encountered only once: Board#move_piece! tries to move a NullPiece? (NoMethodError `location=` on NullPiece, line: `self[target_square].location = target_square)`~~
 | 4. ~~Proto AI~~ | 4. BUF FIXED: square numbers in `castling_line_free?` were incorrect.
-| 5. ~~Define access modifiers~~ | 5.
+| 5. ~~Define access modifiers~~ | 5. AI only makes rook moves when lower than AI
 | 6. ~~Add a..h and 1..8 on x and y axis in board representation~~ |
 | 7. ~~Simplify pieces class system design~~ |
 | 8. Add YAML file with messages ?? |
@@ -36,4 +36,6 @@
 | 34. Learn code packaging |
 | 35. Add history of moves |
 | 36. Add white/black random selection |
+| 37. Test AI vs AI results in 100 games |
+| 38. Make pawns want to be queens |
 
