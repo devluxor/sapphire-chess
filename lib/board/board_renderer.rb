@@ -39,21 +39,8 @@ class BoardRenderer
 
   attr_reader :board, :square_order
 
-  def print_column_letters
-    COLUMN_LETTERS.each { |letter| print "        #{letter}" }
-    new_line(2)
-  end
-
   def print_row(row)
     puts row.even? ? white_starting_row : black_starting_row
-  end
-
-  def print_floor
-    puts ' ' * LEFT_MARGIN + FLOOR_0 + FLOOR * (square_order - 1)
-  end
-
-  def new_line(lines=1)
-    lines.times { puts '' }
   end
 
   def white_starting_row
@@ -68,6 +55,11 @@ class BoardRenderer
       EMPTY_ROW_0 +
       (EMPTY_ROW_WHITE + EMPTY_ROW) * 3 +
       EMPTY_ROW_WHITE
+  end
+
+  def print_column_letters
+    COLUMN_LETTERS.each { |letter| print "        #{letter}" }
+    new_line(2)
   end
 
   def print_piece_row(row)
@@ -113,5 +105,13 @@ class BoardRenderer
         "   #{board[square]}    |"
       end
     )
+  end
+
+  def print_floor
+    puts ' ' * LEFT_MARGIN + FLOOR_0 + FLOOR * (square_order - 1)
+  end
+
+  def new_line(lines=1)
+    lines.times { puts '' }
   end
 end
