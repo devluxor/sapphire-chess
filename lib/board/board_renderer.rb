@@ -26,7 +26,7 @@ class BoardRenderer
       print_row(number)
       print ROW_NUMBERS[number]
       print_piece_row(number)
-      puts (' ' * RIGHT_MARGIN) + ROW_NUMBERS[number].to_s
+      puts (' ' * RIGHT_MARGIN) + ROW_NUMBERS[number]
       print_row(number)
       print_floor
     end
