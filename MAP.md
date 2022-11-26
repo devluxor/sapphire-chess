@@ -5,9 +5,6 @@ The `ChessEngine` class controls the game flow and logic, via the `play` interfa
 
 At the moment, the game only allows the human player to play with whites, but this will change in the near future, as I'd like to implement a color selection randomization.
 
-I'd also like to add an AI vs. AI mode, with the human as spectator.
-
-
 ## Board functionality:
   - `lib/board_analysis.rb`
   - `lib/board_evaluation.rb`
