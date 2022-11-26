@@ -39,6 +39,10 @@ class BoardRenderer
 
   attr_reader :board, :square_order
 
+  def print_floor
+    puts ' ' * LEFT_MARGIN + FLOOR_0 + FLOOR * (square_order - 1)
+  end
+
   def print_row(row)
     puts row.even? ? white_starting_row : black_starting_row
   end
@@ -105,10 +109,6 @@ class BoardRenderer
         "   #{board[square]}    |"
       end
     )
-  end
-
-  def print_floor
-    puts ' ' * LEFT_MARGIN + FLOOR_0 + FLOOR * (square_order - 1)
   end
 
   def new_line(lines=1)
