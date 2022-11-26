@@ -43,8 +43,8 @@ class BoardRenderer
     puts ' ' * LEFT_MARGIN + FLOOR_0 + FLOOR * (square_order - 1)
   end
 
-  def print_row(row)
-    puts row.even? ? white_starting_row : black_starting_row
+  def print_row(number)
+    puts number.even? ? white_starting_row : black_starting_row
   end
 
   def white_starting_row
