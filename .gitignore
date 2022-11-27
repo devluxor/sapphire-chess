@@ -1,3 +1,4 @@
 test*
 .rubocop.yml
 notes.md
+output.csv
