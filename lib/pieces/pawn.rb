@@ -86,7 +86,7 @@ class Pawn < Piece
 
       # If en passant possible
       add_en_passant(moves)
-
+      
       moves.select { |move| board.within_limits?(move) }
     end
   end
