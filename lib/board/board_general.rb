@@ -43,7 +43,7 @@ class Board
     @duplicate = duplicate
   end
 
-  def add_players(player_1, player_2)
+  def add_players!(player_1, player_2)
     if player_1.color == :white
       @white_player = player_1
       @black_player = player_2

@@ -25,7 +25,8 @@ class Engine
   def play
     display_welcome
     set_difficulty
-    board.add_players(white_player, black_player)
+    board.add_players!(white_player, black_player)
+
     until game_over?
       clear_screen
       renderer.render
