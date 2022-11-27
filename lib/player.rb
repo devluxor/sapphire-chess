@@ -7,11 +7,12 @@ class Player
   include Castling
 
   attr_accessor :last_move
-  attr_reader :color, :board
+  attr_reader :color, :board, :history
 
   def initialize(color, board)
     @color = color
     @board = board
+    @history = []
   end
 
   private

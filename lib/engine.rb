@@ -96,7 +96,9 @@ class Engine
     end
   end
 
-  def store_move!(piece, target_square)  
+  def store_move!(piece, target_square)
+    current_player.history << [piece, target_square]
+
     current_player.last_move = 
     if piece == :castle
       "Castle, #{target_square} side"
