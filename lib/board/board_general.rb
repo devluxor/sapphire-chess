@@ -37,6 +37,8 @@ class Board
       end
     end
 
+    board[[4, 4]] = Pawn.new(board, [4,4], :black)
+
     board
   end
 
@@ -93,15 +95,24 @@ class Board
   end
 
   def capture_passed_pawn(target_square)
-    passed_pawn = [target_square.first + 1, target_square.last]
-    self[passed_pawn] = NoPiece.instance
+    captured_pawn = passed_pawn(target_square)
+
+    self[captured_pawn] = NoPiece.instance
   end
 
   def was_en_passant?(piece, target_square)
-    passed_pawn = [target_square.first + 1, target_square.last]
+    captured_pawn = passed_pawn(target_square)
     
     self[target_square].is_a?(Pawn) &&
-      self[target_square].pawn_to_pass(piece).include?(passed_pawn)
+      self[target_square].pawn_to_pass(piece).include?(captured_pawn)
+  end
+
+  def passed_pawn(target_square)
+    if self[target_square].color == :white
+      [target_square.first + 1, target_square.last]
+    else
+      [target_square.first - 1, target_square.last]
+    end
   end
 
   def castle!(side, color, permanent=false)
