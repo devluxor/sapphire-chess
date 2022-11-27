@@ -1,3 +1,5 @@
+require_relative 'en_passant.rb'
+
 class Pawn < Piece
   BLACK = ['♟', '♛']
   WHITE = ['♙', '♕']
@@ -35,6 +37,7 @@ class Pawn < Piece
   ]
   
   include SlidePattern
+  include EnPassant
 
   def initialize(board, location, color)
     super(board, location, color)
@@ -80,6 +83,9 @@ class Pawn < Piece
       diagonal_right = [current_row + forward_direction, current_column - 1]
       moves << diagonal_left if enemy_in?(diagonal_left)
       moves << diagonal_right if enemy_in?(diagonal_right)
+
+      # If en passant possible
+      add_en_passant(moves)
 
       moves.select { |move| board.within_limits?(move) }
     end
