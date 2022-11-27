@@ -3,6 +3,8 @@ require_relative 'board_renderer.rb'
 require_relative 'board_analysis.rb'
 require_relative 'board_evaluation.rb'
 
+require 'pry'
+
 class Board
   SQUARE_ORDER = 8
   B_PAWN_ROW = 1
@@ -34,9 +36,6 @@ class Board
         board[[row, column]] = piece.new(board, [row, column], color)
       end
     end
-
-    # Testing: 
-    board[[3, 3]] = Pawn.new(board, [3, 3], :white)
 
     board
   end
@@ -81,7 +80,7 @@ class Board
     self[piece], self[target_square] = NoPiece.instance, self[piece]
 
     self[target_square].location = target_square
-
+    
     capture_passed_pawn(target_square) if was_en_passant?(piece, target_square)
   end
 
@@ -94,7 +93,6 @@ class Board
   end
 
   def capture_passed_pawn(target_square)
-    binding.irb
     passed_pawn = [target_square.first + 1, target_square.last]
     self[passed_pawn] = NoPiece.instance
   end
