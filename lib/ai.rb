@@ -15,23 +15,14 @@ module AI
   def get_best_move(possible_moves, color)
     evaluations = {}
 
+    anti_loop_filter(possible_moves)
+
     possible_moves.each do |move|
       evaluations[move] = 
       minimax(move, depth, -Float::INFINITY, Float::INFINITY, maximizing_player?)
     end
-
+    
     move_randomizer(evaluations)
-  end
-
-  # This method randomizes the moves if two or more moves share the best evaluation.
-  # This avoids the Computer to play the same moves every game.
-  def move_randomizer(evaluations)
-    best_evaluation =
-    if color == :white then evaluations.values.max
-    else evaluations.values.min
-    end
-
-    evaluations.select { |_, evaluation| evaluation == best_evaluation }.keys.sample
   end
 
   def minimax(move, depth, alpha, beta, maximizing_player)
@@ -92,6 +83,21 @@ module AI
     end
     
     best_evaluation
+  end
+
+    # This method randomizes the moves if two or more moves share the best evaluation.
+  # This avoids the Computer to play the same moves every game.
+  def move_randomizer(evaluations)
+    best_evaluation =
+    if color == :white then evaluations.values.max
+    else evaluations.values.min
+    end
+
+    move = evaluations.select { |_, evaluation| evaluation == best_evaluation }.keys.sample
+  end
+
+  def anti_loop_filter(possible_moves)
+    possible_moves.delete(history[-2]) if possible_moves.include?(history[-2])
   end
 
   # For evaluation analysis only:
