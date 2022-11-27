@@ -21,8 +21,9 @@ module EnPassant
   end
 
   def pawn_to_pass(current_square)
-    return [] if board.white_player.nil?
-    
+    # See Piece#safe_moves, Board#is_a_duplicate?
+    return [] if board.is_a_duplicate?
+
     left_square = [current_square.first, current_square.last - 1]
     right_square = [current_square.first, current_square.last + 1]
 

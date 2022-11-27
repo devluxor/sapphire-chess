@@ -16,7 +16,7 @@ class Board
   include BoardAnalysis
   include BoardEvaluation
 
-  attr_reader :matrix, :renderer, :white_player, :black_player
+  attr_reader :matrix, :duplicate, :renderer, :white_player, :black_player
 
   def self.initialize_board
     board = new
@@ -38,8 +38,9 @@ class Board
     board
   end
 
-  def initialize
+  def initialize(duplicate=false)
     @matrix = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NoPiece.instance) }
+    @duplicate = duplicate
   end
 
   def add_players(player_1, player_2)
@@ -90,6 +91,7 @@ class Board
   end
 
   def capture_passed_pawn(target_square)
+    binding.irb
     passed_pawn = [target_square.first + 1, target_square.last]
     self[passed_pawn] = NoPiece.instance
   end
@@ -145,7 +147,7 @@ class Board
 
   # Deep duplication of the board for Piece#safe_moves
   def duplicate
-    pieces.each_with_object(Board.new) do |piece, new_board|
+    pieces.each_with_object(Board.new(true)) do |piece, new_board|
       new_piece = piece.class.new(new_board, piece.location, piece.color)
 
       new_board[new_piece.location] = new_piece
@@ -160,5 +162,15 @@ class Board
         possible_moves << [location, possible_move]
       end
     end
+  end
+
+  # This method is avoids checking for availability of en passant
+  # moves in duplicate boards
+  def is_a_duplicate?
+    duplicate
+  end
+
+  def is_duplicate
+    self.duplicate = true
   end
 end
