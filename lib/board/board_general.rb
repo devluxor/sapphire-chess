@@ -35,12 +35,15 @@ class Board
       end
     end
 
+    # Testing: 
+    board[[3, 3]] = Pawn.new(board, [3, 3], :white)
+
     board
   end
 
-  def initialize(duplicate=false)
+  def initialize(duplicated=false)
     @matrix = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NoPiece.instance) }
-    @duplicate = duplicate
+    @duplicated = duplicated
   end
 
   def add_players!(player_1, player_2)
@@ -167,10 +170,6 @@ class Board
   # This method is avoids checking for availability of en passant
   # moves in duplicate boards
   def is_a_duplicate?
-    duplicate
-  end
-
-  def is_duplicate
-    self.duplicate = true
+    @duplicated
   end
 end
