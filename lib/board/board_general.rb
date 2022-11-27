@@ -16,7 +16,7 @@ class Board
   include BoardAnalysis
   include BoardEvaluation
 
-  attr_reader :matrix, :renderer
+  attr_reader :matrix, :renderer, :white_player, :black_player
 
   def self.initialize_board
     board = new
@@ -40,6 +40,16 @@ class Board
 
   def initialize
     @matrix = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NoPiece.instance) }
+  end
+
+  def add_players(player_1, player_2)
+    if player_1.color == :white
+      @white_player = player_1
+      @black_player = player_2
+    else
+      @white_player = player_2
+      @black_player = player_1
+    end
   end
 
   def [](square)
