@@ -35,8 +35,6 @@ class Board
       end
     end
 
-    board[[4, 4]] = Pawn.new(board, [4,4], :black)
-
     board
   end
 
