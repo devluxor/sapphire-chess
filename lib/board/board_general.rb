@@ -77,6 +77,8 @@ class Board
     self[piece], self[target_square] = NoPiece.instance, self[piece]
 
     self[target_square].location = target_square
+
+    capture_passed_pawn(target_square) if was_en_passant?(piece, target_square)
   end
 
   # Controls castling rights 
@@ -85,6 +87,18 @@ class Board
     return unless self[piece].is_a?(Rook) || self[piece].is_a?(King)
 
     self[piece].mark!
+  end
+
+  def capture_passed_pawn(target_square)
+    passed_pawn = [target_square.first + 1, target_square.last]
+    self[passed_pawn] = NoPiece.instance
+  end
+
+  def was_en_passant?(piece, target_square)
+    passed_pawn = [target_square.first + 1, target_square.last]
+    
+    self[target_square].is_a?(Pawn) &&
+      self[target_square].pawn_to_pass(piece).include?(passed_pawn)
   end
 
   def castle!(side, color, permanent=false)

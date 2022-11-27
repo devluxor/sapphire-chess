@@ -12,17 +12,17 @@ module EnPassant
   # end
 
   def add_en_passant(moves)
-    adyacent_pawn = pawn_to_pass
-    return if adyacent_pawn.empty?
-    
-    diagonal = [adyacent_pawn.first - 1, adyacent_pawn.last]
+    adyacent_enemy_pawn = pawn_to_pass(location).first
+    return if adyacent_enemy_pawn.nil?
+
+    diagonal = [adyacent_enemy_pawn.first - 1, adyacent_enemy_pawn.last]
 
     [location, diagonal]
   end
 
-  def pawn_to_pass
-    left_square = [location.first, location.last - 1]
-    right_square = [location.first, location.last + 1]
+  def pawn_to_pass(current_square)
+    left_square = [current_square.first, current_square.last - 1]
+    right_square = [current_square.first, current_square.last + 1]
 
     enemy_player = color == :white ? :black_player : :white_player
 
