@@ -14,9 +14,7 @@ module EnPassant
     right_square = [current_square.first, current_square.last + 1]
     
     [left_square, right_square].select do |square|
-      board[square].is_a?(Pawn) &&
-        pawn_just_moved_two?(square)
-        # board.send(enemy_player).history.last == [[square.first - 2, square.last], square]
+      board[square].is_a?(Pawn) && pawn_just_moved_two?(square)
     end
   end
 
