@@ -1,9 +1,6 @@
-require 'pry'
-
 module EnPassant
   def add_en_passant(moves)
     adyacent_enemy_pawn = pawn_to_pass.first
-    # binding.pry if location == [4, 4]
     return if adyacent_enemy_pawn.nil?
 
     moves << en_passant_target_square(adyacent_enemy_pawn)
@@ -12,9 +9,9 @@ module EnPassant
   def pawn_to_pass(current_square=location)
     # See Piece#safe_moves, Board#is_a_duplicate?
     return [] if board.is_a_duplicate?
+
     left_square = [current_square.first, current_square.last - 1]
     right_square = [current_square.first, current_square.last + 1]
-    
     
     [left_square, right_square].select do |square|
       board[square].is_a?(Pawn) &&
