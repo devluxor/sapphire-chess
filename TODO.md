@@ -34,7 +34,8 @@
 | 32. ~~Enable AI vs. AI mode~~ |
 | 33. ~~Add player + computer last move~~ |
 | 34. Learn code packaging |
-| 35. Add history of moves |
+| 35. ~~Add history of moves~~ |
 | 36. Add white/black random selection |
-| 37. Test AI vs AI results in 100 games |
+| 37. ~~Test AI vs AI results in 100 games~~ |
 | 38. Make pawns want to be queens? |
+| 39. Separate testing methods of Engine in module |
