@@ -1,7 +1,10 @@
 require_relative '../pieces.rb'
+require_relative '../en_passant.rb'
 require_relative 'board_renderer.rb'
 require_relative 'board_analysis.rb'
 require_relative 'board_evaluation.rb'
+
+require 'pry'
 
 class Board
   SQUARE_ORDER = 8
@@ -15,6 +18,7 @@ class Board
 
   include BoardAnalysis
   include BoardEvaluation
+  include EnPassant
 
   attr_reader :matrix, :duplicate, :renderer, :white_player, :black_player
 
@@ -34,6 +38,8 @@ class Board
         board[[row, column]] = piece.new(board, [row, column], color)
       end
     end
+
+    board[[4, 4]] = Pawn.new(board, [4, 4], :black)
 
     board
   end
@@ -78,8 +84,10 @@ class Board
     self[piece], self[target_square] = NoPiece.instance, self[piece]
 
     self[target_square].location = target_square
-    
-    capture_passed_pawn(target_square) if was_en_passant?(piece, target_square)
+
+    if permanent && was_en_passant?(piece, target_square)
+      capture_passed_pawn(target_square)
+    end
   end
 
   # Controls castling rights 
@@ -88,27 +96,6 @@ class Board
     return unless self[piece].is_a?(Rook) || self[piece].is_a?(King)
 
     self[piece].mark!
-  end
-
-  def capture_passed_pawn(target_square)
-    captured_pawn = passed_pawn(target_square)
-
-    self[captured_pawn] = NoPiece.instance
-  end
-
-  def was_en_passant?(piece, target_square)
-    captured_pawn = passed_pawn(target_square)
-    
-    self[target_square].is_a?(Pawn) &&
-      self[target_square].pawn_to_pass(piece).include?(captured_pawn)
-  end
-
-  def passed_pawn(target_square)
-    if self[target_square].color == :white
-      [target_square.first + 1, target_square.last]
-    else
-      [target_square.first - 1, target_square.last]
-    end
   end
 
   def castle!(side, color, permanent=false)
