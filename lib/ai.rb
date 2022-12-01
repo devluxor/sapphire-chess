@@ -28,17 +28,7 @@ module AI
   def minimax(move, depth, alpha, beta, maximizing_player)
     return board.evaluate if depth.zero?
 
-    castling = move.first == :castle
-
-    # Makes provisional move
-    if castling
-      side = move.last
-      board.castle!(side, color)
-    else
-      start_position, target_position = move
-      piece_buffer = board[target_position]
-      board.move_piece!(start_position, target_position)
-    end
+    make_provisional(move)
 
     # This generates possible outcomes (children) for the provisional move:
     # Each branch represents the next turn (i.e.: if current player is white 
@@ -73,17 +63,40 @@ module AI
 
                         best_evaluation
                       end
-                      
+
+    unmake_provisional(move)
+                          
+    best_evaluation
+  end
+
+  def make_provisional(move)
+    castling = move.first == :castle
+
+    # Makes provisional move
+    if castling
+      side = move.last
+      board.castle!(side, color)
+    else
+      start_position, target_position = move
+      self.piece_buffer = board[target_position]
+      board.move_piece!(start_position, target_position)
+    end
+  end
+
+  def unmake_provisional(move)
+    castling = move.first == :castle
+
     # Unmakes provisional move:
     if castling
       board.uncastle!(side, color)
     else
+      start_position, target_position = move
       board.move_piece!(target_position, start_position)
       board[target_position] = piece_buffer
     end
-    
-    best_evaluation
   end
+
+
 
   # This method randomizes the moves if two or more moves share the best evaluation.
   # This avoids the Computer to play the same moves every game.
