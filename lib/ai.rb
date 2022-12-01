@@ -88,6 +88,7 @@ module AI
 
     # Unmakes provisional move:
     if castling
+      side = move.last
       board.uncastle!(side, color)
     else
       start_position, target_position = move
