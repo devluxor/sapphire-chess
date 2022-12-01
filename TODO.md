@@ -39,3 +39,4 @@
 | 37. ~~Test AI vs AI results in 100 games~~ |
 | 38. Make pawns want to be queens? |
 | 39. Separate testing methods of Engine in module |
+| 40. Castling methods in board, not pieces |
