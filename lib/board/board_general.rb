@@ -40,6 +40,7 @@ class Board
     end
 
     board[[4, 4]] = Pawn.new(board, [4, 4], :black)
+    board[[3, 3]] = Pawn.new(board, [3, 3], :white)
 
     board
   end

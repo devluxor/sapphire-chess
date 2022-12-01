@@ -85,7 +85,7 @@ module AI
     best_evaluation
   end
 
-    # This method randomizes the moves if two or more moves share the best evaluation.
+  # This method randomizes the moves if two or more moves share the best evaluation.
   # This avoids the Computer to play the same moves every game.
   def move_randomizer(evaluations)
     best_evaluation =
