@@ -37,6 +37,7 @@ class Computer < Player
   private
 
   attr_reader :depth
+  attr_accessor :piece_buffer
 end
 
 class Human < Player
