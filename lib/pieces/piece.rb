@@ -1,4 +1,5 @@
 require_relative '../board.rb'
+require_relative '../castling.rb'
 require_relative 'movement.rb'
 
 require 'singleton'

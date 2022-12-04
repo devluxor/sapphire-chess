@@ -1,4 +1,4 @@
-module Castling
+module CastlingRights
   # To be used by Player class:
   def castle_rights?(side)
     !king_and_rook_moved?(side) &&
@@ -69,7 +69,19 @@ module Castling
 
     false
   end
+end
 
+module CastlingPieceControl
+  def moved?
+    @moved
+  end
+
+  def mark!
+    @moved = true
+  end
+end
+
+module CastlingMoves
   # To be used in Board class:
 
   # Controls castling rights 

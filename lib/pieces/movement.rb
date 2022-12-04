@@ -39,13 +39,3 @@ module SlidePattern
     end
   end
 end
-
-module CastlingPieceControl
-  def moved?
-    @moved
-  end
-
-  def mark!
-    @moved = true
-  end
-end

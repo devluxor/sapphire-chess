@@ -4,7 +4,7 @@ require_relative 'algebraic_conversion.rb'
 require_relative 'castling.rb'
 
 class Player
-  include Castling
+  include CastlingRights
 
   attr_accessor :last_move
   attr_reader :color, :board, :history

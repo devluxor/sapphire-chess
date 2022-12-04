@@ -19,7 +19,7 @@ class Board
 
   include BoardAnalysis
   include BoardEvaluation
-  include Castling
+  include CastlingMoves
   include EnPassant
 
   attr_reader :matrix, :duplicate, :renderer, :white_player, :black_player
@@ -87,11 +87,9 @@ class Board
     mark_moved_piece!(piece) if permanent
 
     self[piece], self[target_square] = NoPiece.instance, self[piece]
-    begin
-      self[target_square].location = target_square
-    rescue
-      binding.pry
-    end
+
+    self[target_square].location = target_square
+
     if permanent && was_en_passant?(piece, target_square)
       capture_passed_pawn(target_square)
     end
