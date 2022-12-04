@@ -72,9 +72,7 @@ module AI
   end
 
   def make_provisional!(move)
-    castling = move.first == :castle
-
-    if castling
+    if move.first == :castle
       side = move.last
       board.castle!(side, color)
     else
@@ -85,9 +83,7 @@ module AI
   end
 
   def unmake_provisional!(piece_buffer, move)
-    castling = move.first == :castle
-
-    if castling
+    if move.first == :castle
       side = move.last
       board.uncastle!(side, color)
     else
