@@ -28,7 +28,9 @@ module AI
   def minimax(move, depth, alpha, beta, maximizing_player)
     return board.evaluate if depth.zero?
 
-    piece_buffer = make_provisional!(move)
+    piece_buffer = board[move.last] unless move.first == :castle
+    
+    make_provisional!(move)
 
     # This generates possible outcomes (children) for the provisional move:
     # Each branch represents the next turn (i.e.: if current player is white 
@@ -80,8 +82,6 @@ module AI
       piece_buffer = board[target_position]
       board.move_piece!(start_position, target_position)
     end
-
-    piece_buffer
   end
 
   def unmake_provisional!(piece_buffer, move)
