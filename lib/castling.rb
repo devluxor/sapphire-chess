@@ -81,7 +81,7 @@ module CastlingPieceControl
   end
 end
 
-module CastlingMoves
+module CastlingBoardControl
   # To be used in Board class:
 
   # Controls castling rights 
