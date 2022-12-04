@@ -41,15 +41,17 @@ class Board
       end
     end
 
-    board[[4, 4]] = Pawn.new(board, [4, 4], :black)
-    board[[3, 3]] = Pawn.new(board, [3, 3], :white)
-
     board
   end
 
   def initialize(duplicated=false)
     @matrix = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NoPiece.instance) }
     @duplicated = duplicated
+    @renderer = BoardRenderer.new(self)
+  end
+
+  def render
+    renderer.render
   end
 
   def add_players!(player_1, player_2)
@@ -85,9 +87,11 @@ class Board
     mark_moved_piece!(piece) if permanent
 
     self[piece], self[target_square] = NoPiece.instance, self[piece]
-
-    self[target_square].location = target_square
-
+    begin
+      self[target_square].location = target_square
+    rescue
+      binding.pry
+    end
     if permanent && was_en_passant?(piece, target_square)
       capture_passed_pawn(target_square)
     end
