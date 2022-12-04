@@ -1,4 +1,4 @@
-module EnPassant
+module EnPassantPieceControl
   def add_en_passant(moves)
     adyacent_enemy_pawn = pawn_to_pass.first
     return if adyacent_enemy_pawn.nil?
@@ -35,7 +35,9 @@ module EnPassant
       [adyacent_enemy_pawn.first + 1, adyacent_enemy_pawn.last]
     end
   end
+end
 
+module EnPassantBoardControl
   def capture_passed_pawn(target_square)
     captured_pawn = passed_pawn(target_square)
 

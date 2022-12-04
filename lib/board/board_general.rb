@@ -19,8 +19,8 @@ class Board
 
   include BoardAnalysis
   include BoardEvaluation
-  include CastlingMoves
-  include EnPassant
+  include CastlingBoardControl
+  include EnPassantBoardControl
 
   attr_reader :matrix, :duplicate, :renderer, :white_player, :black_player
 
@@ -47,6 +47,7 @@ class Board
   def initialize(duplicated=false)
     @matrix = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NoPiece.instance) }
     @duplicated = duplicated
+    # TEST:
     @renderer = BoardRenderer.new(self)
   end
 
