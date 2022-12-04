@@ -37,7 +37,7 @@ class Pawn < Piece
   ]
   
   include SlidePattern
-  include EnPassant
+  include EnPassantPieceControl
 
   def initialize(board, location, color)
     super(board, location, color)
