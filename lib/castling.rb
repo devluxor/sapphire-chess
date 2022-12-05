@@ -27,16 +27,20 @@ module CastlingRights
     case color
     when :white
       if side == :king
-        board.empty_square?([7, 5]) && board.empty_square?([7, 6])
+        board.empty_square?([7, 5]) && 
+          board.empty_square?([7, 6])
       else
-        board.empty_square?([7, 1]) && board.empty_square?([7, 2]) &&
+        board.empty_square?([7, 1]) && 
+          board.empty_square?([7, 2]) &&
           board.empty_square?([7, 3])
       end
     else
       if side == :king
-        board.empty_square?([0, 5]) && board.empty_square?([0, 6])
+        board.empty_square?([0, 5]) && 
+          board.empty_square?([0, 6])
       else
-        board.empty_square?([0, 1]) && board.empty_square?([0, 2]) &&
+        board.empty_square?([0, 1]) && 
+          board.empty_square?([0, 2]) &&
           board.empty_square?([0, 3])
       end
     end
@@ -53,14 +57,8 @@ module CastlingRights
 
   def king_crosses_attack_line?(side)
     hot_square = case color
-                 when :white
-                   if side == :king then [7, 5]
-                   else [7, 3]
-                   end
-                 else
-                   if side == :king then [0, 5]
-                   else [0, 3]
-                   end
+                 when :white then side == :king ? [7, 5] : [7, 3]
+                 else side == :king ? [0, 5] : [0, 3]
                  end
 
     board.enemy_pieces(color).each do |piece|
