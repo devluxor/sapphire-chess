@@ -53,6 +53,5 @@ module EnPassantBoardControl
     direction = self[target_square].color == :white ? 1 : -1
 
     [target_square.first + direction, target_square.last]
-    end
   end
 end
