@@ -29,11 +29,9 @@ module EnPassantPieceControl
   end
 
   def en_passant_target_square(adyacent_enemy_pawn)
-    if color == :white 
-      [adyacent_enemy_pawn.first - 1, adyacent_enemy_pawn.last]
-    else
-      [adyacent_enemy_pawn.first + 1, adyacent_enemy_pawn.last]
-    end
+    direction = color == :white ? -1 : 1
+      
+    [adyacent_enemy_pawn.first + direction, adyacent_enemy_pawn.last]
   end
 end
 
@@ -52,10 +50,9 @@ module EnPassantBoardControl
   end
 
   def passed_pawn(target_square)
-    if self[target_square].color == :white
-      [target_square.first + 1, target_square.last]
-    else
-      [target_square.first - 1, target_square.last]
+    direction = self[target_square].color == :white ? 1 : -1
+
+    [target_square.first + direction, target_square.last]
     end
   end
 end
