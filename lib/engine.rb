@@ -16,15 +16,15 @@ class Engine
   def initialize
     @board = Board.initialize_board
     @renderer = BoardRenderer.new(board)
-    @white_player = Computer.new(:white, board)
-    @black_player = Computer.new(:black, board)
+    @white_player = Human.new(:white, board)
+    @black_player = Human.new(:black, board)
     @current_player = white_player
     @turn_number = 1
   end
   
   def play
     display_welcome
-    set_difficulty
+    set_difficulty if computer_plays?
     board.add_players!(white_player, black_player)
 
     until game_over?
@@ -46,6 +46,10 @@ class Engine
 
   attr_reader :white_player, :black_player, :board, :renderer
   attr_accessor :current_player, :turn_number
+
+  def computer_plays?
+    white_player.is_a?(Computer) || black_player.is_a?(Computer)
+  end
 
   # See Computer#initialize in player.rb, AI#minimax in ai.rb
   def set_difficulty
