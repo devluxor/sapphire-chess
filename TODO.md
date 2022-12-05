@@ -29,8 +29,8 @@
 | 27. Minimax to Negamax ??? |
 | 28. Write a detailed MAP.md |
 | 29. Add a 'want to play again?' method |
-| 30. Implement speed optimization for AI#minimax |
-| 31. Research TCO (_Tail Call Optimization_) |
+| 30. ~~Implement speed optimization for AI#minimax~~ |
+| 31. ~~Research TCO (Tail Call Optimization)~~ |
 | 32. ~~Enable AI vs. AI mode~~ |
 | 33. ~~Add player + computer last move~~ |
 | 34. Learn code packaging |

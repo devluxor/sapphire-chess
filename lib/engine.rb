@@ -16,8 +16,8 @@ class Engine
   def initialize
     @board = Board.initialize_board
     @renderer = BoardRenderer.new(board)
-    @white_player = Human.new(:white, board)
-    @black_player = Human.new(:black, board)
+    @white_player = Computer.new(:white, board)
+    @black_player = Computer.new(:black, board)
     @current_player = white_player
     @turn_number = 1
   end
