@@ -59,8 +59,8 @@ class Engine
     [white_player, black_player].each do |player|
       if player.is_a?(Computer)
         player.depth =
-        if difficulty_input == 'easy' || difficulty_input == '1' then 1
-        elsif difficulty_input == 'medium' || difficulty_input == '2' then 2
+        if difficulty_input.match?(/easy|1/) then 1
+        elsif difficulty_input.match?(/medium|2/) then 2
         else 3
         end
       end
