@@ -36,13 +36,13 @@ class Engine
 
   def set_players
     color_choice = prompt_color
-    
+ 
     @white_player = 
     if color_choice.match?(/w/) then Human.new(:white, board)
     else Computer.new(:white, board)
     end
 
-    @black_player =
+    @black_player = 
     if white_player.is_a?(Human) then Computer.new(:black, board)
     else Human.new(:black, board)
     end
@@ -52,7 +52,7 @@ class Engine
     white_player.is_a?(Computer) || black_player.is_a?(Computer)
   end
 
-  # See Computer#initialize in player.rb, AI#minimax in ai.rb
+  # See Computer in player.rb, AI#minimax in ai.rb
   def set_difficulty
     difficulty_input = prompt_difficulty
 
