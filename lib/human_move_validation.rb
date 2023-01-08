@@ -1,4 +1,38 @@
 module HumanMoveValidation
+  def prompt_color
+    puts "What color would you like to play? ([W]hite/[B]lack)"
+    choice = nil
+    loop do
+      choice = gets.chomp.strip.downcase
+      break if valid_color?(choice)
+      puts 'Please, enter a valid color choice.'
+    end
+    choice
+  end
+
+  def valid_color?(choice)
+    %w(white black w b).include?(choice)
+  end
+
+  def prompt_difficulty
+    display_difficulty_settings
+    difficulty_input = nil
+    loop do
+      difficulty_input = gets.chomp.strip.downcase
+      break if valid_difficulty?(difficulty_input)
+      puts 'Please, enter a valid difficulty setting.'
+    end
+    difficulty_input
+  end
+
+  def display_difficulty_settings
+    puts "Please, enter the game difficulty:\n"\
+      "[i.e.: \"1\", \"e\" or \"easy\" to select Easy]\n\n"\
+      "1) Easy\n2) Medium\n3) Hard\n\n"\
+      "This setting determines how many turns the computer can think ahead.\n"\
+      'Caveat: the "hard" setting is very hard!'
+  end
+
   def valid_difficulty?(difficulty)
     %w(easy medium hard 1 2 3).include?(difficulty)
   end

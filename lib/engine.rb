@@ -16,14 +16,13 @@ class Engine
   def initialize
     @board = Board.initialize_board
     @renderer = BoardRenderer.new(board)
-    @white_player = Computer.new(:white, board)
-    @black_player = Computer.new(:black, board)
-    @current_player = white_player
     @turn_number = 1
   end
   
   def play
     display_welcome
+    set_players
+    @current_player = white_player
     set_difficulty if computer_plays?
     board.add_players!(white_player, black_player)
 
@@ -47,19 +46,27 @@ class Engine
   attr_reader :white_player, :black_player, :board, :renderer
   attr_accessor :current_player, :turn_number
 
+  def set_players
+    color_choice = prompt_color
+    
+    @white_player = 
+    if color_choice.match?(/w/) then Human.new(:white, board)
+    else Computer.new(:white, board)
+    end
+
+    @black_player =
+    if white_player.is_a?(Human) then Computer.new(:black, board)
+    else Human.new(:black, board)
+    end
+  end
+
   def computer_plays?
     white_player.is_a?(Computer) || black_player.is_a?(Computer)
   end
 
   # See Computer#initialize in player.rb, AI#minimax in ai.rb
   def set_difficulty
-    display_difficulty_settings
-    difficulty_input = nil
-    loop do
-      difficulty_input = gets.chomp.strip.downcase
-      break if valid_difficulty?(difficulty_input)
-      puts 'Please, enter a valid difficulty setting.'
-    end
+    difficulty_input = prompt_difficulty
 
     [white_player, black_player].each do |player|
       if player.is_a?(Computer)

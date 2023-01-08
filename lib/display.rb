@@ -15,15 +15,7 @@ module Display
     puts Paint['♚  ♛  ♜  ♝  ♞  ♟', :blue]
     new_line
   end
-
-  def display_difficulty_settings
-    puts "Please, enter the game difficulty:\n"\
-      "[i.e.: \"1\", \"e\" or \"easy\" to select Easy]\n\n"\
-      "1) Easy\n2) Medium\n3) Hard\n\n"\
-      "This setting determines how many turns the computer can think ahead.\n"\
-      'Caveat: the "hard" setting is very hard!'
-  end
-
+  
   def display_last_moves
     return if turn_number < 2
     print Paint['Last moves: ', :green]
@@ -101,11 +93,12 @@ module Display
 
   def display_check
     puts Paint['You are in check!', :red, :bright]
+    new_line
   end
 
   def display_checkmate
     puts Paint['Checkmate!', nil, :red, :bright]
-    puts ''
+    new_line
   end
 
   def display_winner
