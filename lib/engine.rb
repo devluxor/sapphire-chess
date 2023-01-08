@@ -128,25 +128,4 @@ class Engine
   def game_over?
     board.checkmate?(current_player.color) || board.no_king?(current_player.color)
   end
-
-  # TESTING
-
-  def store_game_result
-    File.open('output.csv', 'a') do |file|
-      file.puts turn_number < 100 ? game_summary_string : "draw,draw,draw"
-    end
-  end
-
-  def game_summary_string
-    format(
-      "%s,%s,%s",
-      calculate_game_duration,
-      turn_number.to_i,
-      current_player.color
-    )
-  end
-
-  def calculate_game_duration
-    ((Time.now - start_game_time) / 60).round(2)
-  end
 end

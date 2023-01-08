@@ -5,8 +5,6 @@ require_relative 'board_renderer.rb'
 require_relative 'board_analysis.rb'
 require_relative 'board_evaluation.rb'
 
-require 'pry'
-
 class Board
   SQUARE_ORDER = 8
   B_PAWN_ROW = 1
@@ -22,7 +20,7 @@ class Board
   include CastlingBoardControl
   include EnPassantBoardControl
 
-  attr_reader :matrix, :duplicate, :renderer, :white_player, :black_player
+  attr_reader :matrix, :duplicate, :white_player, :black_player
 
   def self.initialize_board
     board = new
@@ -47,8 +45,6 @@ class Board
   def initialize(duplicated=false)
     @matrix = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, EmptySquare.instance) }
     @duplicated = duplicated
-    # TEST:
-    @renderer = BoardRenderer.new(self)
   end
 
   def render
