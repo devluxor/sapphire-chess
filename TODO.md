@@ -5,9 +5,9 @@
 | 3. ~~Check dependencies/design~~ | 3. ~~Bug encountered only once: Board#move_piece! tries to move a NullPiece? (NoMethodError `location=` on NullPiece, line: `self[target_square].location = target_square)`~~
 | 4. ~~Proto AI~~ | 4. ~~BUG FIXED: square numbers in `castling_line_free?` were incorrect.~~
 | 5. ~~Define access modifiers~~ | 5. AI only makes rook moves when lower than AI
-| 6. ~~Add a..h and 1..8 on x and y axis in board representation~~ | 6. Possible en passant but found: TEST MORE
+| 6. ~~Add a..h and 1..8 on x and y axis in board representation~~ | 6. ~~Possible en passant but found: TEST MORE~~
 | 7. ~~Simplify pieces class system design~~ |
-| 8. Add YAML file with messages ?? |
+| 8. ~~Add YAML file with messages ??~~ |
 | 9. ~~Enable castling move~~ |
 | 10. Add white/black random selection for the human player |
 | 11. ~~Class Player, Human, Computer.~~ |
@@ -16,7 +16,7 @@
 | 14. ~~Calculate material evaluation of the board~~ |
 | 15. ~~make/unmake provisional move~~ |
 | 16. ~~Display graphics for score~~ |
-| 17. Replan design |
+| 17. ~~Replan design~~ |
 | 18. ~~Improve evaluation function `board#evaluate`~~ |
 | 19. ~~Enable en passant move~~ |
 | 20. ~~Separated `Display` class/module for `Engine`~~ |
@@ -40,4 +40,6 @@
 | 38. Make pawns want to be queens? |
 | 39. Separate testing methods of Engine in module |
 | 40. Castling methods in board, not pieces |
-| 41. Abstract methods (main_loop in Engine#play )
+| 41. Abstract methods (main_loop in Engine#play) |
+| 42. Anti boring move filter?? (pieces not advancing, rook just slides) |
+
