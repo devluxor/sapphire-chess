@@ -1,5 +1,3 @@
-require 'paint'
-
 module AI
   private
 
