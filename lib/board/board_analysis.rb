@@ -28,7 +28,7 @@ module BoardAnalysis
   end
 
   def pieces
-    matrix.flatten.reject { |position| position.is_a?(NoPiece) }
+    matrix.flatten.reject { |position| position.is_a?(EmptySquare) }
   end
 
   def friendly_pieces(color)

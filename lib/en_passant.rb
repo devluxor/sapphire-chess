@@ -39,7 +39,7 @@ module EnPassantBoardControl
   def capture_passed_pawn(target_square)
     captured_pawn = passed_pawn(target_square)
 
-    self[captured_pawn] = NoPiece.instance
+    self[captured_pawn] = EmptySquare.instance
   end
 
   def was_en_passant?(piece, target_square)

@@ -1,5 +1,6 @@
 require 'paint'
 require 'pry'
+
 module AI
   private
 

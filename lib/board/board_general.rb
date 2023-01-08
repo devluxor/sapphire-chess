@@ -45,7 +45,7 @@ class Board
   end
 
   def initialize(duplicated=false)
-    @matrix = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, NoPiece.instance) }
+    @matrix = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, EmptySquare.instance) }
     @duplicated = duplicated
     # TEST:
     @renderer = BoardRenderer.new(self)
@@ -81,13 +81,13 @@ class Board
 
   def empty_square?(square)
     row, column = square
-    within_limits?(square) && matrix[row][column].is_a?(NoPiece)
+    within_limits?(square) && matrix[row][column].is_a?(EmptySquare)
   end
 
   def move_piece!(piece, target_square, permanent=false)
     mark_moved_piece!(piece) if permanent
 
-    self[piece], self[target_square] = NoPiece.instance, self[piece]
+    self[piece], self[target_square] = EmptySquare.instance, self[piece]
 
     self[target_square].location = target_square
 

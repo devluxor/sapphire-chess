@@ -2,20 +2,7 @@ require_relative '../board.rb'
 require_relative '../castling.rb'
 require_relative 'movement.rb'
 
-require 'singleton'
 require 'paint'
-
-class NoPiece
-  include Singleton
-
-  def to_s
-    '  '
-  end
-
-  def white
-    '██'
-  end
-end
 
 class Piece
   attr_reader :color, :board

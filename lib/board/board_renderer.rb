@@ -85,11 +85,11 @@ class BoardRenderer
 
   def print_white_square(square, column)
     print(
-      if board[square].is_a?(NoPiece) && column.zero?
+      if board[square].is_a?(EmptySquare) && column.zero?
         "   |███#{board[square].white}███|"
       elsif column.zero?
         "   |██ #{board[square]}  ██|"
-      elsif board[square].is_a?(NoPiece)
+      elsif board[square].is_a?(EmptySquare)
         "███#{board[square].white}███|"
       else
         "██ #{board[square]}  ██|"
@@ -99,11 +99,11 @@ class BoardRenderer
 
   def print_black_square(square, column)
     print(
-      if board[square].is_a?(NoPiece) && column.zero?
+      if board[square].is_a?(EmptySquare) && column.zero?
         "   |   #{board[square]}   |"
       elsif column.zero?
         "   |   #{board[square]}    |"
-      elsif board[square].is_a?(NoPiece)
+      elsif board[square].is_a?(EmptySquare)
         "   #{board[square]}   |"
       else
         "   #{board[square]}    |"

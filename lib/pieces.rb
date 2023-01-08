@@ -1,3 +1,4 @@
+require_relative 'pieces/empty_square.rb'
 require_relative 'pieces/piece.rb'
 require_relative 'pieces/pawn.rb'
 require_relative 'pieces/knight.rb'
