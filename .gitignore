@@ -2,3 +2,4 @@ test*
 .rubocop.yml
 notes.md
 output.csv
+TODO.md
