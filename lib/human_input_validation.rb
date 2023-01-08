@@ -1,4 +1,4 @@
-module HumanMoveValidation
+module HumanInputValidation
   def prompt_color
     puts "What color would you like to play? ([W]hite/[B]lack)"
     choice = nil

@@ -3,14 +3,14 @@ require_relative 'board/board_renderer.rb'
 require_relative 'pieces.rb'
 require_relative 'player.rb'
 require_relative 'display.rb'
-require_relative 'human_move_validation.rb'
+require_relative 'human_input_validation.rb'
 require_relative 'algebraic_conversion.rb'
 
 require 'paint'
 
 class Engine
   include Display
-  include HumanMoveValidation
+  include HumanInputValidation
   include AlgebraicConversion
 
   def initialize
