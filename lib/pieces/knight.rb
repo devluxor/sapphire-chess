@@ -30,6 +30,43 @@ class Knight < Piece
     [-40, -20, 0, 0, 0, 0, -20, -40],
     [-50, -40, -30, -30, -30, -30, -40, -50]
   ]
+
+  WHITE_LOCATION_VALUE_EASY = [
+    [-50, -40, -30, -30, -30, -30, -40, -50],
+    [-40, -20, 0, 0, 0, 0, -20, -40],
+    [-30, 0, 20, 25, 25, 20, 0, -30],
+    [-30, 5, 25, 40, 40, 25, 5, -30],
+    [-30, 0, 25, 40, 40, 25, 0, -30],
+    [-30, 5, 20, 25, 25, 20, 5, -30],
+    [-40, -20, 0, 5, 5, 0, -20, -40],
+    [-50, -40, -30, -30, -30, -30, -40, -50]
+  ]
+
+  BLACK_LOCATION_VALUE_EASY = [
+    [-50, -40, -30, -30, -30, -30, -40, -50],
+    [-40, -20, 0, 5, 5, 0, -20, -40],
+    [-30, 0, 20, 25, 25, 20, 0, -30],
+    [-30, 5, 25, 40, 40, 25, 5, -30],
+    [-30, 0, 25, 40, 40, 25, 0, -30],
+    [-30, 5, 20, 25, 25, 20, 5, -30],
+    [-40, -20, 0, 0, 0, 0, -20, -40],
+    [-50, -40, -30, -30, -30, -30, -40, -50]
+  ]
   
   include StepPattern
+
+  def location_value
+    row, column = location
+    if board.hard_difficulty
+      case color
+      when :white then self.class::WHITE_LOCATION_VALUE[row][column]
+      else self.class::BLACK_LOCATION_VALUE[row][column]
+      end
+    else
+      case color
+      when :white then self.class::WHITE_LOCATION_VALUE_EASY[row][column]
+      else self.class::BLACK_LOCATION_VALUE_EASY[row][column]
+      end
+    end
+  end
 end
