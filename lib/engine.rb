@@ -26,17 +26,7 @@ class Engine
     set_difficulty if computer_plays?
     board.add_players!(white_player, black_player)
 
-    until game_over?
-      clear_screen
-      renderer.render
-      display_graphic_score
-      display_last_moves
-      display_turn_number
-      display_player_turn
-      perform_move!(player_move_selection)
-      swap_player!
-      update_turn_counter
-    end
+    main_game_loop
 
     end_game
   end
@@ -76,6 +66,20 @@ class Engine
         else 3
         end
       end
+    end
+  end
+
+  def main_game_loop
+    until game_over?
+      clear_screen
+      renderer.render
+      display_graphic_score
+      display_last_moves
+      display_turn_number
+      display_player_turn
+      perform_move!(player_move_selection)
+      swap_player!
+      update_turn_counter
     end
   end
   
