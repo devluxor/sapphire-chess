@@ -101,7 +101,9 @@ module AI
     else evaluations.values.min
     end
 
-    move = evaluations.select { |_, evaluation| evaluation == best_evaluation }.keys.sample
+    evaluations.select do |_, evaluation| 
+      evaluation == best_evaluation
+    end.keys.sample
   end
 
   def anti_loop_filter(possible_moves)
