@@ -82,9 +82,8 @@ class Engine
   end
   
   def swap_player!
-    self.current_player = (
+    self.current_player = 
       current_player == white_player ? black_player : white_player
-    )
   end
 
   def update_turn_counter
