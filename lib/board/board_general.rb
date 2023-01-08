@@ -20,7 +20,7 @@ class Board
   include CastlingBoardControl
   include EnPassantBoardControl
 
-  attr_reader :matrix, :duplicate, :white_player, :black_player
+  attr_reader :matrix, :duplicate, :white_player, :black_player, :hard_difficulty
 
   def self.initialize_board
     board = new
@@ -47,10 +47,6 @@ class Board
     @duplicated = duplicated
   end
 
-  def render
-    renderer.render
-  end
-
   def add_players!(player_1, player_2)
     if player_1.color == :white
       @white_player = player_1
@@ -59,6 +55,8 @@ class Board
       @white_player = player_2
       @black_player = player_1
     end
+
+    get_game_difficulty
   end
 
   def [](square)
@@ -115,5 +113,14 @@ class Board
   # moves in duplicate boards
   def is_a_duplicate?
     @duplicated
+  end
+
+  private
+
+  def get_game_difficulty
+    @hard_difficulty = 
+    [white_player, black_player].find do |player|
+      player.is_a?(Computer)
+    end.depth == 3
   end
 end

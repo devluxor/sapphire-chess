@@ -35,6 +35,28 @@ class Pawn < Piece
     [50, 50, 50, 50, 50, 50, 50, 50],
     [0, 0, 0, 0, 0, 0, 0, 0]
   ]
+
+  WHITE_LOCATION_VALUE_EASY = [
+    [100, 100, 100, 100, 100, 100, 100, 100],
+    [60, 60, 60, 60, 60, 60, 60, 60], 
+    [50, 50, 60, 60, 60, 60, 50, 50],
+    [50, 50, 60, 60, 60, 60, 50, 50],
+    [50, 50, 60, 60, 60, 60, 50, 50],
+    [50, 50, 60, 60, 60, 60, 50, 50],
+    [5, 10, 10, -20, -20, 10, 10, 5],
+    [0, 0, 0, 0, 0, 0, 0, 0]
+  ]
+  
+  BLACK_LOCATION_VALUE_EASY = [
+    [0, 0, 0, 0, 0, 0, 0, 0], 
+    [5, 10, 10, -20, -20, 10, 10, 5], 
+    [50, 50, 60, 60, 60, 60, 50, 50], 
+    [50, 50, 60, 60, 60, 60, 50, 50], 
+    [50, 50, 60, 60, 60, 60, 50, 50], 
+    [50, 50, 60, 60, 60, 60, 50, 50], 
+    [60, 60, 60, 60, 60, 60, 60, 60], 
+    [100, 100, 100, 100, 100, 100, 100, 100]
+  ]
   
   include SlidePattern
   include EnPassantPieceControl
@@ -56,6 +78,21 @@ class Pawn < Piece
       case color
       when :white then Paint[self.class::WHITE.first, :white]
       else Paint[self.class::BLACK.first, :blue]
+      end
+    end
+  end
+
+  def location_value
+    row, column = location
+    if board.hard_difficulty
+      case color
+      when :white then self.class::WHITE_LOCATION_VALUE[row][column]
+      else self.class::BLACK_LOCATION_VALUE[row][column]
+      end
+    else
+      case color
+      when :white then self.class::WHITE_LOCATION_VALUE_EASY[row][column]
+      else self.class::BLACK_LOCATION_VALUE_EASY[row][column]
       end
     end
   end
