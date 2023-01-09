@@ -55,7 +55,7 @@ class Engine
   # See Computer in player.rb, AI#minimax in ai.rb
   def set_difficulty
     difficulty_input = prompt_difficulty
-
+    
     [white_player, black_player].each do |player|
       if player.is_a?(Computer)
         player.depth =

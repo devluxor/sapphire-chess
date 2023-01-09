@@ -1,5 +1,5 @@
 require_relative '../pieces.rb'
-require_relative '../castling.rb'
+require_relative '../extra_rules/castling_board_control.rb'
 require_relative '../en_passant.rb'
 require_relative 'board_renderer.rb'
 require_relative 'board_analysis.rb'
