@@ -2,7 +2,7 @@
 
 Welcome to Sapphire Chess!
 
-This is a chess game written in pure Ruby, written for Ruby version 2.7.5. Other versions have not been tested yet.
+This is a chess game written in pure Ruby v2.7.5. Other versions have not been tested yet.
 
 Please, visit https://medium.com/@lucas.sorribes/nostromo-my-ruby-chess-journey-part-i-7ef544b547a5 for a very detailed account of how I wrote this game.
 
