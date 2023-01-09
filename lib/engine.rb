@@ -45,12 +45,12 @@ class Engine
     @white_player =
     if (color_choice.match?(/w/) && human_vs_ai) || !human_vs_ai
       Human.new(:white, board)
-    else color_choice.match?(/b/) && human_vs_ai
+    else
       Computer.new(:white, board)
     end
 
     @black_player =
-    if white_player.is_a?(Human) && human_vs_ai 
+    if white_player.is_a?(Human) && human_vs_ai
       Computer.new(:black, board)
     else
       Human.new(:black, board)
