@@ -64,16 +64,14 @@ class King < Piece
   def location_value
     row, column = location
 
-    if board.end_game?
-      case color
-      when :white then self.class::WHITE_LOCATION_VALUE_END[row][column]
-      else self.class::BLACK_LOCATION_VALUE_END[row][column]
-      end
+    if board.end_game? && color == :white
+      self.class::WHITE_LOCATION_VALUE_END[row][column]
+    elsif board.end_game? && color == :black
+      self.class::BLACK_LOCATION_VALUE_END[row][column]
+    elsif !board.end_game? && color == :white
+      self.class::WHITE_LOCATION_VALUE[row][column]
     else
-      case color
-      when :white then self.class::WHITE_LOCATION_VALUE[row][column]
-      else self.class::BLACK_LOCATION_VALUE[row][column]
-      end
+      self.class::BLACK_LOCATION_VALUE[row][column]
     end
   end
 end
