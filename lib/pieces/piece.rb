@@ -38,16 +38,15 @@ class Piece
 
   def location_value
     row, column = location
-    if board.hard_difficulty
-      case color
-      when :white then self.class::WHITE_LOCATION_VALUE[row][column]
-      else self.class::BLACK_LOCATION_VALUE[row][column]
-      end
+    
+    if board.hard_difficulty? && color == :white
+      self.class::WHITE_LOCATION_VALUE[row][column]
+    elsif board.hard_difficulty? && color == :black
+      self.class::BLACK_LOCATION_VALUE[row][column]
+    elsif !board.hard_difficulty? && color == :white
+      self.class::WHITE_LOCATION_VALUE_EASY[row][column]
     else
-      case color
-      when :white then self.class::WHITE_LOCATION_VALUE_EASY[row][column]
-      else self.class::BLACK_LOCATION_VALUE_EASY[row][column]
-      end
+      self.class::BLACK_LOCATION_VALUE_EASY[row][column]
     end
   end
 
