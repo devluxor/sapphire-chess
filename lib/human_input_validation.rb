@@ -20,8 +20,9 @@ module HumanInputValidation
     loop do 
       game_mode = gets.chomp.strip.to_i
       break if game_mode == 1 || game_mode == 2
-      puts 'Please, enter a valid game mode'
+      puts 'Please, enter a valid game mode.'
     end
+    new_line
     game_mode
   end
 
@@ -33,7 +34,7 @@ module HumanInputValidation
       break if valid_difficulty?(difficulty_input)
       puts 'Please, enter a valid difficulty setting.'
     end
-
+    
     case difficulty_input
     when 'easy' then 1
     when 'medium' then 2
