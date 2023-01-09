@@ -1,4 +1,5 @@
 module Display
+  CURRENT_VERSION = 'v0.9.0'
   def clear_screen
     system 'clear'
   end
@@ -10,9 +11,9 @@ module Display
   def display_welcome
     clear_screen
 
-    print '♟  ♞  ♝  ♜  ♛  ♚'
-    print Paint['   Welcome to Sapphire Chess!  ', :green]
-    puts Paint['♚  ♛  ♜  ♝  ♞  ♟', :blue]
+    print '♟  ♞  ♝  ♜  ♛  ♚ '
+    print Paint[" 💎  Welcome to Sapphire Chess #{CURRENT_VERSION}! 💎 ", :green]
+    puts Paint[' ♚  ♛  ♜  ♝  ♞  ♟', :blue]
     new_line
   end
   
