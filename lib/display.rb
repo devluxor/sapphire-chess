@@ -11,7 +11,7 @@ module Display
     clear_screen
 
     print '♟  ♞  ♝  ♜  ♛  ♚'
-    print Paint['   Welcome to Ruby Chess!  ', :green]
+    print Paint['   Welcome to Sapphire Chess!  ', :green]
     puts Paint['♚  ♛  ♜  ♝  ♞  ♟', :blue]
     new_line
   end
