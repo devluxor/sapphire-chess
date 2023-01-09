@@ -3,8 +3,8 @@ module Display
     system 'clear'
   end
 
-  def new_line
-    puts ''
+  def new_line(lines=1)
+    puts '' * lines
   end
 
   def display_welcome
@@ -57,7 +57,7 @@ module Display
                 end
       print message + ': '
       display_pieces_score(color)
-      puts "\n\n"
+      new_line(2)
     end
   end
 
