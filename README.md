@@ -10,8 +10,6 @@ Please, visit https://medium.com/@lucas.sorribes/nostromo-my-ruby-chess-journey-
 
 ## Current Features
 
-![Game screenshot](./screenshot.png)
-
 * A beautiful board with easy to distinguish colors for white and black pieces.
 * Fully functional AI
 * Two game modes: human vs. computer, human vs. human.
@@ -21,5 +19,6 @@ Please, visit https://medium.com/@lucas.sorribes/nostromo-my-ruby-chess-journey-
 * Material score display.
 * Player's last move display.
 
----
+## Screenshot
 
+![Game screenshot](./screenshot.png)
