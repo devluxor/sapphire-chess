@@ -18,13 +18,20 @@
   - `lib/queen.rb`
   - `lib/rook.rb`
 
+## Movement rules
+  - `lib/movement_rules/castling_board_control.rb`
+  - `lib/movement_rules/castling_piece_control.rb`
+  - `lib/movement_rules/castling_rights.rb`
+  - `lib/movement_rules/en_passant_board_control.rb`
+  - `lib/movement_rules/en_passant_piece_control.rb`
+  - `lib/movement_rules/move_slide_pattern.rb`
+  - `lib/movement_rules/move_step_pattern.rb`
+
 ## Extra functionality:
   - `lib/ai.rb`
-  - `lib/en_passant.rb`
-  - `lib/castling.rb`
   - `lib/display.rb`
 
-## Player:
+## Player classes:
   - `lib/player.rb`
 
 ## Input Validation And Conversion:
