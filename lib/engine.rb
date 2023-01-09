@@ -60,13 +60,7 @@ class Engine
     difficulty_input = prompt_difficulty
     
     [white_player, black_player].each do |player|
-      if player.is_a?(Computer)
-        player.depth =
-        if difficulty_input.match?(/easy|1/) then 1
-        elsif difficulty_input.match?(/medium|2/) then 2
-        else 3
-        end
-      end
+      player.depth = difficulty_input if player.is_a?(Computer)
     end
   end
 

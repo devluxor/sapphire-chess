@@ -22,7 +22,13 @@ module HumanInputValidation
       break if valid_difficulty?(difficulty_input)
       puts 'Please, enter a valid difficulty setting.'
     end
-    difficulty_input
+
+    case difficulty_input
+    when 'easy' then 1
+    when 'medium' then 2
+    when 'hard' then 3
+    else difficulty_input.to_i
+    end
   end
 
   def display_difficulty_settings
