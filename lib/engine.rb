@@ -21,8 +21,11 @@ class Engine
     display_welcome
     set_players
     @current_player = white_player
-    set_difficulty if computer_plays?
     board.add_players!(white_player, black_player)
+    if computer_plays?
+      set_difficulty
+      board.set_game_difficulty
+    end
 
     main_game_loop
 

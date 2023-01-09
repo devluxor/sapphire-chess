@@ -55,8 +55,6 @@ class Board
       @white_player = player_2
       @black_player = player_1
     end
-
-    get_game_difficulty
   end
 
   def [](square)
@@ -115,12 +113,18 @@ class Board
     @duplicated
   end
 
-  private
-
-  def get_game_difficulty
-    @hard_difficulty = 
+  def set_game_difficulty
+    self.hard_difficulty = 
     [white_player, black_player].find do |player|
       player.is_a?(Computer)
     end.depth == 3
   end
+
+  def hard_difficulty?
+    hard_difficulty
+  end
+
+  private
+
+  attr_writer :hard_difficulty
 end
