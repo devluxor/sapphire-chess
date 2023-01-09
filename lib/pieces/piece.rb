@@ -1,6 +1,7 @@
 require_relative '../board.rb'
 require_relative '../movement_rules/castling_piece_control.rb'
-require_relative 'movement.rb'
+require_relative '../movement_rules/move_slide_pattern.rb'
+require_relative '../movement_rules/move_step_pattern.rb'
 
 require 'paint'
 

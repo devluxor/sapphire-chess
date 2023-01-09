@@ -37,12 +37,12 @@ class Engine
   def set_players
     color_choice = prompt_color
  
-    @white_player =
+    @white_player = Computer.new(:white, board)
     if color_choice.match?(/w/) then Human.new(:white, board)
     else Computer.new(:white, board)
     end
 
-    @black_player =
+    @black_player = Computer.new(:black, board)
     if white_player.is_a?(Human) then Computer.new(:black, board)
     else Human.new(:black, board)
     end
