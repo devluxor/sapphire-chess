@@ -1,4 +1,4 @@
-require_relative '../en_passant.rb'
+require_relative '../extra_rules/en_passant_piece_control.rb'
 
 class Pawn < Piece
   BLACK = ['♟', '♛']
