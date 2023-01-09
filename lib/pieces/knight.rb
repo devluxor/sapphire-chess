@@ -54,19 +54,4 @@ class Knight < Piece
   ]
   
   include StepPattern
-
-  def location_value
-    row, column = location
-    if board.hard_difficulty
-      case color
-      when :white then self.class::WHITE_LOCATION_VALUE[row][column]
-      else self.class::BLACK_LOCATION_VALUE[row][column]
-      end
-    else
-      case color
-      when :white then self.class::WHITE_LOCATION_VALUE_EASY[row][column]
-      else self.class::BLACK_LOCATION_VALUE_EASY[row][column]
-      end
-    end
-  end
 end

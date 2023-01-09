@@ -32,4 +32,13 @@ class Queen < Piece
   ]
     
   include SlidePattern
+
+  def location_value
+    row, column = location
+    
+    case color
+    when :white then self.class::WHITE_LOCATION_VALUE[row][column]
+    else self.class::BLACK_LOCATION_VALUE[row][column]
+    end
+  end
 end
