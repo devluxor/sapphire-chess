@@ -1,17 +1,23 @@
-# Ruby Chess
+# Sapphire Chess v0.9.0
 
-Hi!
+Welcome to Sapphire Chess!
 
-Welcome to my pure Ruby chess game!
+This is a chess game written in pure Ruby, written for Ruby version 2.7.5. Other versions have not been tested yet.
 
-The game is now 100% functional. However, I'm still working on it, refactoring, fixing new found bugs, and adding new features almost every day. Every suggestion or comment will be more than welcome.
+Please, visit https://medium.com/@lucas.sorribes/nostromo-my-ruby-chess-journey-part-i-7ef544b547a5 for a very detailed account of how I wrote this game.
 
-Please, feel free to visit `MAP.rb` for a description of the program design and mechanics, and `TODO.md` to see a list with all the features I've been working/will be working on.
+---
 
-To play, just execute `main.rb`.
+## Current Features
 
-Thank you!
+* A beautiful board with easy to distinguish colors for white and black pieces.
+* Fully functional AI
+* Two game modes: human vs. computer, human vs. human.
+* Three levels of difficulty.
+* Full chess movement rules implementation, including castling and en passant, for both the human and the computer player.
+* Accepts algebraic notation for movements, with human input validation.
+* Material score display.
+* Player's last move display.
 
-Best, 
+---
 
-Lucas.
