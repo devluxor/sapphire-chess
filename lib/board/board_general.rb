@@ -1,6 +1,6 @@
 require_relative '../pieces.rb'
-require_relative '../extra_rules/castling_board_control.rb'
-require_relative '../extra_rules/en_passant_board_control.rb'
+require_relative '../movement_rules/castling_board_control.rb'
+require_relative '../movement_rules/en_passant_board_control.rb'
 require_relative 'board_renderer.rb'
 require_relative 'board_analysis.rb'
 require_relative 'board_evaluation.rb'

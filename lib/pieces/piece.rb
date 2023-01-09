@@ -1,5 +1,5 @@
 require_relative '../board.rb'
-require_relative '../extra_rules/castling_piece_control.rb'
+require_relative '../movement_rules/castling_piece_control.rb'
 require_relative 'movement.rb'
 
 require 'paint'
