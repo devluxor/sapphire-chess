@@ -1,5 +1,6 @@
 module Display
-  CURRENT_VERSION = 'v0.9.0'
+  CURRENT_VERSION = 'v0.7.0'
+  
   def clear_screen
     system 'clear'
   end
@@ -15,6 +16,27 @@ module Display
     print Paint[" 💎  Welcome to Sapphire Chess #{CURRENT_VERSION}! 💎 ", :green]
     puts Paint[' ♚  ♛  ♜  ♝  ♞  ♟', :blue]
     new_line
+  end
+
+  def display_game_modes
+    puts "Please, select the game mode: (1/2)\n\n"\
+      "1) You against the machine.\n\n"\
+      "2) You against a friend using the same computer.\n\n"
+  end
+
+  def display_difficulty_settings
+    puts "Please, enter the game difficulty:\n"\
+      "[i.e.: \"1\", \"e\" or \"easy\" to select Easy]\n\n"\
+      "1) Easy\n2) Medium\n3) Hard\n\n"\
+      "This setting determines how many turns the computer can think ahead.\n"\
+      'Warning: the "hard" setting is very hard!'
+  end
+
+  def display_move_message
+    puts 'What piece do you want to move?'
+    puts '[Use algebraic notation, i.e.: "a2a4"]'
+    puts "[To castle, \"castle (k for king side, q for queen side), "\
+         "i.e: \"castle k\"]\n\n"
   end
   
   def display_last_moves

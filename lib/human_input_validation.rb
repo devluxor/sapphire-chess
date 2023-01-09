@@ -14,6 +14,17 @@ module HumanInputValidation
     %w(white black w b).include?(choice)
   end
 
+  def prompt_game_mode
+    display_game_modes
+    game_mode = nil
+    loop do 
+      game_mode = gets.chomp.strip.to_i
+      break if game_mode == 1 || game_mode == 2
+      puts 'Please, enter a valid game mode'
+    end
+    game_mode
+  end
+
   def prompt_difficulty
     display_difficulty_settings
     difficulty_input = nil
@@ -31,23 +42,12 @@ module HumanInputValidation
     end
   end
 
-  def display_difficulty_settings
-    puts "Please, enter the game difficulty:\n"\
-      "[i.e.: \"1\", \"e\" or \"easy\" to select Easy]\n\n"\
-      "1) Easy\n2) Medium\n3) Hard\n\n"\
-      "This setting determines how many turns the computer can think ahead.\n"\
-      'Warning: the "hard" setting is very hard!'
-  end
-
   def valid_difficulty?(difficulty)
     %w(easy medium hard 1 2 3).include?(difficulty)
   end
 
   def prompt_move
-    puts 'What piece do you want to move?'
-    puts '[Use algebraic notation, i.e.: "a2a4"]'
-    puts "[To castle, \"castle (k for king side, q for queen side), "\
-         "i.e: \"castle k\"]\n\n"
+    display_move_message
 
     player_move_input = nil
     loop do
