@@ -43,18 +43,18 @@ class Engine
     color_choice = human_vs_ai ? prompt_color : ''
     
     @white_player =
-    if (color_choice.match?(/w/) && human_vs_ai) || !human_vs_ai
-      Human.new(:white, board)
-    else
-      Computer.new(:white, board)
-    end
+      if (color_choice.match?(/w/) && human_vs_ai) || !human_vs_ai
+        Human.new(:white, board)
+      else
+        Computer.new(:white, board)
+      end
 
     @black_player =
-    if white_player.is_a?(Human) && human_vs_ai
-      Computer.new(:black, board)
-    else
-      Human.new(:black, board)
-    end
+      if white_player.is_a?(Human) && human_vs_ai
+        Computer.new(:black, board)
+      else
+        Human.new(:black, board)
+      end
   end
 
   def computer_plays?
@@ -117,16 +117,16 @@ class Engine
     current_player.history << [piece, target_square]
 
     current_player.last_move = 
-    if piece == :castle
-      "Castle, #{target_square} side"
-    elsif board[target_square].is_a?(Piece)
-      "#{board[piece].class} #{convert_to_algebraic(piece)} "\
-      "to #{board[target_square].class} "\
-      "#{convert_to_algebraic(target_square)}"
-    else
-      "#{board[piece].class} #{convert_to_algebraic(piece)} "\
-      "to #{convert_to_algebraic(target_square)}"
-    end
+      if piece == :castle
+        "Castle, #{target_square} side"
+      elsif board[target_square].is_a?(Piece)
+        "#{board[piece].class} #{convert_to_algebraic(piece)} "\
+        "to #{board[target_square].class} "\
+        "#{convert_to_algebraic(target_square)}"
+      else
+        "#{board[piece].class} #{convert_to_algebraic(piece)} "\
+        "to #{convert_to_algebraic(target_square)}"
+      end
   end
 
   def end_game
