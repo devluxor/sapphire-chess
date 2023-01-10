@@ -3,3 +3,8 @@ test*
 notes.md
 output.csv
 TODO.md
+.gem
+Gemfile.lock
+.bundle
+pkg/*
+.env
