@@ -6,6 +6,8 @@ require_relative 'display.rb'
 require_relative 'human_input_validation.rb'
 require_relative 'algebraic_conversion.rb'
 
+require 'paint'
+
 class Engine
   include Display
   include HumanInputValidation
