@@ -35,7 +35,7 @@ module AI
     # [the maximizing player], it generates every possible movement for the
     # next player, black [the minimizing player], who will choose the best 
     # possible move, and so on. The best (relative to each player) possible 
-    # outcome for each move will determine what move is chosen)
+    # outcome for each move will determine what move is chosen, `best_evaluation`)
     # See AI#computer_chooses_move
 
     # The alpha-beta `prunes` the tree: it makes the search more efficient
