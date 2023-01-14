@@ -7,10 +7,10 @@ module AI
     possible_moves << [:castle, :king] if castle_rights?(:king)
     possible_moves << [:castle, :queen] if castle_rights?(:queen)
 
-    get_best_move(possible_moves, color)
+    best_move(possible_moves, color)
   end
 
-  def get_best_move(possible_moves, color)
+  def best_move(possible_moves, color)
     evaluations = {}
 
     anti_loop_filter(possible_moves)
