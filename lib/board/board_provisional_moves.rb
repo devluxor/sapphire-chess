@@ -15,7 +15,6 @@ module ProvisionalMoves
       castle!(side, color)
     else
       start_position, target_position = move
-      # piece_buffer = self[target_position]
       move_piece!(start_position, target_position)
     end
   end
