@@ -26,8 +26,8 @@ module PawnMovementAndPromotion
 
   def opposite_row
     case color
-    when :white then W_OPPOSITE_ROW
-    else B_OPPOSITE_ROW
+    when :white then self.class::W_OPPOSITE_ROW
+    else self.class::B_OPPOSITE_ROW
     end
   end
 
