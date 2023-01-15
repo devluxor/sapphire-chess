@@ -1,7 +1,9 @@
 require_relative '../pieces'
 require_relative '../movement_rules/castling_board_control'
 require_relative '../movement_rules/en_passant_board_control'
-require_relative '../board'
+require_relative '../board/board_analysis'
+require_relative '../board/board_evaluation'
+require_relative '../board/board_provisional_moves'
 
 class Board
   SQUARE_ORDER = 8

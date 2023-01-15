@@ -13,13 +13,14 @@ Gem::Specification.new do |spec|
   spec.email       = 'lucas.sorribes@gmail.com'
   spec.license     = 'MIT'
   spec.homepage    = 'https://github.com/lucsorr/sapphire-chess'
-  spec.files       = Dir['lib/**/*.rb'] + %w(Gemfile LICENSE Rakefile sapphire-chess.gemspec)
-
-  spec.required_ruby_version = '>= 2.7.5'
+  spec.files       = Dir['lib/**/*.rb'] + %w[Gemfile LICENSE Rakefile sapphire-chess.gemspec]
   spec.extra_rdoc_files = ['README.md']
 
-  spec.add_dependency 'paint', '>= 2.3'
+  spec.required_ruby_version = '>= 2.7.5'
 
+  spec.add_dependency 'paint', '~> 2.3'
+  
   spec.add_development_dependency 'rubocop', '~> 1.43'
   spec.add_development_dependency 'rake', '~> 13.0'
+  spec.add_development_dependency 'bundler', '~> 2.4'
 end
