@@ -20,7 +20,7 @@ module HumanInputValidation
     game_mode = nil
     loop do
       game_mode = gets.chomp.strip.to_i
-      break if [1, 2].include?(game_mode)
+      break if [1, 2, 3].include?(game_mode)
 
       puts 'Please, enter a valid game mode.'
     end
