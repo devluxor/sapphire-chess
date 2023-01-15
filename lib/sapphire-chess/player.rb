@@ -1,6 +1,6 @@
 require_relative 'ai'
 require_relative 'algebraic_conversion'
-require_relative './movement_rules/castling_rights'
+require_relative 'movement_rules/castling_rights'
 
 class Player
   include CastlingRights
