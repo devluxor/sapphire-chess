@@ -19,7 +19,7 @@ module Display
   def display_game_modes
     puts "Please, select the game mode: (1/2)\n\n"\
       "1) You against the machine.\n\n"\
-      "2) You against a friend using this same computer.\n\n"
+      "2) You against a friend using this same computer.\n\n"\
       "3) Enjoy watching the computer playing against itself.\n\n"
   end
 
