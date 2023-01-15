@@ -7,7 +7,7 @@ module EnPassantBoardControl
 
   def was_en_passant?(piece, target_square)
     captured_pawn = passed_pawn(target_square)
-    
+
     self[target_square].is_a?(Pawn) &&
       self[target_square].pawn_to_pass(piece).include?(captured_pawn)
   end
