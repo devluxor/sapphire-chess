@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BoardRenderer
   LEFT_MARGIN = 4
   RIGHT_MARGIN = 3
@@ -10,7 +12,7 @@ class BoardRenderer
   FLOOR_0 =           '+--------+'
   FLOOR =             '--------+'
 
-  COLUMN_LETTERS = [*('a'..'h')]
+  COLUMN_LETTERS = ('a'..'h').to_a.freeze
   ROW_NUMBERS =    [*('1'..'8')].reverse
 
   def initialize(board)
@@ -22,14 +24,7 @@ class BoardRenderer
     print_column_letters
     print_floor
 
-    square_order.times do |number|
-      print_row(number)
-      print ROW_NUMBERS[number]
-      print_piece_row(number)
-      puts (' ' * RIGHT_MARGIN) + ROW_NUMBERS[number]
-      print_row(number)
-      print_floor
-    end
+    print_rows
 
     new_line
     print_column_letters
@@ -46,6 +41,17 @@ class BoardRenderer
 
   def print_floor
     puts ' ' * LEFT_MARGIN + FLOOR_0 + FLOOR * (square_order - 1)
+  end
+
+  def print_rows
+    square_order.times do |number|
+      print_row(number)
+      print ROW_NUMBERS[number]
+      print_piece_row(number)
+      puts (' ' * RIGHT_MARGIN) + ROW_NUMBERS[number]
+      print_row(number)
+      print_floor
+    end
   end
 
   def print_row(number)
@@ -111,7 +117,7 @@ class BoardRenderer
     )
   end
 
-  def new_line(lines=1)
+  def new_line(lines = 1)
     lines.times { puts '' }
   end
 end
