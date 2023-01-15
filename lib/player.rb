@@ -1,4 +1,3 @@
-require_relative 'board.rb'
 require_relative 'ai.rb'
 require_relative 'algebraic_conversion.rb'
 require_relative './movement_rules/castling_rights.rb'

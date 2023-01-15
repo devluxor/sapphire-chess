@@ -28,7 +28,7 @@ module AI
 
     piece_buffer = board[move.last] unless move.first == :castle
     
-    make_provisional!(move)
+    board.make_provisional!(move)
 
     # This generates possible outcomes (children) for the provisional move:
     # Each branch represents the next turn (i.e.: if current player is white 
@@ -64,31 +64,9 @@ module AI
                         best_evaluation
                       end
 
-    unmake_provisional!(piece_buffer, move)
+    board.unmake_provisional!(piece_buffer, move)
 
     best_evaluation
-  end
-
-  def make_provisional!(move)
-    if move.first == :castle
-      side = move.last
-      board.castle!(side, color)
-    else
-      start_position, target_position = move
-      piece_buffer = board[target_position]
-      board.move_piece!(start_position, target_position)
-    end
-  end
-
-  def unmake_provisional!(piece_buffer, move)
-    if move.first == :castle
-      side = move.last
-      board.uncastle!(side, color)
-    else
-      start_position, target_position = move
-      board.move_piece!(target_position, start_position)
-      board[target_position] = piece_buffer
-    end
   end
 
   # This method randomizes the moves if two or more moves share the best evaluation.
