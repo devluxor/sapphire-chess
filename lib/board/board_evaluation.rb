@@ -16,4 +16,10 @@ module BoardEvaluation
 
     white_evaluation + black_evaluation
   end
+
+  def evaluate_move(move, color)
+    provisional(move, color) do
+      evaluate
+    end
+  end
 end

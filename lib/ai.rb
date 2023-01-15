@@ -12,12 +12,11 @@ module AI
 
   def best_move(possible_moves)
     evaluations = {}
-
     anti_loop_filter(possible_moves)
 
     possible_moves.each do |move|
-      evaluations[move] =
-        minimax(move, depth, -Float::INFINITY, Float::INFINITY, maximizing_player?)
+      evaluations[move] = 
+      minimax(move, depth, -Float::INFINITY, Float::INFINITY, maximizing_player?)
     end
 
     move_randomizer(evaluations)

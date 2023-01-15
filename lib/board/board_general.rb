@@ -108,6 +108,7 @@ class Board
   end
 
   def generate_moves(color)
+    possible_moves =
     friendly_pieces(color).each_with_object([]) do |piece, possible_moves|
       location = piece.location
 
@@ -115,6 +116,8 @@ class Board
         possible_moves << [location, possible_move]
       end
     end
+    # sort_moves!(possible_moves, color)
+    possible_moves
   end
 
   # This method is avoids checking for availability of en passant
@@ -137,4 +140,14 @@ class Board
   private
 
   attr_writer :hard_difficulty
+  # For testing purposes:
+  def sort_moves!(possible_moves, color)
+    possible_moves.sort! do |a, b|
+      if color == :white
+        evaluate_move(a, color) <=> evaluate_move(b, color)
+      else
+        evaluate_move(b, color) <=> evaluate_move(a, color)
+      end
+    end
+  end
 end
