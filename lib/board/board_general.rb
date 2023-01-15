@@ -1,7 +1,7 @@
-require_relative '../pieces.rb'
-require_relative '../movement_rules/castling_board_control.rb'
-require_relative '../movement_rules/en_passant_board_control.rb'
-require_relative '../board.rb'
+require_relative '../pieces'
+require_relative '../movement_rules/castling_board_control'
+require_relative '../movement_rules/en_passant_board_control'
+require_relative '../board'
 
 class Board
   SQUARE_ORDER = 8
@@ -11,7 +11,7 @@ class Board
   LAST_ROW = 7
   PIECES_SEQUENCE = [
     Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
-  ]
+  ].freeze
 
   include BoardAnalysis
   include BoardEvaluation
@@ -24,21 +24,32 @@ class Board
   def self.initialize_board
     board = new
 
-    [B_PAWN_ROW, W_PAWN_ROW].each do |pawn_row|
-      color = pawn_row == B_PAWN_ROW ? :black : :white
-
-      SQUARE_ORDER.times do |column|
-        board[[pawn_row, column]] = Pawn.new(board, [pawn_row, column], color)
-      end
-    end
-
-    [[FIRST_ROW, :black], [LAST_ROW, :white]].each do |(row, color)|
-      PIECES_SEQUENCE.each_with_index do |piece, column|
-        board[[row, column]] = piece.new(board, [row, column], color)
-      end
-    end
+    set_pawns(board)
+    set_pieces(board)
 
     board
+  end
+
+  class << self
+    private
+
+    def set_pawns(board)
+      [B_PAWN_ROW, W_PAWN_ROW].each do |pawn_row|
+        color = pawn_row == B_PAWN_ROW ? :black : :white
+  
+        SQUARE_ORDER.times do |column|
+          board[[pawn_row, column]] = Pawn.new(board, [pawn_row, column], color)
+        end
+      end
+    end
+
+    def set_pieces(board)
+      [[FIRST_ROW, :black], [LAST_ROW, :white]].each do |(row, color)|
+        PIECES_SEQUENCE.each_with_index do |piece, column|
+          board[[row, column]] = piece.new(board, [row, column], color)
+        end
+      end
+    end
   end
 
   def initialize(duplicated=false)
