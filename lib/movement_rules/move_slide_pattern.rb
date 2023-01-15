@@ -8,7 +8,7 @@ module SlidePattern
         current_column += column_direction
         possible_location = [current_row, current_column]
 
-        break if !board.within_limits?(possible_location)
+        break unless board.within_limits?(possible_location)
         break if friend_in?(possible_location)
 
         moves << possible_location if board.empty_square?(possible_location)
