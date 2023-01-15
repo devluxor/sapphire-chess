@@ -1,25 +1,27 @@
 module HumanInputValidation
   def prompt_color
-    puts "What color would you like to play? ([W]hite/[B]lack)"
+    puts 'What color would you like to play? ([W]hite/[B]lack)'
     choice = nil
     loop do
       choice = gets.chomp.strip.downcase
       break if valid_color?(choice)
+
       puts 'Please, enter a valid color choice.'
     end
     choice
   end
 
   def valid_color?(choice)
-    %w(white black w b).include?(choice)
+    %w[white black w b].include?(choice)
   end
 
   def prompt_game_mode
     display_game_modes
     game_mode = nil
-    loop do 
+    loop do
       game_mode = gets.chomp.strip.to_i
-      break if game_mode == 1 || game_mode == 2
+      break if [1, 2].include?(game_mode)
+
       puts 'Please, enter a valid game mode.'
     end
     new_line
@@ -32,9 +34,10 @@ module HumanInputValidation
     loop do
       difficulty_input = gets.chomp.strip.downcase
       break if valid_difficulty?(difficulty_input)
+
       puts 'Please, enter a valid difficulty setting.'
     end
-    
+
     case difficulty_input
     when 'easy' then 1
     when 'medium' then 2
@@ -44,7 +47,7 @@ module HumanInputValidation
   end
 
   def valid_difficulty?(difficulty)
-    %w(easy medium hard 1 2 3).include?(difficulty)
+    %w[easy medium hard 1 2 3].include?(difficulty)
   end
 
   def prompt_move
@@ -54,18 +57,20 @@ module HumanInputValidation
     loop do
       player_move_input = current_player.get_move
       break if valid_player_input?(player_move_input)
-      puts "Please, select a valid movement."
+
+      puts 'Please, select a valid movement.'
     end
 
     player_move_input
   end
-  
+
   def prompt_target_square(piece)
     target_square = nil
     puts "Where do you want to move the #{board[piece].class}?"
     loop do
       target_square = current_player.get_move
       break if valid_target_square?(piece, target_square)
+
       puts "The #{board[piece].class} selected can't move to that square."
     end
 
@@ -92,7 +97,7 @@ module HumanInputValidation
   end
 
   def valid_piece_selection?(piece)
-    board[piece].is_a?(Piece) && 
+    board[piece].is_a?(Piece) &&
       board[piece].color == current_player.color
   end
 
