@@ -1,5 +1,5 @@
 module EnPassantPieceControl
-  def add_en_passant(moves)
+  def add_en_passant_movement!(moves)
     adyacent_enemy_pawn = pawn_to_pass.first
     return if adyacent_enemy_pawn.nil?
 

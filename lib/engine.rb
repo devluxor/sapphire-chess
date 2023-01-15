@@ -44,14 +44,14 @@ class Engine
     human_vs_ai = game_mode == 1
     color_choice = human_vs_ai ? prompt_color : ''
     
-    @white_player = #Computer.new(:white, board)
+    @white_player = Computer.new(:white, board)
       if (color_choice.match?(/w/) && human_vs_ai) || !human_vs_ai
         Human.new(:white, board)
       else
         Computer.new(:white, board)
       end
 
-    @black_player = #Computer.new(:black, board)
+    @black_player = Computer.new(:black, board)
       if white_player.is_a?(Human) && human_vs_ai
         Computer.new(:black, board)
       else
