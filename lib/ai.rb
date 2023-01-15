@@ -26,46 +26,43 @@ module AI
   def minimax(move, depth, alpha, beta, maximizing_player)
     return board.evaluate if depth.zero?
 
-    piece_buffer = board[move.last] unless move.first == :castle
-
-    board.make_provisional!(move, color)
-
-    # This generates possible outcomes (children) for the provisional move:
-    # Each branch represents the next turn (i.e.: if current player is white
-    # [the maximizing player], it generates every possible movement for the
-    # next player, black [the minimizing player], who will choose the best
-    # possible move, and so on. The best (relative to each player) possible
-    # outcome for each move will determine what move is chosen, `best_evaluation`)
-    # See AI#computer_chooses_move
-
-    # The alpha-beta `prunes` the tree: it makes the search more efficient
-    # removing unnecessary branches, resulting in a faster process.
     move_final_evaluation =
-      if maximizing_player
-        best_minimizing_evaluation = Float::INFINITY
+    board.provisional(move, color) do
+      # This generates possible outcomes (children) for the provisional move:
+      # Each branch represents the next turn (i.e.: if current player is white
+      # [the maximizing player], it generates every possible movement for the
+      # next player, black [the minimizing player], who will choose the best
+      # possible move, and so on. The best (relative to each player) possible
+      # outcome for each move will determine what move is chosen, `best_evaluation`)
+      # See AI#computer_chooses_move
 
-        board.generate_moves(:black).each do |possible_move|
-          evaluation = minimax(possible_move, depth - 1, alpha, beta, false)
-          best_minimizing_evaluation = [best_minimizing_evaluation, evaluation].min
-          beta = [beta, evaluation].min
-          break if beta <= alpha
+      # The alpha-beta `prunes` the tree: it makes the search more efficient
+      # removing unnecessary branches, resulting in a faster process.
+      move_final_evaluation =
+        if maximizing_player
+          best_minimizing_evaluation = Float::INFINITY
+
+          board.generate_moves(:black).each do |possible_move|
+            evaluation = minimax(possible_move, depth - 1, alpha, beta, false)
+            best_minimizing_evaluation = [best_minimizing_evaluation, evaluation].min
+            beta = [beta, evaluation].min
+            break if beta <= alpha
+          end
+
+          best_minimizing_evaluation
+        else
+          best_maximizing_evaluation = -Float::INFINITY
+
+          board.generate_moves(:white).each do |possible_move|
+            evaluation = minimax(possible_move, depth - 1, alpha, beta, true)
+            best_maximizing_evaluation = [best_maximizing_evaluation, evaluation].max
+            alpha = [alpha, evaluation].max
+            break if beta <= alpha
+          end
+
+          best_maximizing_evaluation
         end
-
-        best_minimizing_evaluation
-      else
-        best_maximizing_evaluation = -Float::INFINITY
-
-        board.generate_moves(:white).each do |possible_move|
-          evaluation = minimax(possible_move, depth - 1, alpha, beta, true)
-          best_maximizing_evaluation = [best_maximizing_evaluation, evaluation].max
-          alpha = [alpha, evaluation].max
-          break if beta <= alpha
-        end
-
-        best_maximizing_evaluation
-      end
-
-    board.unmake_provisional!(piece_buffer, move, color)
+    end
 
     move_final_evaluation
   end

@@ -44,11 +44,11 @@ class Engine
     human_vs_ai = prompt_game_mode == 1
     human_player_color = human_vs_ai ? prompt_color : ''
 
-    @white_player = # Computer.new(:white, board)
-    set_player(:white, human_player_color, mode: human_vs_ai)
+    @white_player = Computer.new(:white, board)
+    # set_player(:white, human_player_color, mode: human_vs_ai)
 
-    @black_player = # Computer.new(:black, board)
-    set_player(:black, human_player_color, mode: human_vs_ai)
+    @black_player = Computer.new(:black, board)
+    # set_player(:black, human_player_color, mode: human_vs_ai)
   end
 
   def set_player(color, human_player_color, mode: nil)

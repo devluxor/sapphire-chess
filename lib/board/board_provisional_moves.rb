@@ -1,11 +1,21 @@
 module ProvisionalMoves
+  def provisional(move, color)
+    piece_buffer = self[move.last] unless move.first == :castle
+    make_provisional!(move, color)
+    from_block = block_given? ? yield : raise(ArgumentError, 'No block given to ProvisionalMoves#provisional')
+    unmake_provisional!(piece_buffer, move, color)
+    from_block
+  end
+
+  private
+
   def make_provisional!(move, color)
     if move.first == :castle
       side = move.last
       castle!(side, color)
     else
       start_position, target_position = move
-      piece_buffer = self[target_position]
+      # piece_buffer = self[target_position]
       move_piece!(start_position, target_position)
     end
   end
