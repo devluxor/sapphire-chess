@@ -1,7 +1,8 @@
 module BoardAnalysis
-  # This is the total material evaluation (pieces value put together) 
-  # when a player keeps just a king, a queen and a few pieces:
-  LAST_STAND_PIECES_VALUE = 21500
+  # This is the total material evaluation (pieces value put together)
+  # when a player keeps just a king, a queen and a few pieces, indicating
+  # that the game is now in its last stage (endgame):
+  LAST_STAND_PIECES_VALUE = 21_500
 
   def in_check?(color)
     king_position = find_king(color)
@@ -18,7 +19,7 @@ module BoardAnalysis
       piece.color == color && piece.is_a?(King)
     end
 
-    king_location ? king_location.location : nil
+    king_location&.location
   end
 
   def checkmate?(color)
@@ -40,11 +41,11 @@ module BoardAnalysis
   end
 
   def enemy_pieces(color)
-    pieces.select { |piece| piece.color != color }
+    pieces.reject { |piece| piece.color == color }
   end
 
   def count(type, color)
-    friendly_pieces(color).select { |piece| piece.class == type }.size
+    friendly_pieces(color).select { |piece| piece.instance_of?(type) }.size
   end
 
   def promoted_pawns(color)
@@ -59,7 +60,7 @@ module BoardAnalysis
   end
 
   def last_stand?(color)
-    count(Queen, color).positive? && 
+    count(Queen, color).positive? &&
       friendly_pieces(color).map(&:value).sum <= LAST_STAND_PIECES_VALUE
   end
 end
