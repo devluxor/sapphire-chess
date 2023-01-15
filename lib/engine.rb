@@ -19,10 +19,10 @@ class Engine
     @renderer = BoardRenderer.new(board)
     @turn_number = 1
   end
-  
+
   def play
     display_welcome
-    set_players
+    define_players
     @current_player = white_player
     board.add_players!(white_player, black_player)
     if computer_plays?
@@ -34,30 +34,29 @@ class Engine
 
     end_game
   end
-  
+
   private
 
   attr_reader :white_player, :black_player, :board, :renderer
   attr_accessor :current_player, :turn_number
 
-  def set_players
-    game_mode = prompt_game_mode
-    human_vs_ai = game_mode == 1
-    color_choice = human_vs_ai ? prompt_color : ''
-    
+  def define_players
+    human_vs_ai = prompt_game_mode == 1
+    human_player_color = human_vs_ai ? prompt_color : ''
+
     @white_player = Computer.new(:white, board)
-      if (color_choice.match?(/w/) && human_vs_ai) || !human_vs_ai
-        Human.new(:white, board)
-      else
-        Computer.new(:white, board)
-      end
+    set_player(:white, human_player_color, mode: human_vs_ai)
 
     @black_player = Computer.new(:black, board)
-      if white_player.is_a?(Human) && human_vs_ai
-        Computer.new(:black, board)
-      else
-        Human.new(:black, board)
-      end
+    set_player(:black, human_player_color, mode: human_vs_ai)
+  end
+
+  def set_player(color, human_player_color, mode: nil)
+    if (human_player_color.match?(/w/) && mode) || !mode
+      Human.new(color, board)
+    else
+      Computer.new(color, board)
+    end
   end
 
   def computer_plays?
@@ -67,7 +66,7 @@ class Engine
   # See Computer in player.rb, AI#minimax in ai.rb
   def set_difficulty
     difficulty_input = prompt_difficulty
-    
+
     [white_player, black_player].each do |player|
       player.depth = difficulty_input if player.is_a?(Computer)
     end
@@ -86,9 +85,9 @@ class Engine
       update_turn_counter
     end
   end
-  
+
   def swap_player!
-    self.current_player = 
+    self.current_player =
       current_player == white_player ? black_player : white_player
   end
 
@@ -104,32 +103,36 @@ class Engine
       puts "\n🤖 I am thinking... 🤖"
       current_player.get_move
     end
-  end  
-  
+  end
+
   def perform_move!(move_input)
     piece, target_square = convert_player_input(move_input)
     store_move!(piece, target_square)
 
     case piece
     when :castle then board.castle!(target_square, current_player.color, permanent: true)
-    else board.move_piece!(piece, target_square, permanent: true)
+    else
+      board.move_piece!(piece, target_square, permanent: true)
     end
   end
 
   def store_move!(piece, target_square)
     current_player.history << [piece, target_square]
 
-    current_player.last_move = 
-      if piece == :castle
-        "Castle, #{target_square} side"
-      elsif board[target_square].is_a?(Piece)
-        "#{board[piece].class} #{convert_to_algebraic(piece)} "\
-        "to #{board[target_square].class} "\
-        "#{convert_to_algebraic(target_square)}"
-      else
-        "#{board[piece].class} #{convert_to_algebraic(piece)} "\
-        "to #{convert_to_algebraic(target_square)}"
-      end
+    current_player.last_move = move_to_string(piece, target_square)
+  end
+
+  def move_to_string(piece, target_square)
+    if piece == :castle
+      "Castle, #{target_square} side"
+    elsif board[target_square].is_a?(Piece)
+      "#{board[piece].class} #{convert_to_algebraic(piece)} "\
+      "to #{board[target_square].class} "\
+      "#{convert_to_algebraic(target_square)}"
+    else
+      "#{board[piece].class} #{convert_to_algebraic(piece)} "\
+      "to #{convert_to_algebraic(target_square)}"
+    end
   end
 
   def end_game
