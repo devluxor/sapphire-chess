@@ -28,7 +28,8 @@ module CastlingRights
     if color == :white && side == :king then f1_to_g1_free?
     elsif color == :white && side == :queen then b1_to_d1_free?
     elsif color == :black && side == :king then f8_to_g8_free?
-    else b8_to_d8_free?
+    else 
+      b8_to_d8_free?
     end
   end
 

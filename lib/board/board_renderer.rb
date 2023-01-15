@@ -77,7 +77,8 @@ class BoardRenderer
       square = [row, column]
 
       if white_square?(square) then print_white_square(square, column)
-      else print_black_square(square, column)
+      else 
+        print_black_square(square, column)
       end
     end
   end
