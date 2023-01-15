@@ -1,11 +1,9 @@
 module Display
-  CURRENT_VERSION = 'v0.7.0'
-  
   def clear_screen
     system 'clear'
   end
 
-  def new_line(lines=1)
+  def new_line(lines = 1)
     puts '' * lines
   end
 
@@ -13,7 +11,7 @@ module Display
     clear_screen
 
     print '♟  ♞  ♝  ♜  ♛  ♚ '
-    print Paint[" 💎  Welcome to Sapphire Chess #{CURRENT_VERSION}! 💎 ", :green]
+    print Paint[" 💎  Welcome to Sapphire Chess #{SapphireChess::VERSION}! 💎 ", :green]
     puts Paint[' ♚  ♛  ♜  ♝  ♞  ♟', :blue]
     new_line
   end
@@ -33,25 +31,25 @@ module Display
   end
 
   def display_move_message
-    puts 'What piece do you want to move?'
-    puts '[Use algebraic notation, i.e.: "a2a4"]'
-    puts "[To castle, \"castle (k for king side, q for queen side), "\
-         "i.e: \"castle k\"]\n\n"
+    puts "What piece do you want to move?\n"\
+         "[Use algebraic notation, i.e.: 'a2a4']\n"\
+         "[To castle, 'castle (k for king side, q for queen side), "\
+         "i.e: 'castle k']\n\n"
   end
-  
+
   def display_last_moves
     new_line
     return if turn_number < 2
+
     print Paint['Last moves: ', :green]
     display_move(:white)
     display_move(:black)
-    
     new_line
   end
 
   def display_move(color)
     player = color == :white ? white_player : black_player
-      
+
     if color == :white
       print Paint["White #{player.last_move}"]
       print Paint[' | ', :green]
@@ -74,44 +72,49 @@ module Display
   end
 
   def display_graphic_score
-    [:black, :white].each do |color|
-      message = case color
-                when :white then Paint['White player score', :white, :underline]
-                else Paint['Black player score', :blue, :underline]
-                end
-      print message + ': '
-      display_pieces_score(color)
+    %i[black white].each do |color|
+      message =
+        case color
+        when :white then Paint['White player score', :white, :underline]
+        else
+          Paint['Black player score', :blue, :underline]
+        end
+      print "#{message}: "
+      display_material_score(color)
       new_line(2)
     end
   end
 
-  def display_pieces_score(color)
+  def display_material_score(color)
     [Pawn, Knight, Bishop, Rook, Queen, King].each do |type|
-      piece_symbol = get_piece_symbol(color, type)
+      symbol = piece_symbol(color, type)
 
-      score_line = if type == Queen
-                     "#{piece_symbol} x "\
-                     "#{board.count(type, color) + board.promoted_pawns(color)} "
-                   elsif type == Pawn
-                     "#{piece_symbol} x "\
-                     "#{board.count(type, color) - board.promoted_pawns(color)} "
-                   else 
-                     "#{piece_symbol} x #{board.count(type, color)} "
-                   end
+      score_line = piece_score(type, color, symbol)
 
-      print score_line unless score_line[-2] == "0"
+      print score_line unless score_line[-2] == '0'
     end
   end
 
-  def get_piece_symbol(color, type)
-    if type == Pawn
-      if color == :white then Paint[type::WHITE.first, :white]
-      else Paint[type::BLACK.first, :blue]
-      end
+  def piece_symbol(color, type)
+    white = color == :white
+
+    if type == Pawn && white then Paint[type::WHITE.first, :white]
+    elsif type == Pawn && !white then Paint[type::BLACK.first, :blue]
+    elsif type != Pawn && white then Paint[type::WHITE, :white]
     else
-      if color == :white then Paint[type::WHITE, :white]
-      else Paint[type::BLACK, :blue]
-      end
+      Paint[type::BLACK, :blue]
+    end
+  end
+
+  def piece_score(type, color, piece_symbol)
+    if type == Queen
+      "#{piece_symbol} x "\
+      "#{board.count(type, color) + board.promoted_pawns(color)} "
+    elsif type == Pawn
+      "#{piece_symbol} x "\
+      "#{board.count(type, color) - board.promoted_pawns(color)} "
+    else
+      "#{piece_symbol} x #{board.count(type, color)} "
     end
   end
 

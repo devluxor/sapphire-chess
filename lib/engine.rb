@@ -1,10 +1,11 @@
-require_relative 'board/board_general.rb'
-require_relative 'board/board_renderer.rb'
-require_relative 'pieces.rb'
-require_relative 'player.rb'
-require_relative 'display.rb'
-require_relative 'human_input_validation.rb'
-require_relative 'algebraic_conversion.rb'
+require_relative 'board/board_general'
+require_relative 'board/board_renderer'
+require_relative 'pieces'
+require_relative 'player'
+require_relative 'display'
+require_relative 'version'
+require_relative 'human_input_validation'
+require_relative 'algebraic_conversion'
 
 require 'paint'
 
