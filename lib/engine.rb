@@ -44,10 +44,10 @@ class Engine
     human_vs_ai = prompt_game_mode == 1
     human_player_color = human_vs_ai ? prompt_color : ''
 
-    @white_player = Computer.new(:white, board)
+    @white_player = # Computer.new(:white, board)
     set_player(:white, human_player_color, mode: human_vs_ai)
 
-    @black_player = Computer.new(:black, board)
+    @black_player = # Computer.new(:black, board)
     set_player(:black, human_player_color, mode: human_vs_ai)
   end
 
@@ -101,7 +101,7 @@ class Engine
       prompt_move
     else
       puts "\n🤖 I am thinking... 🤖"
-      current_player.get_move
+      current_player.select_move
     end
   end
 

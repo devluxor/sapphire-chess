@@ -55,7 +55,7 @@ module HumanInputValidation
 
     player_move_input = nil
     loop do
-      player_move_input = current_player.get_move
+      player_move_input = current_player.select_move
       break if valid_player_input?(player_move_input)
 
       puts 'Please, select a valid movement.'
