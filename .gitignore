@@ -8,3 +8,4 @@ Gemfile.lock
 .bundle
 pkg/*
 .env
+main.rb
