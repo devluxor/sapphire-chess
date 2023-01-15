@@ -44,14 +44,14 @@ class Engine
     human_vs_ai = game_mode == 1
     color_choice = human_vs_ai ? prompt_color : ''
     
-    @white_player =
+    @white_player = #Computer.new(:white, board)
       if (color_choice.match?(/w/) && human_vs_ai) || !human_vs_ai
         Human.new(:white, board)
       else
         Computer.new(:white, board)
       end
 
-    @black_player =
+    @black_player = #Computer.new(:black, board)
       if white_player.is_a?(Human) && human_vs_ai
         Computer.new(:black, board)
       else
@@ -110,8 +110,8 @@ class Engine
     store_move!(piece, target_square)
 
     case piece
-    when :castle then board.castle!(target_square, current_player.color, true)
-    else board.move_piece!(piece, target_square, true)
+    when :castle then board.castle!(target_square, current_player.color, permanent: true)
+    else board.move_piece!(piece, target_square, permanent: true)
     end
   end
 

@@ -8,7 +8,7 @@ module EnPassantPieceControl
 
   def pawn_to_pass(current_square=location)
     # See Piece#safe_moves, Board#is_a_duplicate?
-    return [] if board.is_a_duplicate?
+    return [] if board.a_duplicate?
 
     left_square = [current_square.first, current_square.last - 1]
     right_square = [current_square.first, current_square.last + 1]

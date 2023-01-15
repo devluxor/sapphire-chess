@@ -1,5 +1,5 @@
 module EnPassantBoardControl
-  def capture_passed_pawn(target_square)
+  def capture_passed_pawn!(target_square)
     captured_pawn = passed_pawn(target_square)
 
     self[captured_pawn] = EmptySquare.instance

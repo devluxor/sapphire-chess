@@ -19,7 +19,7 @@ class Board
   include CastlingBoardControl
   include EnPassantBoardControl
 
-  attr_reader :matrix, :duplicate, :white_player, :black_player, :hard_difficulty
+  attr_reader :matrix, :white_player, :black_player, :hard_difficulty
 
   def self.initialize_board
     board = new(duplicated: false)
@@ -57,13 +57,13 @@ class Board
     @duplicated = duplicated
   end
 
-  def add_players!(player_1, player_2)
-    if player_1.color == :white
-      @white_player = player_1
-      @black_player = player_2
+  def add_players!(player1, player2)
+    if player1.color == :white
+      @white_player = player1
+      @black_player = player2
     else
-      @white_player = player_2
-      @black_player = player_1
+      @white_player = player2
+      @black_player = player1
     end
   end
 
@@ -93,9 +93,9 @@ class Board
 
     self[target_square].location = target_square
 
-    if permanent && was_en_passant?(piece, target_square)
-      capture_passed_pawn(target_square)
-    end
+    return unless permanent && was_en_passant?(piece, target_square)
+    
+    capture_passed_pawn!(target_square)
   end
 
   # Deep duplication of the board for Piece#safe_moves
@@ -119,15 +119,15 @@ class Board
 
   # This method is avoids checking for availability of en passant
   # moves in duplicate boards
-  def is_a_duplicate?
+  def a_duplicate?
     @duplicated
   end
 
   def set_game_difficulty
-    self.hard_difficulty = 
-    [white_player, black_player].find do |player|
-      player.is_a?(Computer)
-    end.depth == 3
+    self.hard_difficulty =
+      [white_player, black_player].find do |player|
+        player.is_a?(Computer)
+      end.depth == 3
   end
 
   def hard_difficulty?
