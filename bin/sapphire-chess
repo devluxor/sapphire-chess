@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'sapphire-chess'
+require_relative '../lib/sapphire-chess'
 
 Engine.new.play
