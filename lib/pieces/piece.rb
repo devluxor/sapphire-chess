@@ -1,7 +1,7 @@
-require_relative '../board.rb'
-require_relative '../movement_rules/castling_piece_control.rb'
-require_relative '../movement_rules/move_slide_pattern.rb'
-require_relative '../movement_rules/move_step_pattern.rb'
+require_relative '../board'
+require_relative '../movement_rules/castling_piece_control'
+require_relative '../movement_rules/move_slide_pattern'
+require_relative '../movement_rules/move_step_pattern'
 
 require 'paint'
 
@@ -28,7 +28,7 @@ class Piece
       new_board = board.duplicate
 
       new_board.move_piece!(location, move)
-      moves << move if !new_board.in_check?(color)
+      moves << move unless new_board.in_check?(color)
     end
   end
 
@@ -38,12 +38,12 @@ class Piece
 
   def location_value
     row, column = location
-    
-    if board.hard_difficulty? && color == :white
+    white = color == :white
+    if board.hard_difficulty? && white
       self.class::WHITE_LOCATION_VALUE[row][column]
-    elsif board.hard_difficulty? && color == :black
+    elsif board.hard_difficulty? && !white
       self.class::BLACK_LOCATION_VALUE[row][column]
-    elsif !board.hard_difficulty? && color == :white
+    elsif !board.hard_difficulty? && white
       self.class::WHITE_LOCATION_VALUE_EASY[row][column]
     else
       self.class::BLACK_LOCATION_VALUE_EASY[row][column]
@@ -65,7 +65,7 @@ class Piece
   end
 
   def enemy_in?(location)
-    board.within_limits?(location) && 
+    board.within_limits?(location) &&
       board[location].is_a?(Piece) &&
       board[location].color != color
   end
