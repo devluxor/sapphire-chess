@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class BoardRenderer
   LEFT_MARGIN = 4
   RIGHT_MARGIN = 3

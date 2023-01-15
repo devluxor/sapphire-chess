@@ -7,6 +7,7 @@ require_relative 'version'
 require_relative 'human_input_validation'
 require_relative 'algebraic_conversion'
 
+require 'bundler/setup'
 require 'paint'
 
 class Engine

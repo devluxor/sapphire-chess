@@ -3,6 +3,7 @@ require_relative '../movement_rules/castling_piece_control'
 require_relative '../movement_rules/move_slide_pattern'
 require_relative '../movement_rules/move_step_pattern'
 
+require 'bundler/setup'
 require 'paint'
 
 class Piece
