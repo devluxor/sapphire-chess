@@ -22,7 +22,7 @@ class Board
   attr_reader :matrix, :duplicate, :white_player, :black_player, :hard_difficulty
 
   def self.initialize_board
-    board = new
+    board = new(duplicated: false)
 
     set_pawns(board)
     set_pieces(board)
@@ -52,7 +52,7 @@ class Board
     end
   end
 
-  def initialize(duplicated=false)
+  def initialize(duplicated: false)
     @matrix = Array.new(SQUARE_ORDER) { Array.new(SQUARE_ORDER, EmptySquare.instance) }
     @duplicated = duplicated
   end
@@ -78,7 +78,7 @@ class Board
   end
 
   def within_limits?(square)
-    square.none? { |axis| axis >= SQUARE_ORDER || axis < 0 }
+    square.none? { |axis| axis >= SQUARE_ORDER || axis.negative? }
   end
 
   def empty_square?(square)
@@ -86,7 +86,7 @@ class Board
     within_limits?(square) && matrix[row][column].is_a?(EmptySquare)
   end
 
-  def move_piece!(piece, target_square, permanent=false)
+  def move_piece!(piece, target_square, permanent: false)
     mark_moved_piece!(piece) if permanent
 
     self[piece], self[target_square] = EmptySquare.instance, self[piece]
@@ -100,7 +100,7 @@ class Board
 
   # Deep duplication of the board for Piece#safe_moves
   def duplicate
-    pieces.each_with_object(Board.new(true)) do |piece, new_board|
+    pieces.each_with_object(Board.new(duplicated: true)) do |piece, new_board|
       new_piece = piece.class.new(new_board, piece.location, piece.color)
 
       new_board[new_piece.location] = new_piece
