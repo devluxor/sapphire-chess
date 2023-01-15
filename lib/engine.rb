@@ -41,18 +41,18 @@ class Engine
   attr_accessor :current_player, :turn_number
 
   def define_players
-    human_vs_ai = prompt_game_mode == 1
-    human_player_color = human_vs_ai ? prompt_color : ''
+    mode = prompt_game_mode
+    human_player_color = mode == 1 ? prompt_color : ''
 
     @white_player = Computer.new(:white, board)
-    # set_player(:white, human_player_color, mode: human_vs_ai)
+    # set_player(:white, human_player_color, mode: mode)
 
     @black_player = Computer.new(:black, board)
-    # set_player(:black, human_player_color, mode: human_vs_ai)
+    # set_player(:black, human_player_color, mode: mode)
   end
 
   def set_player(color, human_player_color, mode: nil)
-    if (human_player_color.match?(/w/) && mode) || !mode
+    if (human_player_color.match?(/w/) && mode == 1) || mode == 2
       Human.new(color, board)
     else
       Computer.new(color, board)
