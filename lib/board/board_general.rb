@@ -125,5 +125,5 @@ class Board
 
   private
 
-  attr_accessor :hard_difficulty
+  attr_writer :hard_difficulty
 end
