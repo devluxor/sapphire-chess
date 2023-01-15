@@ -7,6 +7,8 @@ module CastlingRights
       !king_crosses_attack_line?(side)
   end
 
+  private
+
   def king_and_rook_moved?(side)
     case color
     when :white
@@ -23,21 +25,33 @@ module CastlingRights
   end
 
   def castling_line_free?(side)
-    if color == :white && side == :king
-      board.empty_square?([7, 5]) && 
-        board.empty_square?([7, 6])
-    elsif color == :white && side == :queen
-      board.empty_square?([7, 1]) && 
-        board.empty_square?([7, 2]) &&
-        board.empty_square?([7, 3])
-    elsif color == :black && side == :king
-      board.empty_square?([0, 5]) && 
-        board.empty_square?([0, 6])
-    else
-      board.empty_square?([0, 1]) && 
-        board.empty_square?([0, 2]) &&
-        board.empty_square?([0, 3])
+    if color == :white && side == :king then f1_to_g1_free?
+    elsif color == :white && side == :queen then b1_to_d1_free?
+    elsif color == :black && side == :king then f8_to_g8_free?
+    else b8_to_d8_free?
     end
+  end
+
+  def f1_to_g1_free?
+    board.empty_square?([7, 5]) &&
+      board.empty_square?([7, 6])
+  end
+
+  def b1_to_d1_free?
+    board.empty_square?([7, 1]) &&
+      board.empty_square?([7, 2]) &&
+      board.empty_square?([7, 3])
+  end
+
+  def f8_to_g8_free?
+    board.empty_square?([0, 5]) &&
+      board.empty_square?([0, 6])
+  end
+
+  def b8_to_d8_free?
+    board.empty_square?([0, 1]) &&
+      board.empty_square?([0, 2]) &&
+      board.empty_square?([0, 3])
   end
 
   def results_in_check?(side)
