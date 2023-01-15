@@ -7,7 +7,7 @@ module StepPattern
       current_column += column_direction
       possible_location = [current_row, current_column]
 
-      next if !board.within_limits?(possible_location)
+      next unless board.within_limits?(possible_location)
 
       if board.empty_square?(possible_location) || enemy_in?(possible_location)
         moves << possible_location
