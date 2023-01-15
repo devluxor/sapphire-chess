@@ -44,18 +44,18 @@ class Engine
     mode = prompt_game_mode
     human_player_color = mode == 1 ? prompt_color : ''
 
-    @white_player = Computer.new(:white, board)
-    # set_player(:white, human_player_color, mode: mode)
-
-    @black_player = Computer.new(:black, board)
-    # set_player(:black, human_player_color, mode: mode)
+    @white_player, @black_player = initialize_players(human_player_color, mode: mode)
   end
 
-  def set_player(color, human_player_color, mode: nil)
-    if (human_player_color.match?(/w/) && mode == 1) || mode == 2
-      Human.new(color, board)
+  def initialize_players(human_player_color, mode: nil)
+    if human_player_color == 'w'
+      [Human.new(:white, board), Computer.new(:black, board)]
+    elsif human_player_color == 'b'
+      [Computer.new(:white, board), Human.new(:black, board)]
+    elsif mode == 2
+      [Human.new(:white, board), Human.new(:black, board)]
     else
-      Computer.new(color, board)
+      [Computer.new(:white, board), Computer.new(:black, board)]
     end
   end
 
@@ -76,14 +76,18 @@ class Engine
     until game_over?
       clear_screen
       renderer.render
-      display_graphic_score
-      display_last_moves
-      display_turn_number
-      display_player_turn
+      display_game_data
       perform_move!(player_move_selection)
       swap_player!
       update_turn_counter
     end
+  end
+
+  def display_game_data
+    display_graphic_score
+    display_last_moves
+    display_turn_number
+    display_player_turn
   end
 
   def swap_player!
