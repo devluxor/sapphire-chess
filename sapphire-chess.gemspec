@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.email       = 'lucas.sorribes@gmail.com'
   spec.license     = 'MIT'
   spec.homepage    = 'https://github.com/lucsorr/sapphire-chess'
-  spec.files       = Dir['lib/**/*.rb'] + %w[Gemfile LICENSE Rakefile sapphire-chess.gemspec]
+  spec.files       = Dir['lib/**/*.rb'] + %w[Gemfile Gemfile.lock LICENSE Rakefile sapphire-chess.gemspec]
   spec.extra_rdoc_files = ['README.md']
 
   spec.required_ruby_version = '>= 2.7.5'
