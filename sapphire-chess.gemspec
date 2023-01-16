@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.description = <<-EOF
     Sapphire Chess is a command line-based chess game with an algebraic notation input system,
     complete chess rules, a beautiful interface and a functional AI. It provides three game modes: 
-    Human vs. Human, Human vs. Ai, and AI vs. AI.
+    Human vs. Human, Human vs. AI, and AI vs. AI.
   EOF
   spec.authors     = ['Lucas Sorribes']
   spec.email       = 'lucas.sorribes@gmail.com'
