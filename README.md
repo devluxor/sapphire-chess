@@ -1,4 +1,4 @@
-# Sapphire Chess [![Gem Version](https://badge.fury.io/rb/sapphire-chess.svg)](https://badge.fury.io/rb/sapphire-chess)
+# Sapphire Chess [![Gem Version](https://badge.fury.io/rb/sapphire-chess.png)](https://badge.fury.io/rb/sapphire-chess)
 
 Sapphire Chess is a command line-based chess game with an algebraic notation input system,
 complete chess rules, a beautiful interface and a functional AI. It provides three game modes: 
