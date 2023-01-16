@@ -9,3 +9,4 @@ Gemfile.lock
 pkg/*
 .env
 main.rb
+.vscode
