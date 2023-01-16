@@ -22,6 +22,7 @@ module AI
     move_randomizer(evaluations)
   end
 
+  # See README.md for an explanation of this method.
   def minimax(move, depth, alpha, beta, maximizing_player)
     return board.evaluate if depth.zero?
 
