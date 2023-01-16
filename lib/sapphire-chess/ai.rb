@@ -25,19 +25,7 @@ module AI
   def minimax(move, depth, alpha, beta, maximizing_player)
     return board.evaluate if depth.zero?
 
-    move_final_evaluation =
     board.provisional(move, color) do
-      # This generates possible outcomes (children) for the provisional move:
-      # Each branch represents the next turn (i.e.: if current player is white
-      # [the maximizing player], it generates every possible movement for the
-      # next player, black [the minimizing player], who will choose the best
-      # possible move, and so on. The best (relative to each player) possible
-      # outcome for each move will determine what move is chosen, `best_evaluation`)
-      # See AI#computer_chooses_move
-
-      # The alpha-beta `prunes` the tree: it makes the search more efficient
-      # removing unnecessary branches, resulting in a faster process.
-      move_final_evaluation =
         if maximizing_player
           best_minimizing_evaluation = Float::INFINITY
 
@@ -62,8 +50,6 @@ module AI
           best_maximizing_evaluation
         end
     end
-
-    move_final_evaluation
   end
 
   # This method randomizes the moves if two or more moves share the best evaluation.
