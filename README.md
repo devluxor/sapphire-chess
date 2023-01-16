@@ -1,4 +1,5 @@
 # Sapphire Chess v0.9.0
+[![Gem Version](https://badge.fury.io/rb/sapphire-chess.svg)](https://badge.fury.io/rb/sapphire-chess)
 
 Welcome to Sapphire Chess!
 
