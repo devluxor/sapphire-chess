@@ -8,6 +8,18 @@ Please, visit https://medium.com/@lucas.sorribes/nostromo-my-ruby-chess-journey-
 
 ---
 
+## Setup
+
+Install with:
+```ruby
+gem install 'saphhire-chess'
+```
+And execute from the terminal with:
+```
+sapphire-chess
+```
+Currently, the icons are only loaded properly from within VS Code terminals, so, for the moment, I highly recommend executing this command from there.
+
 ## Current Features
 
 * A beautiful board with easy-to-distinguish colors for white and black pieces.
