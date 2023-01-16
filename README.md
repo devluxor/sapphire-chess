@@ -14,7 +14,7 @@ Install with:
 ```ruby
 gem install 'saphhire-chess'
 ```
-And execute from the terminal with:
+And execute from the command prompt with:
 ```
 sapphire-chess
 ```
