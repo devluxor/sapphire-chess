@@ -3,6 +3,8 @@ module AI
 
   # Chooses move by best possible outcome:
   def computer_chooses_move
+    return first_move(color) if first_turn?
+
     possible_moves = board.generate_moves(color)
     possible_moves << %i[castle king] if castle_rights?(:king)
     possible_moves << %i[castle queen] if castle_rights?(:queen)
@@ -10,13 +12,37 @@ module AI
     best_move(possible_moves)
   end
 
+  def first_move(color)
+    if color == :white then opening
+    else
+      defense
+    end
+  end
+
+  def opening
+    opening =
+      case rand(1..100)
+      when self.class::OPENINGS[:nf3][:probabilty] then :nf3
+      when self.class::OPENINGS[:e4][:probabilty] then :e4
+      when self.class::OPENINGS[:d4][:probabilty] then :d4
+      when self.class::OPENINGS[:c4][:probabilty] then :c4
+      end
+
+    self.class::OPENINGS[opening][:move]
+  end
+
+  def defense
+    self.class::DEFENSES[board.white_player.history.last] ||
+      best_move(board.generate_moves(:black))
+  end
+
   def best_move(possible_moves)
     evaluations = {}
     anti_loop_filter(possible_moves)
 
     possible_moves.each do |move|
-      evaluations[move] = 
-      minimax(move, depth, -Float::INFINITY, Float::INFINITY, maximizing_player?)
+      evaluations[move] =
+        minimax(move, depth, -Float::INFINITY, Float::INFINITY, maximizing_player?)
     end
 
     move_randomizer(evaluations)
@@ -27,29 +53,29 @@ module AI
     return board.evaluate if depth.zero?
 
     board.provisional(move, color) do
-        if maximizing_player
-          best_minimizing_evaluation = Float::INFINITY
+      if maximizing_player
+        best_minimizing_evaluation = Float::INFINITY
 
-          board.generate_moves(:black).each do |possible_move|
-            evaluation = minimax(possible_move, depth - 1, alpha, beta, false)
-            best_minimizing_evaluation = [best_minimizing_evaluation, evaluation].min
-            beta = [beta, evaluation].min
-            break if beta <= alpha
-          end
-
-          best_minimizing_evaluation
-        else
-          best_maximizing_evaluation = -Float::INFINITY
-
-          board.generate_moves(:white).each do |possible_move|
-            evaluation = minimax(possible_move, depth - 1, alpha, beta, true)
-            best_maximizing_evaluation = [best_maximizing_evaluation, evaluation].max
-            alpha = [alpha, evaluation].max
-            break if beta <= alpha
-          end
-
-          best_maximizing_evaluation
+        board.generate_moves(:black).each do |possible_move|
+          evaluation = minimax(possible_move, depth - 1, alpha, beta, false)
+          best_minimizing_evaluation = [best_minimizing_evaluation, evaluation].min
+          beta = [beta, evaluation].min
+          break if beta <= alpha
         end
+
+        best_minimizing_evaluation
+      else
+        best_maximizing_evaluation = -Float::INFINITY
+
+        board.generate_moves(:white).each do |possible_move|
+          evaluation = minimax(possible_move, depth - 1, alpha, beta, true)
+          best_maximizing_evaluation = [best_maximizing_evaluation, evaluation].max
+          alpha = [alpha, evaluation].max
+          break if beta <= alpha
+        end
+
+        best_maximizing_evaluation
+      end
     end
   end
 
