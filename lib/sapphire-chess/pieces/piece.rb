@@ -51,6 +51,11 @@ class Piece
     end
   end
 
+  def hash_value
+    value = self.class.to_s[0]
+    color == :white ? value : value.downcase
+  end
+
   private
 
   def current_row

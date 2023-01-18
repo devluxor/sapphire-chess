@@ -54,4 +54,9 @@ class Knight < Piece
   ].freeze
 
   include StepPattern
+
+  def hash_value
+    value = self.class.to_s[1]
+    color == :white ? value.upcase : value
+  end
 end

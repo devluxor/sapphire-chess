@@ -10,4 +10,8 @@ class EmptySquare
   def white
     '██'
   end
+
+  def hash_value
+    '0'
+  end
 end
