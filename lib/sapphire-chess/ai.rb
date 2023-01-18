@@ -1,4 +1,8 @@
+require_relative 'openings_and_defenses'
+
 module AI
+  include OpeningsAndDefenses
+
   private
 
   # Chooses move by best possible outcome:
@@ -22,17 +26,17 @@ module AI
   def opening
     opening =
       case rand(1..100)
-      when self.class::OPENINGS[:nf3][:probabilty] then :nf3
-      when self.class::OPENINGS[:e4][:probabilty] then :e4
-      when self.class::OPENINGS[:d4][:probabilty] then :d4
-      when self.class::OPENINGS[:c4][:probabilty] then :c4
+      when OPENINGS[:nf3][:probabilty] then :nf3
+      when OPENINGS[:e4][:probabilty] then :e4
+      when OPENINGS[:d4][:probabilty] then :d4
+      when OPENINGS[:c4][:probabilty] then :c4
       end
 
-    self.class::OPENINGS[opening][:move]
+    OPENINGS[opening][:move]
   end
 
   def defense
-    self.class::DEFENSES[board.white_player.history.last] ||
+    DEFENSES[board.white_player.history.last] ||
       best_move(board.generate_moves(:black))
   end
 

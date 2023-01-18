@@ -1,5 +1,4 @@
 require_relative 'ai'
-require_relative 'openings_and_defenses'
 require_relative 'algebraic_conversion'
 require_relative 'movement_rules/castling_rights'
 
@@ -28,7 +27,6 @@ end
 
 class Computer < Player
   include AI
-  include OpeningsAndDefenses
 
   # depth: Levels of AI#minimax recursion.
   # Deeper means harder (computer can think `depth` turns ahead)
