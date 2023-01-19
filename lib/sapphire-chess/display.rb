@@ -135,6 +135,6 @@ module Display
       nil,
       current_player.color
     ]
-    puts 'Thanks for playing Ruby Chess'
+    puts "\nThanks for playing Sapphire Chess!\n"
   end
 end
