@@ -36,7 +36,7 @@ class Board
     def set_pawns(board)
       [B_PAWN_ROW, W_PAWN_ROW].each do |pawn_row|
         color = pawn_row == B_PAWN_ROW ? :black : :white
-  
+
         SQUARE_ORDER.times do |column|
           board[[pawn_row, column]] = Pawn.new(board, [pawn_row, column], color)
         end
@@ -94,7 +94,7 @@ class Board
     self[target_square].location = target_square
 
     return unless permanent && was_en_passant?(piece, target_square)
-    
+
     capture_passed_pawn!(target_square)
   end
 
@@ -108,7 +108,6 @@ class Board
   end
 
   def generate_moves(color)
-    possible_moves =
     friendly_pieces(color).each_with_object([]) do |piece, possible_moves|
       location = piece.location
 
@@ -116,8 +115,6 @@ class Board
         possible_moves << [location, possible_move]
       end
     end
-    # sort_moves!(possible_moves, color)
-    possible_moves
   end
 
   # This method is avoids checking for availability of en passant
@@ -140,6 +137,7 @@ class Board
   private
 
   attr_writer :hard_difficulty
+
   # For testing purposes:
   def sort_moves!(possible_moves, color)
     possible_moves.sort! do |a, b|
