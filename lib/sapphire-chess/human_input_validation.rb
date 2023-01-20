@@ -68,7 +68,7 @@ module HumanInputValidation
     target_square = nil
     puts "Where do you want to move the #{board[piece].class}?"
     loop do
-      target_square = current_player.get_move
+      target_square = current_player.select_move
       break if valid_target_square?(piece, target_square)
 
       puts "The #{board[piece].class} selected can't move to that square."
@@ -96,13 +96,21 @@ module HumanInputValidation
     player_move_input.first.is_a?(Integer)
   end
 
-  def valid_piece_selection?(piece)
-    board[piece].is_a?(Piece) &&
-      board[piece].color == current_player.color
+  def valid_piece_selection?(piece_location)
+    piece = board[piece_location]
+
+    piece.is_a?(Piece) &&
+      piece.color == current_player.color &&
+      !piece.available_moves.empty? &&
+      (!board.in_check?(current_player.color) || board.in_check?(current_player.color) && !piece.safe_moves.empty?)
   end
 
-  def valid_target_square?(piece, target_square)
-    board[piece].available_moves.include?(target_square)
+  def valid_target_square?(piece_location, target_square)
+    piece = board[piece_location]
+    valid_target = piece.available_moves.include?(target_square)
+
+    (valid_target && !board.in_check?(current_player.color)) ||
+      (valid_target && board.in_check?(current_player.color) && piece.safe_moves.include?(target_square))
   end
 
   def valid_castling?(side)

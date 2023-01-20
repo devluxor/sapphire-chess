@@ -27,6 +27,10 @@ class Board
     set_pawns(board)
     set_pieces(board)
 
+    # TEST:
+    board[[1, 2]] = Knight.new(board, [1, 2], :white)
+    board[[6, 2]] = Knight.new(board, [6, 2], :black)
+
     board
   end
 
@@ -108,13 +112,21 @@ class Board
   end
 
   def generate_moves(color)
+    possible_moves =
     friendly_pieces(color).each_with_object([]) do |piece, possible_moves|
-      location = piece.location
+      current_piece_location = piece.location
 
-      piece.available_moves.each do |possible_move|
-        possible_moves << [location, possible_move]
+      piece.available_moves.each do |possible_target_square|
+        move = [current_piece_location, possible_target_square]
+
+        if !in_check?(color) ||
+           (in_check?(color) && piece.safe_moves.include?(possible_target_square))
+          possible_moves << move
+        end
       end
     end
+
+    possible_moves
   end
 
   # This method is avoids checking for availability of en passant
