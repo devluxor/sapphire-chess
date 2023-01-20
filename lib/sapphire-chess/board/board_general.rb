@@ -12,6 +12,7 @@ class Board
   PIECES_SEQUENCE = [
     Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
   ].freeze
+  MIN_FOR_HARD_DIFFICULTY = 2
 
   include BoardAnalysis
   include BoardEvaluation
@@ -26,10 +27,6 @@ class Board
 
     set_pawns(board)
     set_pieces(board)
-
-    # TEST:
-    board[[1, 2]] = Knight.new(board, [1, 2], :white)
-    board[[6, 2]] = Knight.new(board, [6, 2], :black)
 
     board
   end
@@ -139,7 +136,7 @@ class Board
     self.hard_difficulty =
       [white_player, black_player].find do |player|
         player.is_a?(Computer)
-      end.depth == 3
+      end.depth >= MIN_FOR_HARD_DIFFICULTY
   end
 
   def hard_difficulty?
