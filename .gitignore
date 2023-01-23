@@ -10,3 +10,4 @@ pkg/*
 .env
 main.rb
 .vscode
+feature_testing/
