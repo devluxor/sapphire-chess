@@ -1,5 +1,5 @@
 require_relative '../movement_rules/en_passant_piece_control'
-require_relative '../movement_rules/pawn_movement_and_promotion'
+require_relative '../movement_rules/pawn_movement_helpers_and_promotion'
 
 class Pawn < Piece
   BLACK = ['♟', '♛'].freeze
@@ -61,7 +61,7 @@ class Pawn < Piece
 
   include SlidePattern
   include EnPassantPieceControl
-  include PawnMovementAndPromotion
+  include PawnMovementHelpersAndPromotion
 
   def initialize(board, location, color)
     super(board, location, color)
@@ -77,6 +77,19 @@ class Pawn < Piece
     elsif !promoted? && white then Paint[self.class::WHITE.first, :white]
     else
       Paint[self.class::BLACK.first, :blue]
+    end
+  end
+
+  def available_moves
+    if promoted? then super
+    else
+      moves = []
+      add_one_square_movement!(moves)
+      add_two_square_movement!(moves)
+      add_diagonal_movement!(moves)
+      add_en_passant_movement!(moves)
+
+      moves.select { |move| board.within_limits?(move) }
     end
   end
 end
