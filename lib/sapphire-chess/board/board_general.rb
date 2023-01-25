@@ -2,6 +2,7 @@ require_relative '../pieces'
 require_relative '../board'
 require_relative '../movement_rules/castling_board_control'
 require_relative '../movement_rules/en_passant_board_control'
+require_relative '../algebraic_conversion'
 
 class Board
   SQUARE_ORDER = 8
@@ -9,18 +10,19 @@ class Board
   W_PAWN_ROW = 6
   FIRST_ROW = 0
   LAST_ROW = 7
+  MIN_FOR_HARD_DIFFICULTY = 2
   PIECES_SEQUENCE = [
     Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
   ].freeze
-  MIN_FOR_HARD_DIFFICULTY = 2
 
   include BoardAnalysis
   include BoardEvaluation
   include ProvisionalMoves
   include CastlingBoardControl
   include EnPassantBoardControl
+  include AlgebraicConversion
 
-  attr_reader :matrix, :white_player, :black_player, :hard_difficulty
+  attr_reader :matrix, :white_player, :black_player
 
   def self.initialize_board
     board = new(duplicated: false)
@@ -109,21 +111,17 @@ class Board
   end
 
   def generate_moves(color)
-    possible_moves =
     friendly_pieces(color).each_with_object([]) do |piece, possible_moves|
+
       current_piece_location = piece.location
 
       piece.available_moves.each do |possible_target_square|
+
         move = [current_piece_location, possible_target_square]
 
-        if !in_check?(color) ||
-           (in_check?(color) && piece.safe_moves.include?(possible_target_square))
-          possible_moves << move
-        end
+        possible_moves << move if legal_move?(piece, possible_target_square)
       end
     end
-
-    possible_moves
   end
 
   # This method is avoids checking for availability of en passant
@@ -140,21 +138,15 @@ class Board
   end
 
   def hard_difficulty?
-    hard_difficulty
+    @hard_difficulty
   end
 
   private
 
   attr_writer :hard_difficulty
 
-  # For testing purposes:
-  def sort_moves!(possible_moves, color)
-    possible_moves.sort! do |a, b|
-      if color == :white
-        evaluate_move(a, color) <=> evaluate_move(b, color)
-      else
-        evaluate_move(b, color) <=> evaluate_move(a, color)
-      end
-    end
+  def legal_move?(piece, target_square)
+    color = piece.color
+    !in_check?(color) || (in_check?(color) && piece.safe_moves.include?(target_square))
   end
 end
