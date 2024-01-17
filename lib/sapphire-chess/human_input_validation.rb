@@ -58,7 +58,7 @@ module HumanInputValidation
       player_move_input = current_player.select_move
       break if valid_player_input?(player_move_input)
 
-      puts 'Please, select a valid movement.'
+      puts 'Please, enter a valid movement.'
     end
 
     player_move_input
