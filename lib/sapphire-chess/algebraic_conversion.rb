@@ -11,7 +11,7 @@ module AlgebraicConversion
       move_input = gets.chomp.strip.downcase
       break if valid_input_format?(move_input)
 
-      puts 'Please, enter a valid move_input.'
+      puts 'Please, enter a valid movement.'
     end
 
     convert_algegraic_input(move_input)
