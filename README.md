@@ -58,6 +58,6 @@ The AI is based on a Minimax algorithm with Alpha-Beta pruning. This algorithm g
 
 The best (relative to each player) possible outcome for each move will determine what move is chosen) The Alpha-Beta 'prunes' the tree: it makes the search more efficient, removing unnecessary branches, resulting in a faster process.
 
-Copyright © 2023 Lucas Sorribes, released under the MIT license.
+Lucas Sorribes, released under the MIT license.
 
 
