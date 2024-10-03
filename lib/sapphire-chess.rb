@@ -1,7 +1,7 @@
 require_relative 'sapphire-chess/board'
 require_relative 'sapphire-chess/movement_rules'
 require_relative 'sapphire-chess/pieces'
-require_relative 'sapphire-chess/ai' 
+require_relative 'sapphire-chess/ai'
 require_relative 'sapphire-chess/player'
 require_relative 'sapphire-chess/algebraic_conversion'
 require_relative 'sapphire-chess/human_input_validation'

@@ -1,5 +1,7 @@
 require_relative '../pieces'
-require_relative '../board'
+require 'sapphire-chess/board/board_analysis'
+require 'sapphire-chess/board/board_evaluation'
+require 'sapphire-chess/board/board_provisional_moves'
 require_relative '../movement_rules/castling_board_control'
 require_relative '../movement_rules/en_passant_board_control'
 require_relative '../algebraic_conversion'
