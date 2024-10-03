@@ -1,14 +1,18 @@
 # Sapphire Chess
+
 [![Gem Version](https://badge.fury.io/rb/sapphire-chess.svg)](https://badge.fury.io/rb/sapphire-chess)
 
 Sapphire Chess is a command line-based chess game with an algebraic notation input system,
 complete chess rules, a beautiful interface and a functional AI. It provides three game modes: 
 Human vs. Human, Human vs. AI, and AI vs. AI.
 
-Please, visit https://medium.com/@lucas.sorribes/nostromo-my-ruby-chess-journey-part-i-7ef544b547a5 for a very detailed account of how I wrote this game.
+Please, visit <https://medium.com/@lucas.sorribes/nostromo-my-ruby-chess-journey-part-i-7ef544b547a5> for a very detailed account of how I wrote this game.
 
-Supported Rubies: 3.1, 3.0, 2.7. 
-The game has not been tested for older versions, but it might still work.
+Supported Rubies: 3.1, 3.0, 2.7.
+
+The game has not been tested on older versions, but it might still work.
+
+Playing within the VS Code terminal is highly recommended because it renders the icons better.
 
 ---
 
@@ -23,19 +27,38 @@ The game has not been tested for older versions, but it might still work.
 * Material score display.
 * Player's last move display.
 
+## Easy Setup (run containerized version; with Docker)
+
+Simply, build the image (it's very lightweight) with:
+
+```sh
+docker build -t sapphire-chess .
+```
+
+And run it with:
+
+```sh
+docker run -it sapphire-chess
+```
+
 ## Setup
 
 Install with:
+
 ```ruby
 gem install 'saphhire-chess'
 ```
+
 And execute from the command prompt with:
-```
+
+```sh
 sapphire-chess
 ```
+
 Currently, the icons are only loaded properly from within VS Code terminals, so, for the moment, I highly recommend executing this command from there.
 
 You can also create a new `.rb` file with this content and execute it:
+
 ```ruby
 require 'sapphire-chess'
 
@@ -59,5 +82,3 @@ The AI is based on a Minimax algorithm with Alpha-Beta pruning. This algorithm g
 The best (relative to each player) possible outcome for each move will determine what move is chosen) The Alpha-Beta 'prunes' the tree: it makes the search more efficient, removing unnecessary branches, resulting in a faster process.
 
 Lucas Sorribes, released under the MIT license.
-
-
